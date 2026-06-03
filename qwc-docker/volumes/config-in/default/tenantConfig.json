@@ -1,0 +1,99 @@
+{
+  "$schema": "https://github.com/qwc-services/qwc-config-generator/raw/master/schemas/qwc-config-generator.json",
+  "service": "config-generator",
+  "config": {
+    "autogen_keyvaltable_datasets": true,
+    "config_db_url": "postgresql:///?service=qwc_configdb",
+    "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+    "generate_nested_nrel_forms": false,
+    "generate_wfs_services": false,
+    "permissions_default_allow": true,
+    "qgis_print_layouts_dir": "/layouts",
+    "qgis_projects_base_dir": "/data",
+    "qgis_project_extension": ".qgs",
+    "qgis_projects_scan_base_dir": "/data/scan",
+    "strip_scan_prefix_from_theme_names": true,
+    "tenant": "default",
+    "validate_schema": true,
+    "use_default_map_thumbnail": true
+  },
+  "themesConfig": "./themesConfig.json",
+  "services": [
+    {
+      "name": "adminGui",
+      "config": {
+        "config_generator_service_url": "http://qwc-config-service:9090",
+        "db_url": "postgresql:///?service=qwc_configdb",
+        "input_config_path": "/srv/qwc_service/config-in",
+        "info_templates_path": "/info_templates",
+        "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+        "ows_prefix": "/ows",
+        "ows_service_url": "/ows",
+        "plugins": [],
+        "qgs_resources_path": "/qgs-resources",
+        "qwc2_path": "/qwc2",
+        "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
+        "solr_tenant_dih": "dih_geodata_config",
+        "totp_enabled": false,
+        "user_info_fields": []
+      }
+    },
+    {
+      "name": "dbAuth",
+      "config": {
+        "db_url": "postgresql:///?service=qwc_configdb"
+      }
+    },
+    {
+      "name": "featureInfo",
+      "config": {
+        "data_service_url": "/api/v1/data/",
+        "skip_empty_attributes": false
+      }
+    },
+    {
+      "name": "legend",
+      "config": {
+        "legend_images_path": "/legends/"
+      }
+    },
+    {
+      "name": "mapViewer",
+      "generator_config": {
+        "qwc2_config": {
+          "qwc2_config_file": "/srv/qwc_service/config-in/default/config.json",
+          "qwc2_index_file": "/srv/qwc_service/config-in/default/index.html"
+        }
+      },
+      "config": {
+        "qwc2_path": "/qwc2/",
+        "auth_service_url": "/auth/",
+        "data_service_url": "/api/v1/data/",
+        "document_service_url": "/api/v1/document/",
+        "elevation_service_url": "/api/v1/elevation/",
+        "info_service_url": "/api/v1/featureinfo/",
+        "legend_service_url": "/api/v1/legend/",
+        "mapinfo_service_url": "/api/v1/mapinfo/",
+        "ogc_service_url": "/ows/",
+        "permalink_service_url": "/api/v1/permalink/",
+        "print_service_url": "/api/v1/print/",
+        "search_service_url": "/api/v2/search/",
+        "search_data_service_url": "/api/v2/search/geom/"
+      }
+    },
+    {
+      "name": "ogc",
+      "config": {},
+      "generator_config": {
+        "wms_services": {
+          "online_resources": {
+            "feature_info": "/api/v1/featureinfo/",
+            "legend": "/api/v1/legend/",
+            "service": "/ows/",
+            "edit_config": "/editConfig.json?map="
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkqwc2_demo_app=self.webpackChunkqwc2_demo_app||[]).push([[221],{76221(e,a,c){c.d(a,{default:()=>p});var s=c(4860),d=c(51497);class p extends d.A{decodeBlock(e){return(0,s.UD)(new Uint8Array(e)).buffer}}}}]);
+//# sourceMappingURL=221.QWC2App.js.map

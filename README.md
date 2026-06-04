@@ -4,7 +4,7 @@ Thesis project demonstrating the publication of a QGIS project on the web using 
 
 ## Overview
 
-The system publishes geospatial data (Italian municipal boundaries) through QGIS Server and exposes it via a QWC2 web map viewer. A custom WPS Client plugin in the viewer allows users to discover and execute geoprocessing operations served by a PyWPS backend. The WPS processes leverage PyQGIS to perform geospatial analysis and transformations on the server side.
+The system publishes geospatial data through QGIS Server and exposes it via a QWC2 web map viewer. A custom WPS Client plugin in the viewer allows users to discover and execute geoprocessing operations served by a PyWPS backend. The WPS processes leverage PyQGIS to perform geospatial analysis and transformations on the server side.
 
 ### Architecture
 

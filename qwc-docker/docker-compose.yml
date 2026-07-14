@@ -174,9 +174,8 @@ services:
     command: gunicorn main:app --bind 0.0.0.0:5000 --reload
     develop:
       watch:
-        - action: sync
+        - action: rebuild
           path: ../pywps
-          target: /app
           ignore:
             - node_modules/
             - venv/

@@ -10,7 +10,7 @@ class TestJson(Process):
         super(TestJson, self).__init__(
             self._handler,
             identifier='testjson',
-            title='Process Test',
+            title='Process Json',
             version='1.0.0',
             inputs=inputs,
             outputs=outputs,

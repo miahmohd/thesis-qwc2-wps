@@ -21,284 +21,6 @@
       "permissions": {
         "wms_services": [
           {
-            "name": "qwc_demo",
-            "layers": [
-              {
-                "name": "qwc_demo",
-                "queryable": true,
-                "info_template": true
-              },
-              {
-                "name": "edit_demo",
-                "queryable": true,
-                "info_template": true
-              },
-              {
-                "name": "edit_points",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "id",
-                  "name",
-                  "description",
-                  "num",
-                  "value",
-                  "type",
-                  "amount",
-                  "validated",
-                  "datetime",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "edit_lines",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "id",
-                  "name",
-                  "description",
-                  "num",
-                  "value",
-                  "type",
-                  "amount",
-                  "validated",
-                  "datetime",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "edit_polygons",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "id",
-                  "name",
-                  "description",
-                  "num",
-                  "value",
-                  "type",
-                  "amount",
-                  "validated",
-                  "datetime",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "geographic_lines",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "ogc_fid",
-                  "scalerank",
-                  "name",
-                  "name_long",
-                  "abbrev",
-                  "note",
-                  "featurecla",
-                  "min_zoom",
-                  "wikidataid",
-                  "name_ar",
-                  "name_bn",
-                  "name_de",
-                  "name_en",
-                  "name_es",
-                  "name_fr",
-                  "name_el",
-                  "name_hi",
-                  "name_hu",
-                  "name_id",
-                  "name_it",
-                  "name_ja",
-                  "name_ko",
-                  "name_nl",
-                  "name_pl",
-                  "name_pt",
-                  "name_ru",
-                  "name_sv",
-                  "name_tr",
-                  "name_vi",
-                  "name_zh",
-                  "wdid_score",
-                  "ne_id",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "country_names",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "ogc_fid",
-                  "scalerank",
-                  "labelrank",
-                  "z_postal",
-                  "z_abbrev",
-                  "z_name",
-                  "z_admin",
-                  "featurecla",
-                  "sovereignt",
-                  "sov_a3",
-                  "adm0_dif",
-                  "level",
-                  "type",
-                  "admin",
-                  "adm0_a3",
-                  "geou_dif",
-                  "name",
-                  "abbrev",
-                  "postal",
-                  "name_forma",
-                  "terr_",
-                  "name_sort",
-                  "map_color",
-                  "pop_est",
-                  "gdp_md_est",
-                  "fips_10_",
-                  "iso_a2",
-                  "iso_a3",
-                  "iso_n3",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "states_provinces",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "featurecla",
-                  "name",
-                  "adm0_a3",
-                  "adm0_name",
-                  "sov_a3",
-                  "name_l",
-                  "name_r",
-                  "name_alt_l",
-                  "name_alt_r",
-                  "name_loc_l",
-                  "name_loc_r",
-                  "name_len_l",
-                  "name_len_r",
-                  "note",
-                  "type",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "countries",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "featurecla",
-                  "sovereignt",
-                  "sov_a3",
-                  "adm0_dif",
-                  "level",
-                  "type",
-                  "admin",
-                  "adm0_a3",
-                  "geou_dif",
-                  "geounit",
-                  "gu_a3",
-                  "su_dif",
-                  "subunit",
-                  "su_a3",
-                  "brk_diff",
-                  "name",
-                  "name_long",
-                  "brk_a3",
-                  "brk_name",
-                  "brk_group",
-                  "abbrev",
-                  "postal",
-                  "formal_en",
-                  "formal_fr",
-                  "name_ciawf",
-                  "note_adm0",
-                  "note_brk",
-                  "name_sort",
-                  "name_alt",
-                  "pop_est",
-                  "pop_rank",
-                  "gdp_md_est",
-                  "pop_year",
-                  "lastcensus",
-                  "gdp_year",
-                  "economy",
-                  "income_grp",
-                  "wikipedia",
-                  "fips_10_",
-                  "iso_a2",
-                  "iso_a3",
-                  "iso_a3_eh",
-                  "iso_n3",
-                  "un_a3",
-                  "wb_a2",
-                  "wb_a3",
-                  "woe_id",
-                  "woe_id_eh",
-                  "woe_note",
-                  "adm0_a3_is",
-                  "adm0_a3_us",
-                  "adm0_a3_un",
-                  "adm0_a3_wb",
-                  "continent",
-                  "region_un",
-                  "subregion",
-                  "region_wb",
-                  "name_len",
-                  "long_len",
-                  "abbrev_len",
-                  "tiny",
-                  "homepart",
-                  "ne_id",
-                  "wikidataid",
-                  "name_ar",
-                  "name_bn",
-                  "name_de",
-                  "name_en",
-                  "name_es",
-                  "name_fr",
-                  "name_el",
-                  "name_hi",
-                  "name_hu",
-                  "name_id",
-                  "name_it",
-                  "name_ja",
-                  "name_ko",
-                  "name_nl",
-                  "name_pl",
-                  "name_pt",
-                  "name_ru",
-                  "name_sv",
-                  "name_tr",
-                  "name_vi",
-                  "name_zh",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "osm_bg"
-              },
-              {
-                "name": "esri_imagery_bg"
-              },
-              {
-                "name": "bluemarble_bg"
-              }
-            ],
-            "print_templates": [
-              "A4 Landscape"
-            ]
-          },
-          {
             "name": "scan/comuni",
             "layers": [
               {
@@ -331,196 +53,157 @@
                 ]
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               }
             ]
           },
           {
-            "name": "scan/world",
+            "name": "scan/lmb_grids",
             "layers": [
               {
-                "name": "world",
+                "name": "LMB Grids",
                 "queryable": true,
                 "info_template": true
               },
               {
-                "name": "airports",
+                "name": "lmb5a",
                 "queryable": true,
                 "info_template": true,
                 "attributes": [
-                  "id",
-                  "scalerank",
-                  "featurecla",
-                  "type",
-                  "name",
-                  "abbrev",
-                  "location",
-                  "gps_code",
-                  "iata_code",
-                  "wikipedia",
-                  "natlscale",
+                  "LMB5A_IDis",
+                  "LMB5A_IDna",
                   "geometry",
                   "maptip"
                 ]
               },
               {
-                "name": "places",
+                "name": "lmb4b",
                 "queryable": true,
                 "info_template": true,
                 "attributes": [
-                  "id",
-                  "scalerank",
-                  "natscale",
-                  "labelrank",
-                  "featurecla",
-                  "name",
-                  "namepar",
-                  "namealt",
-                  "diffascii",
-                  "nameascii",
-                  "adm0cap",
-                  "capalt",
-                  "capin",
-                  "worldcity",
-                  "megacity",
-                  "sov0name",
-                  "sov_a3",
-                  "adm0name",
-                  "adm0_a3",
-                  "adm1name",
-                  "iso_a2",
-                  "note",
-                  "latitude",
-                  "longitude",
-                  "changed",
-                  "namediff",
-                  "diffnote",
-                  "pop_max",
-                  "pop_min",
-                  "pop_other",
-                  "rank_max",
-                  "rank_min",
-                  "geonameid",
-                  "meganame",
-                  "ls_name",
-                  "ls_match",
-                  "checkme",
-                  "max_pop10",
-                  "max_pop20",
-                  "max_pop50",
-                  "max_pop300",
-                  "max_pop310",
-                  "max_natsca",
-                  "min_areakm",
-                  "max_areakm",
-                  "min_areami",
-                  "max_areami",
-                  "min_perkm",
-                  "max_perkm",
-                  "min_permi",
-                  "max_permi",
-                  "min_bbxmin",
-                  "max_bbxmin",
-                  "min_bbxmax",
-                  "max_bbxmax",
-                  "min_bbymin",
-                  "max_bbymin",
-                  "min_bbymax",
-                  "max_bbymax",
-                  "mean_bbxc",
-                  "mean_bbyc",
-                  "compare",
-                  "gn_ascii",
-                  "feature_cl",
-                  "feature_co",
-                  "admin1_cod",
-                  "gn_pop",
-                  "elevation",
-                  "gtopo30",
-                  "timezone",
-                  "geonamesno",
-                  "un_fid",
-                  "un_adm0",
-                  "un_lat",
-                  "un_long",
-                  "pop1950",
-                  "pop1955",
-                  "pop1960",
-                  "pop1965",
-                  "pop1970",
-                  "pop1975",
-                  "pop1980",
-                  "pop1985",
-                  "pop1990",
-                  "pop1995",
-                  "pop2000",
-                  "pop2005",
-                  "pop2010",
-                  "pop2015",
-                  "pop2020",
-                  "pop2025",
-                  "pop2050",
-                  "cityalt",
+                  "LMB4B_IDna",
+                  "LMB4B_IDcu",
                   "geometry",
                   "maptip"
                 ]
               },
               {
-                "name": "countries",
+                "name": "lmb4a",
                 "queryable": true,
                 "info_template": true,
                 "attributes": [
-                  "id",
-                  "fips",
-                  "iso2",
-                  "iso3",
-                  "un",
-                  "name",
-                  "area",
-                  "pop2005",
-                  "region",
-                  "subregion",
-                  "lon",
-                  "lat",
-                  "pop_est",
+                  "LMB4A_IDis",
+                  "LMB4A_IDna",
+                  "LMB4A_IDtg",
                   "geometry",
                   "maptip"
                 ]
               },
               {
-                "name": "countries_shapeburst",
+                "name": "lmb3b",
                 "queryable": true,
                 "info_template": true,
                 "attributes": [
-                  "id",
-                  "fips",
-                  "iso2",
-                  "iso3",
-                  "un",
-                  "name",
-                  "area",
-                  "pop2005",
-                  "region",
-                  "subregion",
-                  "lon",
-                  "lat",
-                  "pop_est",
+                  "LMB3B_IDna",
+                  "LMB3B_IDcu",
                   "geometry",
                   "maptip"
                 ]
               },
               {
-                "name": "osm_bg"
+                "name": "lmb3a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB3A_IDcu",
+                  "LMB3A_area",
+                  "POP_2018",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb2c",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB2C_IDcu",
+                  "LMB2C_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb2b",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB2B_IDis",
+                  "LMB2B_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb2a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB2A_IDis",
+                  "LMB2A_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb1c",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB1C_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb1b",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB1B_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb1a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB1A_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb0a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB0A_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
               },
               {
                 "name": "esri_imagery_bg"
+              },
+              {
+                "name": "osm_bg"
               }
-            ],
-            "print_templates": [
-              "Population distribution"
             ]
           }
         ],

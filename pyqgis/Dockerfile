@@ -49,9 +49,9 @@ RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
 # ── Copy application scripts ──────────────────────────────────────────────────
 WORKDIR /app
-COPY . /app
+COPY *.py .
 
 # ── Entrypoint ────────────────────────────────────────────────────────────────
 # Override with: docker run ... python3 your_script.py
 ENTRYPOINT ["python3" ]
-CMD ["script.py"]
+CMD ["lmb_grids.py"]

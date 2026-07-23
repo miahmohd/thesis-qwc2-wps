@@ -70,91 +70,9 @@
         "coordinates"
     ],
     "defaultMapCrs": "EPSG:3857",
-    "defaultTheme": "qwc_demo",
+    "defaultTheme": "lmb_grids",
     "themes": {
-        "items": [
-            {
-                "id": "qwc_demo",
-                "title": "QWC Demo Theme",
-                "url": "/ows/qwc_demo",
-                "attribution": "Demo attribution",
-                "attributionUrl": "https://example.com/",
-                "backgroundLayers": [
-                    {
-                        "name": "bluemarble",
-                        "printLayer": "bluemarble_bg"
-                    },
-                    {
-                        "name": "mapnik",
-                        "printLayer": "osm_bg"
-                    },
-                    {
-                        "name": "esri_imagery",
-                        "printLayer": "esri_imagery_bg",
-                        "visibility": true
-                    }
-                ],
-                "searchProviders": [
-                    "coordinates",
-                    "nominatim",
-                    {
-                        "provider": "fulltext",
-                        "params": {
-                            "default": [
-                                "ne_10m_admin_0_countries"
-                            ]
-                        }
-                    }
-                ],
-                "mapCrs": "EPSG:3857",
-                "additionalMouseCrs": [],
-                "extent": [
-                    -1000000,
-                    4000000,
-                    3000000,
-                    8000000
-                ],
-                "printResolutions": [
-                    100,
-                    300
-                ],
-                "thumbnail": "qwc_demo.jpg",
-                "featureReport": {
-                    "countries": "Country"
-                },
-                "predefinedFilters": [
-                    {
-                        "id": "continent_filter",
-                        "title": "Continent",
-                        "filter": {
-                            "countries": [
-                                "continent",
-                                "=",
-                                "$continent$"
-                            ]
-                        },
-                        "fields": [
-                            {
-                                "id": "continent",
-                                "title": "Name",
-                                "defaultValue": "",
-                                "inputConfig": {
-                                    "type": "select",
-                                    "options": [
-                                        "Africa",
-                                        "Asia",
-                                        "Europe",
-                                        "Oceania"
-                                    ]
-                                }
-                            }
-                        ]
-                    }
-                ],
-                "extraLegendParameters": "LAYERTITLE=FALSE",
-                "defaultPrintLayout": "A4 Landscape"
-            }
-        ],
+        "items": [],
         "backgroundLayers": [
             {
                 "type": "wmts",

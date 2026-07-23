@@ -550,921 +550,6 @@
         "title": "root",
         "items": [
           {
-            "id": "qwc_demo",
-            "mapCrs": "EPSG:3857",
-            "name": "qwc_demo",
-            "title": "QWC Demo Theme",
-            "url": "/ows/qwc_demo",
-            "wms_name": "qwc_demo",
-            "abstract": "This a demo project for the QGIS Web Client",
-            "attribution": {
-              "Title": "Demo attribution",
-              "OnlineResource": "https://example.com/"
-            },
-            "availableFormats": [
-              "image/jpeg",
-              "image/png",
-              "image/png; mode=16bit",
-              "image/png; mode=8bit",
-              "image/png; mode=1bit",
-              "application/dxf",
-              "application/pdf"
-            ],
-            "bbox": {
-              "crs": "EPSG:4326",
-              "bounds": [
-                -179.999996,
-                -89.0,
-                179.999996,
-                89.0
-              ]
-            },
-            "contact": {
-              "person": "unknown",
-              "organization": "Sourcepole AG",
-              "position": null,
-              "phone": null,
-              "email": null
-            },
-            "description": "",
-            "drawingOrder": [
-              "bluemarble_bg",
-              "osm_bg",
-              "countries",
-              "states_provinces",
-              "country_names",
-              "geographic_lines",
-              "edit_polygons",
-              "edit_lines",
-              "edit_points"
-            ],
-            "editConfig": {
-              "edit_lines": {
-                "layerName": "edit_lines",
-                "layerTitle": "Edit Lines",
-                "displayField": "name",
-                "editDataset": "qwc_demo.edit_lines",
-                "geomType": "LineString",
-                "primaryKey": "id",
-                "form": ":/forms/autogen/qwc_demo_edit_lines.ui?v=1780488701",
-                "reltables": [],
-                "fields": [
-                  {
-                    "id": "id",
-                    "name": "id",
-                    "type": "number",
-                    "data_type": "integer",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": true,
-                      "expression": "",
-                      "placeholder": "",
-                      "hidden": true,
-                      "min": -2147483648,
-                      "max": 2147483647
-                    }
-                  },
-                  {
-                    "id": "name",
-                    "name": "Name",
-                    "type": "text",
-                    "data_type": "character varying",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false,
-                      "maxlength": 32
-                    }
-                  },
-                  {
-                    "id": "description",
-                    "name": "Description",
-                    "type": "text",
-                    "data_type": "text",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": true
-                    }
-                  },
-                  {
-                    "id": "num",
-                    "name": "Number",
-                    "type": "number",
-                    "data_type": "integer",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "min": 0,
-                      "max": 10000,
-                      "step": 1,
-                      "prec": 0
-                    }
-                  },
-                  {
-                    "id": "value",
-                    "name": "value",
-                    "type": "number",
-                    "data_type": "double precision",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "type",
-                    "name": "Type",
-                    "type": "list",
-                    "data_type": "smallint",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "values": [
-                        {
-                          "label": "Type A",
-                          "value": "0"
-                        },
-                        {
-                          "label": "Type B",
-                          "value": "1"
-                        },
-                        {
-                          "label": "Type C",
-                          "value": "2"
-                        }
-                      ],
-                      "min": -32768,
-                      "max": 32767
-                    }
-                  },
-                  {
-                    "id": "amount",
-                    "name": "amount",
-                    "type": "number",
-                    "data_type": "numeric",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false,
-                      "numeric_precision": 5,
-                      "numeric_scale": 2,
-                      "step": 0.01,
-                      "min": -999.99,
-                      "max": 999.99
-                    }
-                  },
-                  {
-                    "id": "validated",
-                    "name": "Validated",
-                    "type": "boolean",
-                    "data_type": "boolean",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": ""
-                    }
-                  },
-                  {
-                    "id": "datetime",
-                    "name": "Date",
-                    "type": "date",
-                    "data_type": "timestamp without time zone",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": ""
-                    }
-                  }
-                ]
-              },
-              "edit_points": {
-                "layerName": "edit_points",
-                "layerTitle": "Edit Points",
-                "displayField": "name",
-                "editDataset": "qwc_demo.edit_points",
-                "geomType": "Point",
-                "primaryKey": "id",
-                "form": ":/forms/autogen/qwc_demo_edit_points.ui?v=1780488701",
-                "reltables": [],
-                "fields": [
-                  {
-                    "id": "id",
-                    "name": "id",
-                    "type": "number",
-                    "data_type": "integer",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": true,
-                      "expression": "",
-                      "placeholder": "",
-                      "hidden": true,
-                      "min": -2147483648,
-                      "max": 2147483647
-                    }
-                  },
-                  {
-                    "id": "name",
-                    "name": "Name",
-                    "type": "text",
-                    "data_type": "character varying",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false,
-                      "maxlength": 32
-                    }
-                  },
-                  {
-                    "id": "description",
-                    "name": "Description",
-                    "type": "text",
-                    "data_type": "text",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": true
-                    }
-                  },
-                  {
-                    "id": "num",
-                    "name": "Number",
-                    "type": "number",
-                    "data_type": "integer",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "min": 0,
-                      "max": 10000,
-                      "step": 1,
-                      "prec": 0
-                    }
-                  },
-                  {
-                    "id": "value",
-                    "name": "value",
-                    "type": "number",
-                    "data_type": "double precision",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "type",
-                    "name": "Type",
-                    "type": "list",
-                    "data_type": "smallint",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "values": [
-                        {
-                          "label": "Type A",
-                          "value": "0"
-                        },
-                        {
-                          "label": "Type B",
-                          "value": "1"
-                        },
-                        {
-                          "label": "Type C",
-                          "value": "2"
-                        }
-                      ],
-                      "min": -32768,
-                      "max": 32767
-                    }
-                  },
-                  {
-                    "id": "amount",
-                    "name": "amount",
-                    "type": "number",
-                    "data_type": "numeric",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false,
-                      "numeric_precision": 5,
-                      "numeric_scale": 2,
-                      "step": 0.01,
-                      "min": -999.99,
-                      "max": 999.99
-                    }
-                  },
-                  {
-                    "id": "validated",
-                    "name": "Validated",
-                    "type": "boolean",
-                    "data_type": "boolean",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": ""
-                    }
-                  },
-                  {
-                    "id": "datetime",
-                    "name": "Date",
-                    "type": "date",
-                    "data_type": "timestamp without time zone",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": ""
-                    }
-                  }
-                ]
-              },
-              "edit_polygons": {
-                "layerName": "edit_polygons",
-                "layerTitle": "Edit Polygons",
-                "displayField": "name",
-                "editDataset": "qwc_demo.edit_polygons",
-                "geomType": "Polygon",
-                "primaryKey": "id",
-                "form": ":/forms/autogen/qwc_demo_edit_polygons.ui?v=1780488701",
-                "reltables": [],
-                "fields": [
-                  {
-                    "id": "id",
-                    "name": "id",
-                    "type": "number",
-                    "data_type": "integer",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": true,
-                      "expression": "",
-                      "placeholder": "",
-                      "hidden": true,
-                      "min": -2147483648,
-                      "max": 2147483647
-                    }
-                  },
-                  {
-                    "id": "name",
-                    "name": "Name",
-                    "type": "text",
-                    "data_type": "character varying",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false,
-                      "maxlength": 32
-                    }
-                  },
-                  {
-                    "id": "description",
-                    "name": "Description",
-                    "type": "text",
-                    "data_type": "text",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": true
-                    }
-                  },
-                  {
-                    "id": "num",
-                    "name": "Number",
-                    "type": "number",
-                    "data_type": "integer",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "min": 0,
-                      "max": 10000,
-                      "step": 1,
-                      "prec": 0
-                    }
-                  },
-                  {
-                    "id": "value",
-                    "name": "value",
-                    "type": "number",
-                    "data_type": "double precision",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "type",
-                    "name": "Type",
-                    "type": "list",
-                    "data_type": "smallint",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "values": [
-                        {
-                          "label": "Type A",
-                          "value": "0"
-                        },
-                        {
-                          "label": "Type B",
-                          "value": "1"
-                        },
-                        {
-                          "label": "Type C",
-                          "value": "2"
-                        }
-                      ],
-                      "min": -32768,
-                      "max": 32767
-                    }
-                  },
-                  {
-                    "id": "amount",
-                    "name": "amount",
-                    "type": "number",
-                    "data_type": "numeric",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": "",
-                      "multiline": false,
-                      "numeric_precision": 5,
-                      "numeric_scale": 2,
-                      "step": 0.01,
-                      "min": -999.99,
-                      "max": 999.99
-                    }
-                  },
-                  {
-                    "id": "validated",
-                    "name": "Validated",
-                    "type": "boolean",
-                    "data_type": "boolean",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": ""
-                    }
-                  },
-                  {
-                    "id": "datetime",
-                    "name": "Date",
-                    "type": "date",
-                    "data_type": "timestamp without time zone",
-                    "defaultValue": "",
-                    "filterExpression": null,
-                    "expression": null,
-                    "constraints": {
-                      "readOnly": false,
-                      "required": false,
-                      "expression": "",
-                      "placeholder": ""
-                    }
-                  }
-                ]
-              }
-            },
-            "expanded": true,
-            "externalLayers": [],
-            "infoFormats": [
-              "text/plain",
-              "text/html",
-              "text/xml",
-              "application/vnd.ogc.gml",
-              "application/vnd.ogc.gml/3.1.1",
-              "application/json",
-              "application/geo+json"
-            ],
-            "initialBbox": {
-              "crs": "EPSG:3857",
-              "bounds": [
-                -1000000,
-                4000000,
-                3000000,
-                8000000
-              ]
-            },
-            "keywords": "qwc, demo",
-            "onlineResource": "",
-            "searchProviders": [
-              "coordinates",
-              "nominatim",
-              {
-                "provider": "fulltext",
-                "params": {
-                  "default": [
-                    "ne_10m_admin_0_countries"
-                  ]
-                }
-              }
-            ],
-            "sublayers": [
-              {
-                "name": "edit_demo",
-                "title": "Edit Demo",
-                "sublayers": [
-                  {
-                    "name": "edit_points",
-                    "title": "Edit Points",
-                    "visibility": true,
-                    "geometryType": "Point",
-                    "category_sublayer": false,
-                    "queryable": true,
-                    "styles": {
-                      "default": "default"
-                    },
-                    "style": "default",
-                    "displayField": "Name",
-                    "opacity": 255,
-                    "bbox": {
-                      "crs": "EPSG:4326",
-                      "bounds": [
-                        -179.999996,
-                        -89.0,
-                        179.999996,
-                        89.0
-                      ]
-                    },
-                    "dimensions": [],
-                    "attribution": {
-                      "Title": null,
-                      "OnlineResource": null
-                    },
-                    "refreshInterval": 0
-                  },
-                  {
-                    "name": "edit_lines",
-                    "title": "Edit Lines",
-                    "visibility": true,
-                    "geometryType": "LineString",
-                    "category_sublayer": false,
-                    "queryable": true,
-                    "styles": {
-                      "default": "default"
-                    },
-                    "style": "default",
-                    "displayField": "Name",
-                    "opacity": 255,
-                    "bbox": {
-                      "crs": "EPSG:4326",
-                      "bounds": [
-                        8.542115,
-                        47.377069,
-                        8.542278,
-                        47.377544
-                      ]
-                    },
-                    "dimensions": [],
-                    "attribution": {
-                      "Title": null,
-                      "OnlineResource": null
-                    },
-                    "refreshInterval": 0
-                  },
-                  {
-                    "name": "edit_polygons",
-                    "title": "Edit Polygons",
-                    "visibility": true,
-                    "geometryType": "Polygon",
-                    "category_sublayer": false,
-                    "queryable": true,
-                    "styles": {
-                      "default": "default"
-                    },
-                    "style": "default",
-                    "displayField": "Name",
-                    "opacity": 255,
-                    "bbox": {
-                      "crs": "EPSG:4326",
-                      "bounds": [
-                        8.541217,
-                        47.377464,
-                        8.541461,
-                        47.377751
-                      ]
-                    },
-                    "dimensions": [],
-                    "attribution": {
-                      "Title": null,
-                      "OnlineResource": null
-                    },
-                    "refreshInterval": 0
-                  }
-                ],
-                "expanded": true,
-                "mutuallyExclusive": false,
-                "visibility": true
-              },
-              {
-                "name": "geographic_lines",
-                "title": "Geographic lines",
-                "visibility": true,
-                "geometryType": "MultiLineString",
-                "category_sublayer": false,
-                "queryable": true,
-                "styles": {
-                  "default": "default"
-                },
-                "style": "default",
-                "displayField": "name",
-                "opacity": 255,
-                "bbox": {
-                  "crs": "EPSG:4326",
-                  "bounds": [
-                    -180.0,
-                    -66.549927,
-                    179.999997,
-                    66.549986
-                  ]
-                },
-                "dimensions": [],
-                "attribution": {
-                  "Title": null,
-                  "OnlineResource": null
-                },
-                "refreshInterval": 0
-              },
-              {
-                "name": "country_names",
-                "title": "Country names",
-                "visibility": true,
-                "geometryType": "Point",
-                "category_sublayer": false,
-                "queryable": true,
-                "styles": {
-                  "default": "default"
-                },
-                "style": "default",
-                "displayField": "z_name",
-                "opacity": 255,
-                "bbox": {
-                  "crs": "EPSG:4326",
-                  "bounds": [
-                    -177.22902,
-                    -80.516568,
-                    178.519895,
-                    73.34887
-                  ]
-                },
-                "minScale": 0,
-                "maxScale": 10000000,
-                "dimensions": [],
-                "attribution": {
-                  "Title": null,
-                  "OnlineResource": null
-                },
-                "refreshInterval": 0
-              },
-              {
-                "name": "states_provinces",
-                "title": "States and Provinces",
-                "visibility": true,
-                "geometryType": "MultiLineString",
-                "category_sublayer": false,
-                "queryable": true,
-                "styles": {
-                  "default": "default"
-                },
-                "style": "default",
-                "displayField": "name",
-                "opacity": 255,
-                "bbox": {
-                  "crs": "EPSG:4326",
-                  "bounds": [
-                    -178.137086,
-                    -49.250871,
-                    178.448623,
-                    81.128532
-                  ]
-                },
-                "minScale": 0,
-                "maxScale": 5000000,
-                "dimensions": [],
-                "attribution": {
-                  "Title": null,
-                  "OnlineResource": null
-                },
-                "refreshInterval": 0
-              },
-              {
-                "name": "countries",
-                "title": "Countries",
-                "visibility": true,
-                "geometryType": "MultiPolygon",
-                "category_sublayer": false,
-                "queryable": true,
-                "styles": {
-                  "default": "default"
-                },
-                "style": "default",
-                "displayField": "name",
-                "opacity": 255,
-                "bbox": {
-                  "crs": "EPSG:4326",
-                  "bounds": [
-                    -180.0,
-                    -89.501386,
-                    180.0,
-                    83.634101
-                  ]
-                },
-                "dimensions": [],
-                "attribution": {
-                  "Title": null,
-                  "OnlineResource": null
-                },
-                "featureReport": "Country",
-                "refreshInterval": 0
-              }
-            ],
-            "translations": {},
-            "wmsOnly": false,
-            "print": [
-              {
-                "name": "A4 Landscape",
-                "title": "A4 Landscape",
-                "map": {
-                  "name": "map0",
-                  "x": 8.0,
-                  "y": 8.0,
-                  "width": 220.0,
-                  "height": 190.0
-                },
-                "atlasCoverageLayer": "countries",
-                "atlas_pk": "ogc_fid",
-                "labels": [
-                  "user_text"
-                ],
-                "default": true
-              }
-            ],
-            "visibilityPresets": {},
-            "additionalMouseCrs": [],
-            "backgroundLayers": [
-              {
-                "name": "bluemarble",
-                "printLayer": "bluemarble_bg"
-              },
-              {
-                "name": "mapnik",
-                "printLayer": "osm_bg"
-              },
-              {
-                "name": "esri_imagery",
-                "printLayer": "esri_imagery_bg",
-                "visibility": true
-              }
-            ],
-            "extraLegendParameters": "LAYERTITLE=FALSE",
-            "predefinedFilters": [
-              {
-                "id": "continent_filter",
-                "title": "Continent",
-                "filter": {
-                  "countries": [
-                    "continent",
-                    "=",
-                    "$continent$"
-                  ]
-                },
-                "fields": [
-                  {
-                    "id": "continent",
-                    "title": "Name",
-                    "defaultValue": "",
-                    "inputConfig": {
-                      "type": "select",
-                      "options": [
-                        "Africa",
-                        "Asia",
-                        "Europe",
-                        "Oceania"
-                      ]
-                    }
-                  }
-                ]
-              }
-            ],
-            "printResolutions": [
-              100,
-              300
-            ],
-            "thumbnail": "img/mapthumbs/qwc_demo.jpg"
-          },
-          {
             "id": "comuni",
             "mapCrs": "EPSG:3857",
             "name": "comuni",
@@ -1583,13 +668,13 @@
             "thumbnail": "img/mapthumbs/default.jpg"
           },
           {
-            "id": "world",
+            "id": "lmb_grids",
             "mapCrs": "EPSG:4326",
-            "name": "world",
-            "title": "QGIS Server Demo",
-            "url": "/ows/scan/world",
-            "wms_name": "scan/world",
-            "abstract": "This is a simple World map that showcases QGIS Server capabilities.",
+            "name": "lmb_grids",
+            "title": "LMB Grids",
+            "url": "/ows/scan/lmb_grids",
+            "wms_name": "scan/lmb_grids",
+            "abstract": "Griglie LMB (Lombardia). Proiezione nativa: WGS84 (EPSG:4326). Riproiezione on-the-fly disponibile per EPSG:3857.",
             "attribution": {
               "Title": null,
               "OnlineResource": null
@@ -1606,25 +691,33 @@
             "bbox": {
               "crs": "EPSG:4326",
               "bounds": [
-                -189.0,
-                -123.0,
-                189.0,
-                118.0
+                460624.425499,
+                4947405.265,
+                691621.345301,
+                5165402.8468
               ]
             },
             "contact": {
-              "person": "Tudor Bărăscu",
-              "organization": "qgis.org",
-              "position": null,
-              "phone": null,
-              "email": "tudor.barascu@qtibia.ro"
+              "person": "GIS Administrator",
+              "organization": "My Organisation",
+              "position": "GIS Manager",
+              "phone": "+39 000 0000000",
+              "email": "gis@example.com"
             },
             "description": "",
             "drawingOrder": [
-              "countries_shapeburst",
-              "countries",
-              "places",
-              "airports"
+              "lmb0a",
+              "lmb1a",
+              "lmb1b",
+              "lmb1c",
+              "lmb2a",
+              "lmb2b",
+              "lmb2c",
+              "lmb3a",
+              "lmb3b",
+              "lmb4a",
+              "lmb4b",
+              "lmb5a"
             ],
             "editConfig": {},
             "expanded": true,
@@ -1641,43 +734,43 @@
             "initialBbox": {
               "crs": "EPSG:4326",
               "bounds": [
-                -189.0,
-                -123.0,
-                189.0,
-                118.0
+                460624.425499,
+                4947405.265,
+                691621.345301,
+                5165402.8468
               ]
             },
-            "keywords": "QGIS Server World",
+            "keywords": "LMB, grids, Lombardia, boundaries",
             "onlineResource": "",
             "searchProviders": [
               "coordinates"
             ],
             "sublayers": [
               {
-                "name": "airports",
-                "title": "airports",
+                "name": "lmb5a",
+                "title": "LMB5A",
                 "visibility": true,
-                "geometryType": "Point",
+                "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
                 "styles": {
                   "default": "default"
                 },
                 "style": "default",
-                "displayField": "name",
+                "displayField": "LMB5A_IDna",
                 "opacity": 255,
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -175.135635,
-                    -53.781475,
-                    179.195443,
-                    78.246717
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
                   ]
                 },
-                "minScale": 1,
-                "maxScale": 3661920,
                 "dimensions": [],
+                "abstract": "Griglia LMB5A – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
                 "attribution": {
                   "Title": null,
                   "OnlineResource": null
@@ -1685,28 +778,30 @@
                 "refreshInterval": 0
               },
               {
-                "name": "places",
-                "title": "places",
-                "visibility": false,
-                "geometryType": "Point",
+                "name": "lmb4b",
+                "title": "LMB4B",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
                 "styles": {
                   "default": "default"
                 },
                 "style": "default",
-                "displayField": "name",
+                "displayField": "LMB4B_IDna",
                 "opacity": 255,
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -175.220565,
-                    -41.299974,
-                    179.216648,
-                    64.150024
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
                   ]
                 },
                 "dimensions": [],
+                "abstract": "Griglia LMB4B – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
                 "attribution": {
                   "Title": null,
                   "OnlineResource": null
@@ -1714,62 +809,309 @@
                 "refreshInterval": 0
               },
               {
-                "name": "countries",
-                "title": "countries",
+                "name": "lmb4a",
+                "title": "LMB4A",
                 "visibility": true,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
                 "styles": {
-                  "classified_by_name": "classified_by_name",
-                  "classified_by_population": "classified_by_population"
-                },
-                "style": "classified_by_name",
-                "displayField": "maptip",
-                "opacity": 255,
-                "bbox": {
-                  "crs": "EPSG:4326",
-                  "bounds": [
-                    -180.0,
-                    -90.0,
-                    180.0,
-                    83.623597
-                  ]
-                },
-                "dimensions": [],
-                "attribution": {
-                  "Title": null,
-                  "OnlineResource": null
-                },
-                "refreshInterval": 0
-              },
-              {
-                "name": "countries_shapeburst",
-                "title": "countries_shapeburst",
-                "visibility": true,
-                "geometryType": "MultiPolygon",
-                "category_sublayer": false,
-                "queryable": true,
-                "styles": {
-                  "blue": "blue",
-                  "default": "default",
-                  "green": "green"
+                  "default": "default"
                 },
                 "style": "default",
-                "displayField": "name",
+                "displayField": "LMB4A_IDna",
                 "opacity": 255,
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -180.0,
-                    -90.0,
-                    180.0,
-                    83.623597
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
                   ]
                 },
-                "minScale": 1,
-                "maxScale": 250000000,
                 "dimensions": [],
+                "abstract": "Griglia LMB4A – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb3b",
+                "title": "LMB3B",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB3B_IDna",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB3B – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb3a",
+                "title": "LMB3A",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB3A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654476,
+                    11.50069,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB3A – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb2c",
+                "title": "LMB2C",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB2C_IDna",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485961,
+                    44.654707,
+                    11.502601,
+                    46.642184
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB2C – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb2b",
+                "title": "LMB2B",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB2B_IDis",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB2B – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb2a",
+                "title": "LMB2A",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB2A_IDis",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB2A – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb1c",
+                "title": "LMB1C",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB1C_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB1C – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb1b",
+                "title": "LMB1B",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB1B_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB1B – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb1a",
+                "title": "LMB1A",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB1A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB1A – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "lmb0a",
+                "title": "LMB0A",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB0A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.487098,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia LMB0A – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
                 "attribution": {
                   "Title": null,
                   "OnlineResource": null
@@ -1779,25 +1121,7 @@
             ],
             "translations": {},
             "wmsOnly": false,
-            "print": [
-              {
-                "name": "Population distribution",
-                "title": "Population distribution",
-                "map": {
-                  "name": "map0",
-                  "x": 85.9395,
-                  "y": 37.8204,
-                  "width": 201.045,
-                  "height": 129.038
-                },
-                "labels": [
-                  "Html Description",
-                  "HTML Title",
-                  "Html Description"
-                ],
-                "default": false
-              }
-            ],
+            "print": [],
             "visibilityPresets": {},
             "backgroundLayers": [
               {
@@ -1814,7 +1138,7 @@
           }
         ],
         "subdirs": [],
-        "defaultTheme": "qwc_demo",
+        "defaultTheme": "lmb_grids",
         "externalLayers": [],
         "backgroundLayers": [
           {

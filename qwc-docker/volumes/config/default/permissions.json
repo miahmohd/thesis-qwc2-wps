@@ -159,10 +159,10 @@
                 ]
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               }
             ]
           }

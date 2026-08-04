@@ -30,6 +30,8 @@ class WpsClient extends React.Component {
         wpsUrl: PropTypes.string.isRequired,
         /** The side of the application on which to display the sidebar */
         side: PropTypes.string,
+        /** The currently active theme object from Redux state */
+        currentTheme: PropTypes.object,
         processStarted: PropTypes.func,
         processFinished: PropTypes.func
     };
@@ -642,6 +644,7 @@ ${responseForm}
 
     renderForm = () => {
         const { processDescription, loadingDescription, formValues, validationErrors, executing } = this.state;
+        const { currentTheme } = this.props;
 
         if (loadingDescription) {
             return <div className="wps-client-loading"><Spinner /> Loading process details...</div>;
@@ -651,6 +654,12 @@ ${responseForm}
 
         return (
             <div className="wps-client-section wps-client-form">
+                {currentTheme && (
+                    <div className="wps-client-theme-info">
+                        <label className="wps-client-label">Active Theme:</label>
+                        <span className="wps-client-theme-title">{currentTheme.title || currentTheme.name || currentTheme.id}</span>
+                    </div>
+                )}
                 <label className="wps-client-label">Inputs:</label>
                 {processDescription.inputs.length === 0 && (
                     <div className="wps-client-no-inputs">This process has no inputs.</div>
@@ -767,7 +776,9 @@ ${responseForm}
 }
 
 export default connect(
-    () => ({}),
+    (state) => ({
+        currentTheme: state.theme.current
+    }),
     {
         processStarted: processStarted,
         processFinished: processFinished

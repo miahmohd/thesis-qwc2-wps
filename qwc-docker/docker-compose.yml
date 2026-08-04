@@ -137,10 +137,11 @@ services:
 
 
   qwc-map-viewer:
+    build: ../qwc-custom
     # Stock qwc2 app
     # image: sourcepole/qwc-map-viewer:latest-2026-lts
     # Or with own viewer build placed in volumes/qwc2
-    image: sourcepole/qwc-map-viewer-base:latest-2026-lts
+    # image: sourcepole/qwc-map-viewer-base:latest-2026-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
@@ -150,7 +151,7 @@ services:
       # When using qwc-map-viewer:
       # - ./volumes/qwc2/assets:/qwc2/assets:ro
       # When using own viewer build with qwc-map-viewer-base:
-      - ./volumes/qwc2:/qwc2:ro
+      # - ./volumes/qwc2:/qwc2:ro
 
   qwc-ogc-service:
     image: sourcepole/qwc-ogc-service:latest-2026-lts

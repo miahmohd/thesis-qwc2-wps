@@ -101,3 +101,23 @@
 2026-08-04 15:37:54,003] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
 2026-08-04 15:37:54,050] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_bcxa35bp
 2026-08-04 15:38:12,970] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-04 17:14:59,790] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-04 17:15:03,714] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-04 17:15:18,111] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-04 17:15:18,180] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-04 17:15:18,221] [ERROR] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=289 module=Process function=_run_process Process error: method=sayhello.py._handler, line=24, msg='SayHello' object has no attribute 'log'
+2026-08-04 17:15:18,232] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_tu3tpg_b
+2026-08-04 19:31:52,990] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-04 19:31:53,049] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-04 19:31:53,086] [ERROR] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=289 module=Process function=_run_process Process error: method=sayhello.py._handler, line=24, msg='SayHello' object has no attribute 'log'
+2026-08-04 19:31:53,097] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_7b9zhjwk
+2026-08-04 19:32:32,379] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-04 19:32:32,478] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-04 19:32:32,526] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_kt0wts6n
+2026-08-04 19:33:09,351] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-04 19:33:09,451] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-04 19:33:09,500] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_yz76ybiz
+2026-08-04 19:33:43,938] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-04 19:33:45,340] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-04 19:36:51,978] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-04 19:36:54,419] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess

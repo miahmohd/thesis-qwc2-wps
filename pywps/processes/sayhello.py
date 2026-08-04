@@ -20,7 +20,7 @@ class SayHello(Process):
         )
 
     def _handler(self, request, response):
-        print(request)
+        print("ciso miah")
         response.outputs["response"].data = "Hello " + request.inputs["name"][0].data
         response.outputs["response"].uom = UOM("unity")
         return response

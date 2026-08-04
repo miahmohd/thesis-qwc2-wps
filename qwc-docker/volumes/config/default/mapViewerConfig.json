@@ -631,7 +631,7 @@
               {
                 "name": "lmb5a",
                 "title": "LMB5A",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -662,7 +662,7 @@
               {
                 "name": "lmb4b",
                 "title": "LMB4B",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -693,7 +693,7 @@
               {
                 "name": "lmb4a",
                 "title": "LMB4A",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -724,7 +724,7 @@
               {
                 "name": "lmb3b",
                 "title": "LMB3B",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -755,7 +755,7 @@
               {
                 "name": "lmb3a",
                 "title": "LMB3A",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -786,7 +786,7 @@
               {
                 "name": "lmb2c",
                 "title": "LMB2C",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -817,7 +817,7 @@
               {
                 "name": "lmb2b",
                 "title": "LMB2B",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -848,7 +848,7 @@
               {
                 "name": "lmb2a",
                 "title": "LMB2A",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -879,7 +879,7 @@
               {
                 "name": "lmb1c",
                 "title": "LMB1C",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -910,7 +910,7 @@
               {
                 "name": "lmb1b",
                 "title": "LMB1B",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -941,7 +941,7 @@
               {
                 "name": "lmb1a",
                 "title": "LMB1A",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -972,7 +972,7 @@
               {
                 "name": "lmb0a",
                 "title": "LMB0A",
-                "visibility": true,
+                "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
                 "queryable": true,
@@ -1055,7 +1055,7 @@
               256,
               256
             ],
-            "thumbnail": "img/mapthumbs/default.jpg",
+            "thumbnail": "img/mapthumbs/mapnik.jpg",
             "attribution": {
               "Title": null,
               "OnlineResource": null
@@ -1070,7 +1070,7 @@
               "Title": "OpenStreetMap contributors",
               "OnlineResource": "https://www.openstreetmap.org/copyright"
             },
-            "thumbnail": "img/mapthumbs/default.jpg"
+            "thumbnail": "img/mapthumbs/mapnik.jpg"
           },
           {
             "type": "wmts",
@@ -1096,7 +1096,7 @@
               256,
               256
             ],
-            "thumbnail": "img/mapthumbs/default.jpg",
+            "thumbnail": "img/mapthumbs/bluemarble.jpg",
             "attribution": {
               "Title": null,
               "OnlineResource": null

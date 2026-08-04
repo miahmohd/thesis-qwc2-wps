@@ -122,7 +122,9 @@ for shp in shp_files:
     if not layer.isValid():
         print(f"  WARNING: Failed to load {shp.name} – skipping")
         continue
-    print(f"       {layer_name}: {layer.featureCount()} features, CRS={layer.crs().authid()}")
+    print(
+        f"       {layer_name}: {layer.featureCount()} features, CRS={layer.crs().authid()}"
+    )
     layers.append(layer)
 
 if not layers:
@@ -148,13 +150,15 @@ for layer in layers:
     sp.setKeywordList(", ".join(WMS_KEYWORDS))
 
     # Styling – uniform semi-transparent blue fill
-    symbol = QgsFillSymbol.createSimple({
-        "color": "74,144,217,128",
-        "outline_color": STROKE_COLOR.name(),
-        "outline_width": STROKE_WIDTH,
-        "style": "solid",
-        "outline_style": "solid",
-    })
+    symbol = QgsFillSymbol.createSimple(
+        {
+            "color": "74,144,217,128",
+            "outline_color": STROKE_COLOR.name(),
+            "outline_width": STROKE_WIDTH,
+            "style": "solid",
+            "outline_style": "solid",
+        }
+    )
     layer.renderer().setSymbol(symbol)
     layer.triggerRepaint()
 
@@ -171,8 +175,14 @@ project.setCrs(project_crs)
 # Set the filename early so QGIS can compute relative paths from the project location
 project.setFileName(str(OUTPUT_PROJECT))
 
+root = project.layerTreeRoot()
+
 for layer in layers:
     project.addMapLayer(layer)
+
+    node = root.findLayer(layer.id())
+    if node:
+        node.setItemVisibilityChecked(False)
 
 project.setTitle(WMS_TITLE)
 
@@ -227,13 +237,21 @@ for layer in layers:
 
 # WMSExtent must be in the project CRS (EPSG:32632)
 if not combined_extent.isEmpty():
-    W("WMSExtent", "/", [
-        str(combined_extent.xMinimum()), str(combined_extent.yMinimum()),
-        str(combined_extent.xMaximum()), str(combined_extent.yMaximum()),
-    ])
-    print(f"       Extent ({PROJECT_CRS}): {combined_extent.xMinimum():.0f}, "
-          f"{combined_extent.yMinimum():.0f}, {combined_extent.xMaximum():.0f}, "
-          f"{combined_extent.yMaximum():.0f}")
+    W(
+        "WMSExtent",
+        "/",
+        [
+            str(combined_extent.xMinimum()),
+            str(combined_extent.yMinimum()),
+            str(combined_extent.xMaximum()),
+            str(combined_extent.yMaximum()),
+        ],
+    )
+    print(
+        f"       Extent ({PROJECT_CRS}): {combined_extent.xMinimum():.0f}, "
+        f"{combined_extent.yMinimum():.0f}, {combined_extent.xMaximum():.0f}, "
+        f"{combined_extent.yMaximum():.0f}"
+    )
 
 W("WMSRestrictedLayers", "/", [])
 

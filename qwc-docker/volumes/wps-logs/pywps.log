@@ -82,3 +82,8 @@
 2026-06-19 21:04:46,518] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
 2026-06-19 21:06:55,500] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
 2026-06-19 21:06:56,732] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-07-23 22:03:48,556] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-07-23 22:03:50,725] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-07-23 22:03:54,286] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-07-23 22:03:54,349] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-07-23 22:03:54,416] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_q7hc47g1

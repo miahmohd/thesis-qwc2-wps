@@ -669,12 +669,12 @@
           },
           {
             "id": "lmb_grids",
-            "mapCrs": "EPSG:4326",
+            "mapCrs": "EPSG:32632",
             "name": "lmb_grids",
             "title": "LMB Grids",
             "url": "/ows/scan/lmb_grids",
             "wms_name": "scan/lmb_grids",
-            "abstract": "Griglie LMB (Lombardia). Proiezione nativa: WGS84 (EPSG:4326). Riproiezione on-the-fly disponibile per EPSG:3857.",
+            "abstract": "Griglie LMB (Lombardia). Proiezione nativa: UTM zone 32N (EPSG:32632). Riproiezione on-the-fly disponibile per EPSG:3857 e EPSG:4326.",
             "attribution": {
               "Title": null,
               "OnlineResource": null
@@ -691,10 +691,10 @@
             "bbox": {
               "crs": "EPSG:4326",
               "bounds": [
-                460624.425499,
-                4947405.265,
-                691621.345301,
-                5165402.8468
+                8.485509,
+                44.654438,
+                11.502601,
+                46.642184
               ]
             },
             "contact": {
@@ -734,10 +734,10 @@
             "initialBbox": {
               "crs": "EPSG:4326",
               "bounds": [
-                460624.425499,
-                4947405.265,
-                691621.345301,
-                5165402.8468
+                8.485509,
+                44.654438,
+                11.502601,
+                46.642184
               ]
             },
             "keywords": "LMB, grids, Lombardia, boundaries",

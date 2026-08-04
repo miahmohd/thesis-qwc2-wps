@@ -38,6 +38,7 @@ services:
 
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.40
+    user: "1000:1000"
     # ports:
     #   - "127.0.0.1:8001:80"
     environment:
@@ -47,7 +48,7 @@ services:
       FCGID_EXTRA_ENV: 'PRINT_LAYOUT_DIR'
       PRINT_LAYOUT_DIR: '/layouts'
     volumes:
-      - ../data:/data:ro
+      - ../data:/data
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
       - ./volumes/qgis-server-plugins/print_templates:/usr/share/qgis/python/plugins/print_templates:ro
       - ./volumes/qgis-server-plugins/split_categorized:/usr/share/qgis/python/plugins/split_categorized:ro

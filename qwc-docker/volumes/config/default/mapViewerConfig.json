@@ -1008,12 +1008,12 @@
             "backgroundLayers": [
               {
                 "name": "mapnik",
-                "printLayer": "osm_bg"
+                "printLayer": "osm_bg",
+                "visibility": true
               },
               {
                 "name": "esri_imagery",
-                "printLayer": "esri_imagery_bg",
-                "visibility": true
+                "printLayer": "esri_imagery_bg"
               }
             ],
             "thumbnail": "img/mapthumbs/default.jpg"
@@ -1055,7 +1055,7 @@
               256,
               256
             ],
-            "thumbnail": "img/mapthumbs/default.jpg",
+            "thumbnail": "img/mapthumbs/mapnik.jpg",
             "attribution": {
               "Title": null,
               "OnlineResource": null
@@ -1070,7 +1070,7 @@
               "Title": "OpenStreetMap contributors",
               "OnlineResource": "https://www.openstreetmap.org/copyright"
             },
-            "thumbnail": "img/mapthumbs/default.jpg"
+            "thumbnail": "img/mapthumbs/mapnik.jpg"
           },
           {
             "type": "wmts",
@@ -1096,7 +1096,7 @@
               256,
               256
             ],
-            "thumbnail": "img/mapthumbs/default.jpg",
+            "thumbnail": "img/mapthumbs/bluemarble.jpg",
             "attribution": {
               "Title": null,
               "OnlineResource": null
@@ -1170,12 +1170,12 @@
         "defaultBackgroundLayers": [
           {
             "name": "mapnik",
-            "printLayer": "osm_bg"
+            "printLayer": "osm_bg",
+            "visibility": true
           },
           {
             "name": "esri_imagery",
-            "printLayer": "esri_imagery_bg",
-            "visibility": true
+            "printLayer": "esri_imagery_bg"
           }
         ]
       }

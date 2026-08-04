@@ -67,7 +67,7 @@ services:
     volumes:
       - ./volumes/config-in:/srv/qwc_service/config-in:ro
       - ./volumes/config:/srv/qwc_service/config-out
-      # - ./volumes/qwc2:/qwc2
+      - ./volumes/qwc2:/qwc2
       - ./volumes/qgs-resources:/data
       - ./pg_service.conf:/srv/pg_service.conf:ro
 

@@ -168,8 +168,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       }
     ],

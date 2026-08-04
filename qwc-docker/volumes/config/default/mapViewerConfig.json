@@ -109,7 +109,7 @@
             {
               "name": "WpsClient",
               "cfg": {
-                "wpsUrl": "/wps"
+                "wpsUrl": "/wps/"
               }
             },
             {
@@ -549,124 +549,6 @@
       "themes": {
         "title": "root",
         "items": [
-          {
-            "id": "comuni",
-            "mapCrs": "EPSG:3857",
-            "name": "comuni",
-            "title": "Comuni d'Italia",
-            "url": "/ows/scan/comuni",
-            "wms_name": "scan/comuni",
-            "abstract": "Confini amministrativi dei comuni italiani. Proiezione: Web Mercator (EPSG:3857). Fonte: comuni.geojson",
-            "attribution": {
-              "Title": null,
-              "OnlineResource": null
-            },
-            "availableFormats": [
-              "image/jpeg",
-              "image/png",
-              "image/png; mode=16bit",
-              "image/png; mode=8bit",
-              "image/png; mode=1bit",
-              "application/dxf",
-              "application/pdf"
-            ],
-            "bbox": {
-              "crs": "EPSG:4326",
-              "bounds": [
-                8.498337,
-                44.679944,
-                11.427673,
-                46.635188
-              ]
-            },
-            "contact": {
-              "person": "GIS Administrator",
-              "organization": "My Organisation",
-              "position": "GIS Manager",
-              "phone": "+39 000 0000000",
-              "email": "gis@example.com"
-            },
-            "description": "",
-            "drawingOrder": [
-              "comuni"
-            ],
-            "editConfig": {},
-            "expanded": true,
-            "externalLayers": [],
-            "infoFormats": [
-              "text/plain",
-              "text/html",
-              "text/xml",
-              "application/vnd.ogc.gml",
-              "application/vnd.ogc.gml/3.1.1",
-              "application/json",
-              "application/geo+json"
-            ],
-            "initialBbox": {
-              "crs": "EPSG:4326",
-              "bounds": [
-                8.498337,
-                44.679944,
-                11.427673,
-                46.635188
-              ]
-            },
-            "keywords": "comuni, Italy, administrative, boundaries, ISTAT",
-            "onlineResource": "",
-            "searchProviders": [
-              "coordinates"
-            ],
-            "sublayers": [
-              {
-                "name": "comuni",
-                "title": "Comuni",
-                "visibility": true,
-                "geometryType": "Polygon",
-                "category_sublayer": false,
-                "queryable": true,
-                "styles": {
-                  "default": "default"
-                },
-                "style": "default",
-                "displayField": "name",
-                "opacity": 255,
-                "bbox": {
-                  "crs": "EPSG:4326",
-                  "bounds": [
-                    8.498337,
-                    44.679944,
-                    11.427673,
-                    46.635188
-                  ]
-                },
-                "dimensions": [],
-                "abstract": "Confini amministrativi dei comuni italiani. Coordinate in Web Mercator (EPSG:3857).",
-                "keywords": "comuni, Italy, administrative, boundaries, ISTAT",
-                "attribution": {
-                  "Title": "Dati comuni italiani – ISTAT",
-                  "OnlineResource": "https://www.istat.it/"
-                },
-                "dataUrl": "",
-                "refreshInterval": 0
-              }
-            ],
-            "translations": {},
-            "wmsOnly": false,
-            "print": [],
-            "visibilityPresets": {},
-            "backgroundLayers": [
-              {
-                "name": "mapnik",
-                "printLayer": "osm_bg"
-              },
-              {
-                "name": "esri_imagery",
-                "printLayer": "esri_imagery_bg",
-                "visibility": true
-              }
-            ],
-            "thumbnail": "img/mapthumbs/default.jpg"
-          },
           {
             "id": "lmb_grids",
             "mapCrs": "EPSG:32632",

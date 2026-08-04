@@ -89,7 +89,7 @@
       {
         "name": "WpsClient",
         "cfg": {
-          "wpsUrl": "/wps"
+          "wpsUrl": "/wps/"
         }
       },
       {

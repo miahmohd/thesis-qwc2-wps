@@ -4,11 +4,11 @@ Docker Compose setup for deploying a custom [QWC2](https://github.com/qgis/qwc2)
 
 ## Architecture
 
-All services are orchestrated via Docker Compose behind an NGINX reverse proxy exposed on port **8088**.
+All services are orchestrated via Docker Compose behind an **OAuth2 Proxy** (acting as both reverse proxy and authentication gateway) exposed on port **8088**. The OAuth2 Proxy authenticates users via an OIDC provider (AWS Cognito) before forwarding requests to the backend services.
 
 | Service | Description |
 |---------|-------------|
-| `qwc-api-gateway` | NGINX reverse proxy (entry point, port 8088) |
+| `auth-proxy` | OAuth2 Proxy — reverse proxy + OIDC authentication (entry point, port 8088) |
 | `qwc-map-viewer` | Custom QWC2 web map viewer |
 | `qwc-qgis-server` | QGIS Server (WMS/WFS) |
 | `qwc-ogc-service` | OGC proxy service |
@@ -16,7 +16,7 @@ All services are orchestrated via Docker Compose behind an NGINX reverse proxy e
 | `qwc-postgis` | PostgreSQL/PostGIS database |
 | `qwc-config-service` | Configuration generator |
 | `qwc-admin-gui` | Administration interface |
-| `qwc-auth-service` | Authentication service (JWT) |
+| `qwc-auth-service` | Authentication service (JWT, used internally by QWC services) |
 | `qwc-feature-info-service` | Feature info service |
 | `qwc-legend-service` | Legend service |
 
@@ -30,7 +30,7 @@ All services are orchestrated via Docker Compose behind an NGINX reverse proxy e
 ```
 qwc-docker/             # This directory - Docker orchestration
 ├── docker-compose.yml
-├── .env                # JWT secret key
+├── .env                # Secrets (JWT, OAuth2 Proxy)
 ├── api-gateway/
 │   └── nginx.conf      # NGINX routing configuration
 ├── pg_service.conf     # PostgreSQL connection config
@@ -55,14 +55,18 @@ cd thesis/qwc-docker
 
 ### 2. Configure environment
 
-The `.env` file contains the JWT secret used for authentication across services. A default value is provided, but you should generate a new one for production:
+The `.env` file contains secrets used by the services:
+
+- `JWT_SECRET_KEY` — used for authentication across QWC services. Generate a new one for production:
+- `OAUTH_COOKIE_SECRET` — cookie encryption secret for the OAuth2 Proxy.
+- `OAUTH_CLIENT_SECRET` — OIDC client secret for the OAuth2 Proxy (from your identity provider).
 
 ```bash
-# Generate a new secret
+# Generate a new JWT secret
 python3 -c "import secrets; print(secrets.token_hex(48))"
 ```
 
-Update the `JWT_SECRET_KEY` value in `.env` with the generated secret.
+Update the values in `.env` accordingly.
 
 ### 3. Start the services
 
@@ -76,7 +80,7 @@ This will:
 3. Start QGIS Server
 4. Build and start the PyWPS service from `../pywps`
 5. Start all QWC2 microservices
-6. Start the NGINX gateway on port 8088
+6. Start the OAuth2 Proxy gateway on port 8088
 
 ### 4. Generate configuration
 
@@ -121,6 +125,17 @@ After changing dependencies in `../pywps/requirements.txt`:
 ```bash
 docker compose up --build
 ```
+
+## Disabling Authentication (Using NGINX API Gateway)
+
+If you do not need OIDC authentication, you can replace the `auth-proxy` with the simpler NGINX reverse proxy. In `docker-compose.yml`:
+
+1. **Comment out** the `auth-proxy` service block.
+2. **Uncomment** the `qwc-api-gateway` service block.
+
+The NGINX gateway uses the configuration in `api-gateway/nginx.conf` and exposes the application on port **8088** by default (adjust the port mapping as needed).
+
+This is useful for local development or deployments where authentication is handled externally or not required.
 
 ## Stopping the services
 

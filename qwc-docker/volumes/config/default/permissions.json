@@ -21,46 +21,6 @@
       "permissions": {
         "wms_services": [
           {
-            "name": "scan/comuni",
-            "layers": [
-              {
-                "name": "Comuni d'Italia",
-                "queryable": true,
-                "info_template": true
-              },
-              {
-                "name": "comuni",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "name",
-                  "minint_finloc",
-                  "op_id",
-                  "minint_elettorale",
-                  "prov_name",
-                  "prov_istat_code",
-                  "prov_istat_code_num",
-                  "prov_acr",
-                  "reg_name",
-                  "reg_istat_code",
-                  "reg_istat_code_num",
-                  "opdm_id",
-                  "com_catasto_code",
-                  "com_istat_code",
-                  "com_istat_code_num",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "esri_imagery_bg"
-              },
-              {
-                "name": "osm_bg"
-              }
-            ]
-          },
-          {
             "name": "scan/lmb_grids",
             "layers": [
               {
@@ -199,10 +159,10 @@
                 ]
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               }
             ]
           }

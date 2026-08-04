@@ -9,17 +9,6 @@
   "resources": {
     "wms_services": [
       {
-        "name": "scan/comuni",
-        "root_layer": {
-          "name": "Comuni d'Italia",
-          "layers": [
-            {
-              "name": "comuni"
-            }
-          ]
-        }
-      },
-      {
         "name": "scan/lmb_grids",
         "root_layer": {
           "name": "LMB Grids",

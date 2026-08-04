@@ -29,24 +29,22 @@ import pywps
 from pywps import Service
 
 from processes.sleep import Sleep
+
 # from processes.ultimate_question import UltimateQuestion
 # from processes.centroids import Centroids
 from processes.sayhello import SayHello
+
 # from processes.feature_count import FeatureCount
 # from processes.buffer import Buffer
 # from processes.area import Area
 # from processes.bboxinout import Box
 from processes.jsonprocess import TestJson
 
-
 app = flask.Flask(__name__)
+app.url_map.strict_slashes = False
 CORS(app)
 
-processes = [
-    SayHello(),
-    TestJson(),
-    Sleep()
-]
+processes = [SayHello(), TestJson(), Sleep()]
 
 # For the process list on the home page
 
@@ -57,30 +55,28 @@ for process in processes:
     process_descriptor[identifier] = abstract
 
 # This is, how you start PyWPS instance
-service = Service(processes, ['pywps.cfg'])
+service = Service(processes, ["pywps.cfg"])
 
 
-
-@app.route('/wps', methods=['GET', 'POST'])
+@app.route("/wps/", methods=["GET", "POST"])
 def wps():
 
     return service
 
 
-@app.route('/wps-outputs/'+'<path:filename>')
+@app.route("/wps-outputs/" + "<path:filename>")
 def outputfile(filename):
-    targetfile = os.path.join('outputs', filename)
+    targetfile = os.path.join("outputs", filename)
     if os.path.isfile(targetfile):
         file_ext = os.path.splitext(targetfile)[1]
-        with open(targetfile, mode='rb') as f:
+        with open(targetfile, mode="rb") as f:
             file_bytes = f.read()
         mime_type = None
-        if 'xml' in file_ext:
-            mime_type = 'text/xml'
+        if "xml" in file_ext:
+            mime_type = "text/xml"
         return flask.Response(file_bytes, content_type=mime_type)
     else:
         flask.abort(404)
-
 
 
 if __name__ == "__main__":
@@ -92,19 +88,24 @@ if __name__ == "__main__":
         epilog="""Do not use this service in a production environment.
          It's intended to be running in test environment only!
         For more documentation, visit http://pywps.org/doc
-        """
-        )
-    parser.add_argument('-d', '--daemon',
-                        action='store_true', help="run in daemon mode")
-    parser.add_argument('-a','--all-addresses',
-                        action='store_true', help="run flask using IPv4 0.0.0.0 (all network interfaces),"  +
-                            "otherwise bind to 127.0.0.1 (localhost).  This maybe necessary in systems that only run Flask")
+        """,
+    )
+    parser.add_argument(
+        "-d", "--daemon", action="store_true", help="run in daemon mode"
+    )
+    parser.add_argument(
+        "-a",
+        "--all-addresses",
+        action="store_true",
+        help="run flask using IPv4 0.0.0.0 (all network interfaces),"
+        + "otherwise bind to 127.0.0.1 (localhost).  This maybe necessary in systems that only run Flask",
+    )
     args = parser.parse_args()
 
     if args.all_addresses:
-        bind_host='0.0.0.0'
+        bind_host = "0.0.0.0"
     else:
-        bind_host='127.0.0.1'
+        bind_host = "127.0.0.1"
 
     if args.daemon:
         pid = None
@@ -113,10 +114,10 @@ if __name__ == "__main__":
         except OSError as e:
             raise Exception("%s [%d]" % (e.strerror, e.errno))
 
-        if (pid == 0):
+        if pid == 0:
             os.setsid()
-            app.run(threaded=True,host=bind_host)
+            app.run(threaded=True, host=bind_host)
         else:
             os._exit(0)
     else:
-        app.run(threaded=True,host=bind_host)
+        app.run(threaded=True, host=bind_host)

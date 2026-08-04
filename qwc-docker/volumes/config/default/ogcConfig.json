@@ -8,54 +8,6 @@
   "resources": {
     "wms_services": [
       {
-        "name": "scan/comuni",
-        "title": "Comuni d'Italia",
-        "hidden_in_landing_page": false,
-        "online_resources": {
-          "feature_info": "/api/v1/featureinfo/scan/comuni",
-          "legend": "/api/v1/legend/scan/comuni",
-          "service": "/ows/scan/comuni",
-          "edit_config": "/editConfig.json?map=scan/comuni"
-        },
-        "root_layer": {
-          "name": "Comuni d'Italia",
-          "title": "Comuni d'Italia",
-          "layers": [
-            {
-              "name": "comuni",
-              "title": "Comuni",
-              "attributes": {
-                "name": "name",
-                "minint_finloc": "minint_finloc",
-                "op_id": "op_id",
-                "minint_elettorale": "minint_elettorale",
-                "prov_name": "prov_name",
-                "prov_istat_code": "prov_istat_code",
-                "prov_istat_code_num": "prov_istat_code_num",
-                "prov_acr": "prov_acr",
-                "reg_name": "reg_name",
-                "reg_istat_code": "reg_istat_code",
-                "reg_istat_code_num": "reg_istat_code_num",
-                "opdm_id": "opdm_id",
-                "com_catasto_code": "com_catasto_code",
-                "com_istat_code": "com_istat_code",
-                "com_istat_code_num": "com_istat_code_num",
-                "geometry": "geometry",
-                "maptip": "maptip"
-              },
-              "queryable": true,
-              "edit_layers": []
-            }
-          ],
-          "edit_layers": []
-        },
-        "print_templates": [],
-        "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
-        ]
-      },
-      {
         "name": "scan/lmb_grids",
         "title": "LMB Grids",
         "hidden_in_landing_page": false,
@@ -216,8 +168,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       }
     ],

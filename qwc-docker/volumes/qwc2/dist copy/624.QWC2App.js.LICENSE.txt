@@ -1,1 +1,0 @@
-/*! For license information please see painterro.commonjs2.js.LICENSE.txt */

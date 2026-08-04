@@ -15,7 +15,7 @@
         },
         "abstract": "This a demo project for the QGIS Web Client",
         "keywords": "qwc, demo",
-        "onlineResource": "http://qwc2.sourcepole.ch/ows/qwc_demo?",
+        "onlineResource": "http://demo.qwc.app/ows/qwc_demo?",
         "contact": {
           "person": "unknown",
           "organization": "Sourcepole AG",
@@ -82,10 +82,33 @@
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -6.002525,
-                    46.504802,
-                    30.513566,
-                    50.421163
+                    5.085213,
+                    21.270615,
+                    113.021157,
+                    52.028492
+                  ]
+                },
+                "dimensions": []
+              },
+              {
+                "name": "edit_lines",
+                "title": "Edit Lines",
+                "geometryType": "LineString",
+                "visibility": true,
+                "queryable": true,
+                "displayField": "Name",
+                "opacity": 255,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    -2.151226,
+                    21.272121,
+                    39.834004,
+                    60.688764
                   ]
                 },
                 "dimensions": []
@@ -105,9 +128,9 @@
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -0.643143,
-                    45.277421,
-                    20.648725,
+                    -46.821975,
+                    -37.153826,
+                    141.272437,
                     53.593256
                   ]
                 },
@@ -263,11 +286,12 @@
           "country_names",
           "geographic_lines",
           "edit_polygons",
+          "edit_lines",
           "edit_points"
         ],
-        "legendUrl": "http://qwc2.sourcepole.ch/api/v1/legend/qwc_demo?LAYERTITLE=FALSE",
-        "featureInfoUrl": "http://qwc2.sourcepole.ch/api/v1/featureinfo/qwc_demo?",
-        "printUrl": "http://qwc2.sourcepole.ch/ows/qwc_demo?",
+        "legendUrl": "http://demo.qwc.app/api/v1/legend/qwc_demo?LAYERTITLE=FALSE",
+        "featureInfoUrl": "http://demo.qwc.app/api/v1/featureinfo/qwc_demo?",
+        "printUrl": "http://demo.qwc.app/ows/qwc_demo?",
         "predefinedFilters": [
           {
             "id": "continent_filter",

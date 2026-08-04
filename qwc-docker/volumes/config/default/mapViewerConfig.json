@@ -1055,7 +1055,7 @@
               256,
               256
             ],
-            "thumbnail": "img/mapthumbs/mapnik.jpg",
+            "thumbnail": "img/mapthumbs/default.jpg",
             "attribution": {
               "Title": null,
               "OnlineResource": null
@@ -1070,7 +1070,7 @@
               "Title": "OpenStreetMap contributors",
               "OnlineResource": "https://www.openstreetmap.org/copyright"
             },
-            "thumbnail": "img/mapthumbs/mapnik.jpg"
+            "thumbnail": "img/mapthumbs/default.jpg"
           },
           {
             "type": "wmts",
@@ -1096,7 +1096,7 @@
               256,
               256
             ],
-            "thumbnail": "img/mapthumbs/bluemarble.jpg",
+            "thumbnail": "img/mapthumbs/default.jpg",
             "attribution": {
               "Title": null,
               "OnlineResource": null

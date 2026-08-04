@@ -58,12 +58,12 @@
     "defaultBackgroundLayers": [
         {
             "name": "mapnik",
-            "printLayer": "osm_bg"
+            "printLayer": "osm_bg",
+            "visibility": true
         },
         {
             "name": "esri_imagery",
-            "printLayer": "esri_imagery_bg",
-            "visibility": true
+            "printLayer": "esri_imagery_bg"
         }
     ],
     "defaultSearchProviders": [

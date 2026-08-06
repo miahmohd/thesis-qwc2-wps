@@ -89,7 +89,20 @@ class LMBStatistic(Process):
                 "Classification method",
                 data_type="string",
                 allowed_values=["Equal Count", "Natural Breaks (Jenks)"],
-                default="Equal Count",
+                default="Natural Breaks (Jenks)",
+            ),
+            LiteralInput(
+                "day_filter",
+                "Day filter",
+                data_type="string",
+                allowed_values=["all", "weekday", "weekend"],
+                default="all",
+            ),
+            LiteralInput(
+                "months",
+                "Months (comma-separated, e.g. 1,3,5)",
+                data_type="string",
+                default="1,2,3,4,5,6,7,8,9,10,11,12",
             ),
         ]
         outputs = [LiteralOutput("response", "Output response", data_type="string")]
@@ -113,7 +126,27 @@ class LMBStatistic(Process):
         project = request.inputs["project"][0].data
         color_by = request.inputs["color_by"][0].data
         classification_method = request.inputs["classification_method"][0].data
+        # day_filter = request.inputs["day_filter"][0].data
+        day_filter = "all"
+        # months_str = request.inputs["months"][0].data.strip()
+        months_str = "1,2,3,4,5,6,7,8,9,10,11,12"
         qgis_project_path = f"/data/scan/{project}.qgs"
+
+        # --- Validate months input (strict) ---
+        months_filter = None
+        if months_str:
+            tokens = [t.strip() for t in months_str.split(",")]
+            for token in tokens:
+                if not token.isdigit() or int(token) < 1 or int(token) > 12:
+                    response.outputs["response"].data = (
+                        f"ERROR: Invalid month value '{token}'. "
+                        f"Months must be comma-separated integers between 1 and 12."
+                    )
+                    response.outputs["response"].uom = UOM("unity")
+                    return response
+            months_filter = set(int(t) for t in tokens)
+
+        temporal_filter_active = day_filter != "all" or months_filter is not None
 
         # --- Step 1: Copy shapefile to output directory ---
         os.makedirs(str(OUTPUT_DIR), exist_ok=True)
@@ -185,6 +218,34 @@ class LMBStatistic(Process):
         events = events.dropna(subset=["LONG", "LAT"])
         events = events[~((events["LONG"] == 0.0) & (events["LAT"] == 0.0))]
         skipped_events = total_raw - len(events)
+
+        # --- Step 8b: Apply temporal filter (day of week / months) ---
+        filtered_events = 0
+        if temporal_filter_active:
+            response.update_status("Applying temporal filter", 5)
+            events["_invio_dt"] = events["INVIO"].apply(parse_timestamp_safe)
+            # Drop events with unparseable INVIO when temporal filter is active
+            unparseable_mask = events["_invio_dt"].isna()
+            filtered_events += unparseable_mask.sum()
+            events = events[~unparseable_mask]
+
+            # Filter by day of week
+            if day_filter == "weekday":
+                weekday_mask = events["_invio_dt"].apply(lambda dt: dt.weekday() < 5)
+                filtered_events += (~weekday_mask).sum()
+                events = events[weekday_mask]
+            elif day_filter == "weekend":
+                weekend_mask = events["_invio_dt"].apply(lambda dt: dt.weekday() >= 5)
+                filtered_events += (~weekend_mask).sum()
+                events = events[weekend_mask]
+
+            # Filter by months
+            if months_filter is not None:
+                month_mask = events["_invio_dt"].apply(
+                    lambda dt: dt.month in months_filter
+                )
+                filtered_events += (~month_mask).sum()
+                events = events[month_mask]
 
         # --- Step 9: Spatial matching ---
         matched_events = 0
@@ -337,6 +398,14 @@ class LMBStatistic(Process):
             f"{matched_events} matched, {unmatched_events} unmatched, "
             f"{skipped_events} skipped (invalid coordinates)."
         )
+        if temporal_filter_active:
+            filter_desc_parts = []
+            if day_filter != "all":
+                filter_desc_parts.append(f"day_filter={day_filter}")
+            if months_filter is not None:
+                filter_desc_parts.append(f"months={months_str}")
+            filter_desc = ", ".join(filter_desc_parts)
+            msg += f" {filtered_events} excluded by time filter ({filter_desc})."
         response.outputs["response"].data = msg
         response.outputs["response"].uom = UOM("unity")
         return response

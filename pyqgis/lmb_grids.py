@@ -62,7 +62,7 @@ from qgis.PyQt.QtGui import QColor
 # Configuration
 # ============================================================================
 
-INPUT_DIR: Path = Path("/data/LMB_grids")
+INPUT_DIR: Path = Path("/data/layer")
 OUTPUT_PROJECT: Path = Path("/data/scan/lmb_grids.qgs")
 
 # Project CRS will be determined from the first loaded layer (expected: EPSG:32632)
@@ -84,12 +84,12 @@ WMS_KEYWORDS = ["LMB", "grids", "Lombardia", "boundaries"]
 WMS_FEES = "None"
 WMS_ACCESS_CONSTRAINTS = "None"
 
-CONTACT_PERSON = "GIS Administrator"
-CONTACT_ORGANIZATION = "My Organisation"
-CONTACT_POSITION = "GIS Manager"
-CONTACT_EMAIL = "gis@example.com"
+CONTACT_PERSON = "Miah Mohd"
+CONTACT_ORGANIZATION = "Politecnico di Milano"
+CONTACT_POSITION = "Student"
+CONTACT_EMAIL = "miahmohd98@gmail.com"
 CONTACT_PHONE = "+39 000 0000000"
-CONTACT_ADDRESS = "Via Example 1, 00000 Roma, Italy"
+CONTACT_ADDRESS = "Piazza Leonardo da Vinci, 32 · 02 23991"
 
 # ============================================================================
 # STEP 2 – Discover shapefiles

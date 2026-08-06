@@ -26,7 +26,7 @@ from qgis.core import (
 )
 from PyQt5.QtCore import QVariant
 
-logger = logging.getLogger("gunicorn.error")
+log = logging.getLogger("gunicorn.error")
 
 SHAPEFILES_DIR = Path("/data/LMB_grids")
 EVT_DIR = Path("/data/EVT")
@@ -88,8 +88,8 @@ class LMBStatistic(Process):
                 "classification_method",
                 "Classification method",
                 data_type="string",
-                allowed_values=["quantile", "jenks"],
-                default="quantile",
+                allowed_values=["Equal Count", "Natural Breaks (Jenks)"],
+                default="Equal Count",
             ),
         ]
         outputs = [LiteralOutput("response", "Output response", data_type="string")]
@@ -107,7 +107,7 @@ class LMBStatistic(Process):
         )
 
     def _handler(self, request, response):
-        logger.info("Starting lmbstat process")
+        log.info("Starting lmbstat process")
         layer_name = request.inputs["layer_name"][0].data
         lmbgrid = request.inputs["lmbgrid"][0].data
         project = request.inputs["project"][0].data
@@ -284,7 +284,7 @@ class LMBStatistic(Process):
         color_ramp = style.colorRamp("YlOrRd")
 
         # Compute class breaks using the chosen method
-        if classification_method == "jenks":
+        if classification_method == "Natural Breaks (Jenks)":
             classifier = QgsClassificationJenks()
         else:
             classifier = QgsClassificationQuantile()
@@ -327,7 +327,7 @@ class LMBStatistic(Process):
                 timeout=120,
             )
         except Exception as e:
-            logger.warning(f"Config regeneration failed: {e}")
+            log.warning(f"Config regeneration failed: {e}")
 
         # --- Step 16: Return result ---
         total_events = matched_events + unmatched_events

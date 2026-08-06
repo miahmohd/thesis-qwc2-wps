@@ -14,58 +14,7 @@
           "name": "LMB Grids",
           "layers": [
             {
-              "name": "2a evcount jenks"
-            },
-            {
-              "name": "b3a avg response time"
-            },
-            {
-              "name": "b3a quant"
-            },
-            {
-              "name": "b3a jenks"
-            },
-            {
-              "name": "test3"
-            },
-            {
-              "name": "test2"
-            },
-            {
               "name": "lmb5a"
-            },
-            {
-              "name": "lmb4b"
-            },
-            {
-              "name": "lmb4a"
-            },
-            {
-              "name": "lmb3b"
-            },
-            {
-              "name": "lmb3a"
-            },
-            {
-              "name": "lmb2c"
-            },
-            {
-              "name": "lmb2b"
-            },
-            {
-              "name": "lmb2a"
-            },
-            {
-              "name": "lmb1c"
-            },
-            {
-              "name": "lmb1b"
-            },
-            {
-              "name": "lmb1a"
-            },
-            {
-              "name": "lmb0a"
             }
           ]
         }

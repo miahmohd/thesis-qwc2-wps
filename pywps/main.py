@@ -37,14 +37,13 @@ if QgsApplication.instance() is None:
     QgsApplication.setPrefixPath(QGIS_PREFIX, True)
     _qgs_app.initQgis()
 
-from processes.sayhello import SayHello
 from processes.lmbstats import LMBStatistic
 
 app = flask.Flask(__name__)
 app.url_map.strict_slashes = False
 CORS(app)
 
-processes = [SayHello(), LMBStatistic()]
+processes = [LMBStatistic()]
 
 # For the process list on the home page
 

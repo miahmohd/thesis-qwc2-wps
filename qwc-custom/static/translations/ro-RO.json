@@ -3,6 +3,7 @@
   "messages": {
     "appmenu": {
       "items": {
+        "WpsClient": "WPS client",
         "ExternalLink": "Link extern",
         "Bookmark": "Marcaj",
         "Compare3D": "",

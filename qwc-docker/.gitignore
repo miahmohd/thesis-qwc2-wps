@@ -1,2 +1,4 @@
 .env
 volumes/config/__capabilities_cache
+volumes/wps-outputs
+volumes/wps-logs

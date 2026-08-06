@@ -62,7 +62,7 @@ from qgis.PyQt.QtGui import QColor
 # Configuration
 # ============================================================================
 
-INPUT_DIR: Path = Path("/data/LMB_grids")
+INPUT_DIR: Path = Path("/data/layer")
 OUTPUT_PROJECT: Path = Path("/data/scan/lmb_grids.qgs")
 
 # Project CRS will be determined from the first loaded layer (expected: EPSG:32632)
@@ -101,7 +101,7 @@ if OUTPUT_PROJECT.exists():
 if not INPUT_DIR.exists():
     sys.exit(f"ERROR: Input directory not found: {INPUT_DIR}")
 
-shp_files = sorted(INPUT_DIR.glob("ccc.shp"))
+shp_files = sorted(INPUT_DIR.glob("*.shp"))
 
 if not shp_files:
     sys.exit(f"ERROR: No .shp files found in {INPUT_DIR}")

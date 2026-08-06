@@ -16,8 +16,78 @@
           "title": "LMB Grids",
           "layers": [
             {
-              "name": "ccc",
-              "title": "ccc",
+              "name": "wtwt",
+              "title": "wtwt",
+              "attributes": [
+                {
+                  "name": "LMB3A_IDcu",
+                  "alias": "LMB3A_IDcu"
+                },
+                {
+                  "name": "LMB3A_area",
+                  "alias": "LMB3A_area"
+                },
+                {
+                  "name": "POP_2018",
+                  "alias": "POP_2018"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "LMB3A_IDcu"
+            },
+            {
+              "name": "wrwr",
+              "title": "wrwr",
+              "attributes": [
+                {
+                  "name": "LMB3A_IDcu",
+                  "alias": "LMB3A_IDcu"
+                },
+                {
+                  "name": "LMB3A_area",
+                  "alias": "LMB3A_area"
+                },
+                {
+                  "name": "POP_2018",
+                  "alias": "POP_2018"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "LMB3A_IDcu"
+            },
+            {
+              "name": "wewe",
+              "title": "wewe",
               "attributes": [
                 {
                   "name": "LMB3B_IDna",
@@ -45,6 +115,103 @@
                 }
               ],
               "display_field": "LMB3B_IDna"
+            },
+            {
+              "name": "qwqw",
+              "title": "qwqw",
+              "attributes": [
+                {
+                  "name": "LMB3A_IDcu",
+                  "alias": "LMB3A_IDcu"
+                },
+                {
+                  "name": "LMB3A_area",
+                  "alias": "LMB3A_area"
+                },
+                {
+                  "name": "POP_2018",
+                  "alias": "POP_2018"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "LMB3A_IDcu"
+            },
+            {
+              "name": "erer",
+              "title": "erer",
+              "attributes": [
+                {
+                  "name": "LMB3B_IDna",
+                  "alias": "LMB3B_IDna"
+                },
+                {
+                  "name": "LMB3B_IDcu",
+                  "alias": "LMB3B_IDcu"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "LMB3B_IDna"
+            },
+            {
+              "name": "by munu",
+              "title": "by munu",
+              "attributes": [
+                {
+                  "name": "LMB2B_IDis",
+                  "alias": "LMB2B_IDis"
+                },
+                {
+                  "name": "LMB2B_IDna",
+                  "alias": "LMB2B_IDna"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "LMB2B_IDis"
             }
           ]
         }

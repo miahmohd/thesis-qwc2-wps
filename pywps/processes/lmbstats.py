@@ -134,7 +134,7 @@ class LMBStatistic(Process):
         # --- Step 7: Read all .tab files into a single DataFrame ---
         response.update_status(f"Reading evt files", 3)
         # Speed rading by parsing only the used columns
-        USECOLS = ["LONG", "LAT", "INVIO_1", "POSTO_1"]
+        USECOLS = ["LONG", "LAT", "INVIO", "POSTO_1"]
         dfs = []
         for evt_file in evt_files:
             df = pd.read_csv(

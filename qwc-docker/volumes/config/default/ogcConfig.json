@@ -22,11 +22,84 @@
           "title": "LMB Grids",
           "layers": [
             {
-              "name": "ccc",
-              "title": "ccc",
+              "name": "wtwt",
+              "title": "wtwt",
+              "attributes": {
+                "LMB3A_IDcu": "LMB3A_IDcu",
+                "LMB3A_area": "LMB3A_area",
+                "POP_2018": "POP_2018",
+                "evt_count": "evt_count",
+                "avg_resp_s": "avg_resp_s",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "wrwr",
+              "title": "wrwr",
+              "attributes": {
+                "LMB3A_IDcu": "LMB3A_IDcu",
+                "LMB3A_area": "LMB3A_area",
+                "POP_2018": "POP_2018",
+                "evt_count": "evt_count",
+                "avg_resp_s": "avg_resp_s",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "wewe",
+              "title": "wewe",
               "attributes": {
                 "LMB3B_IDna": "LMB3B_IDna",
                 "LMB3B_IDcu": "LMB3B_IDcu",
+                "evt_count": "evt_count",
+                "avg_resp_s": "avg_resp_s",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "qwqw",
+              "title": "qwqw",
+              "attributes": {
+                "LMB3A_IDcu": "LMB3A_IDcu",
+                "LMB3A_area": "LMB3A_area",
+                "POP_2018": "POP_2018",
+                "evt_count": "evt_count",
+                "avg_resp_s": "avg_resp_s",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "erer",
+              "title": "erer",
+              "attributes": {
+                "LMB3B_IDna": "LMB3B_IDna",
+                "LMB3B_IDcu": "LMB3B_IDcu",
+                "evt_count": "evt_count",
+                "avg_resp_s": "avg_resp_s",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "by munu",
+              "title": "by munu",
+              "attributes": {
+                "LMB2B_IDis": "LMB2B_IDis",
+                "LMB2B_IDna": "LMB2B_IDna",
                 "evt_count": "evt_count",
                 "avg_resp_s": "avg_resp_s",
                 "geometry": "geometry",
@@ -40,8 +113,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "osm_bg",
-          "esri_imagery_bg"
+          "esri_imagery_bg",
+          "osm_bg"
         ]
       }
     ],

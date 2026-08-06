@@ -29,7 +29,35 @@
                 "info_template": true
               },
               {
-                "name": "ccc",
+                "name": "wtwt",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB3A_IDcu",
+                  "LMB3A_area",
+                  "POP_2018",
+                  "evt_count",
+                  "avg_resp_s",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "wrwr",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB3A_IDcu",
+                  "LMB3A_area",
+                  "POP_2018",
+                  "evt_count",
+                  "avg_resp_s",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "wewe",
                 "queryable": true,
                 "info_template": true,
                 "attributes": [
@@ -42,10 +70,50 @@
                 ]
               },
               {
-                "name": "osm_bg"
+                "name": "qwqw",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB3A_IDcu",
+                  "LMB3A_area",
+                  "POP_2018",
+                  "evt_count",
+                  "avg_resp_s",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "erer",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB3B_IDna",
+                  "LMB3B_IDcu",
+                  "evt_count",
+                  "avg_resp_s",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "by munu",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "LMB2B_IDis",
+                  "LMB2B_IDna",
+                  "evt_count",
+                  "avg_resp_s",
+                  "geometry",
+                  "maptip"
+                ]
               },
               {
                 "name": "esri_imagery_bg"
+              },
+              {
+                "name": "osm_bg"
               }
             ]
           }

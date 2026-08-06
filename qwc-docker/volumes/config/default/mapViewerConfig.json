@@ -588,7 +588,12 @@
             },
             "description": "",
             "drawingOrder": [
-              "ccc"
+              "by munu",
+              "erer",
+              "qwqw",
+              "wewe",
+              "wrwr",
+              "wtwt"
             ],
             "editConfig": {},
             "expanded": true,
@@ -618,8 +623,70 @@
             ],
             "sublayers": [
               {
-                "name": "ccc",
-                "title": "ccc",
+                "name": "wtwt",
+                "title": "wtwt",
+                "visibility": false,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB3A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654476,
+                    11.50069,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia wtwt – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "wrwr",
+                "title": "wrwr",
+                "visibility": false,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB3A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654476,
+                    11.50069,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia wrwr – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "wewe",
+                "title": "wewe",
                 "visibility": false,
                 "geometryType": "MultiPolygon",
                 "category_sublayer": false,
@@ -640,7 +707,100 @@
                   ]
                 },
                 "dimensions": [],
-                "abstract": "Griglia ccc – LMB grid layer.",
+                "abstract": "Griglia wewe – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "qwqw",
+                "title": "qwqw",
+                "visibility": false,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB3A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654476,
+                    11.50069,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia qwqw – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "erer",
+                "title": "erer",
+                "visibility": false,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB3B_IDna",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia erer – LMB grid layer.",
+                "keywords": "LMB, grids, Lombardia, boundaries",
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "by munu",
+                "title": "by munu",
+                "visibility": false,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB2B_IDis",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485512,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "abstract": "Griglia by munu – LMB grid layer.",
                 "keywords": "LMB, grids, Lombardia, boundaries",
                 "attribution": {
                   "Title": null,

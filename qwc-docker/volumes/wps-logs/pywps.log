@@ -121,3 +121,55 @@
 2026-08-04 19:33:45,340] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
 2026-08-04 19:36:51,978] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
 2026-08-04 19:36:54,419] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-05 23:35:27,778] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-05 23:36:01,665] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-05 23:36:06,641] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-05 23:36:16,165] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-05 23:36:24,967] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:07:47,874] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:07:51,772] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:08:26,622] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:08:30,426] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:08:39,299] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:08:39,364] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 00:18:54,812] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:18:56,934] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:19:42,534] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:19:42,595] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 00:19:44,384] [ERROR] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=289 module=Process function=_run_process Process error: method=lmbstats.py._handler, line=149, msg=can only concatenate str (not "PosixPath") to str
+2026-08-06 00:19:44,396] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_rbcmvc9s
+2026-08-06 00:21:23,421] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:21:25,814] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:21:42,071] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:21:42,136] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 00:25:06,413] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:25:09,344] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:25:22,415] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:25:22,498] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 00:27:25,382] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:27:27,374] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:27:30,227] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:27:30,296] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 00:27:30,362] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_tf0dq5sd
+2026-08-06 00:31:20,514] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:31:23,233] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:31:31,532] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:31:31,600] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 00:34:55,765] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 00:34:57,450] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 00:35:08,595] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 00:35:08,680] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 11:09:04,148] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 11:09:05,607] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 11:09:23,666] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 11:09:23,732] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 11:30:36,045] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Process.py line=337 module=Process function=clean Removing temporary working directory: /app/workdir/pywps_process_ka6geh2f
+2026-08-06 11:40:46,847] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 11:40:49,970] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 11:41:02,018] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 11:41:02,104] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default
+2026-08-06 11:43:31,827] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 12:26:44,197] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: getcapabilities
+2026-08-06 12:26:45,772] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: describeprocess
+2026-08-06 12:27:07,975] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/app/Service.py line=290 module=Service function=call Request: execute
+2026-08-06 12:27:08,065] [INFO] file=/usr/local/lib/python3.10/dist-packages/pywps/processing/__init__.py line=32 module=__init__ function=Process Processing mode: default

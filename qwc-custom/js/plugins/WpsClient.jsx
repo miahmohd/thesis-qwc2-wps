@@ -22,7 +22,7 @@ import './style/WpsClient.css';
 
 
 const POLL_INTERVAL_MS = 3000;
-const MAX_POLL_ATTEMPTS = 100;
+const MAX_POLL_ATTEMPTS = 1500;
 
 class WpsClient extends React.Component {
     static propTypes = {
@@ -52,6 +52,8 @@ class WpsClient extends React.Component {
         validationErrors: {},
         // Execution
         executing: false,
+        statusMessage: null,
+        statusPercent: null,
         // Results
         results: null,
         error: null
@@ -293,7 +295,7 @@ class WpsClient extends React.Component {
         const useAsync = processDescription.storeSupported && processDescription.statusSupported;
         const requestXml = this.buildExecuteRequest(processDescription, formValues, useAsync);
 
-        this.setState({ executing: true, results: null, error: null });
+        this.setState({ executing: true, results: null, error: null, statusMessage: null, statusPercent: null });
 
         const processId = processDescription.identifier + '_' + Date.now();
         if (useAsync) {
@@ -325,11 +327,16 @@ class WpsClient extends React.Component {
                     // Check status
                     const status = this.extractStatus(result);
                     if (status === 'ProcessAccepted' || status === 'ProcessStarted') {
+                        const progress = this.extractProgressInfo(result);
+                        this.setState({
+                            statusPercent: progress.percent,
+                            statusMessage: progress.message
+                        });
                         const statusLocation = this.extractStatusLocation(result);
                         if (statusLocation) {
                             this.startPolling(statusLocation, processId);
                         } else {
-                            this.setState({ executing: false, error: 'No status location returned' });
+                            this.setState({ executing: false, error: 'No status location returned', statusMessage: null, statusPercent: null });
                             this.props.processFinished(processId, false, 'No status location');
                         }
                     } else if (status === 'ProcessSucceeded') {
@@ -353,7 +360,7 @@ class WpsClient extends React.Component {
             })
             .catch(err => {
                 const errMsg = 'Execution failed: ' + (err.message || 'Unknown error');
-                this.setState({ executing: false, error: errMsg });
+                this.setState({ executing: false, error: errMsg, statusMessage: null, statusPercent: null });
                 if (useAsync) {
                     this.props.processFinished(processId, false, errMsg);
                 }
@@ -436,7 +443,7 @@ ${responseForm}
         if (this.pollCount > MAX_POLL_ATTEMPTS) {
             this.stopPolling();
             const errMsg = 'Process timed out after ' + (MAX_POLL_ATTEMPTS * POLL_INTERVAL_MS / 1000) + ' seconds';
-            this.setState({ executing: false, error: errMsg });
+            this.setState({ executing: false, error: errMsg, statusMessage: null, statusPercent: null });
             this.props.processFinished(this.pollProcessId, false, errMsg);
             return;
         }
@@ -462,20 +469,26 @@ ${responseForm}
                 if (status === 'ProcessSucceeded') {
                     this.stopPolling();
                     const outputs = this.extractOutputs(result);
-                    this.setState({ executing: false, results: outputs });
+                    this.setState({ executing: false, results: outputs, statusMessage: null, statusPercent: null });
                     this.props.processFinished(this.pollProcessId, true, 'Process completed');
                 } else if (status === 'ProcessFailed') {
                     this.stopPolling();
                     const failMsg = this.extractFailureMessage(result) || 'Process failed';
-                    this.setState({ executing: false, error: failMsg });
+                    this.setState({ executing: false, error: failMsg, statusMessage: null, statusPercent: null });
                     this.props.processFinished(this.pollProcessId, false, failMsg);
+                } else {
+                    // ProcessAccepted / ProcessStarted => update progress and keep polling
+                    const progress = this.extractProgressInfo(result);
+                    this.setState({
+                        statusPercent: progress.percent,
+                        statusMessage: progress.message
+                    });
                 }
-                // ProcessAccepted / ProcessStarted => keep polling
             })
             .catch(err => {
                 this.stopPolling();
                 const errMsg = 'Polling failed: ' + (err.message || 'Unknown error');
-                this.setState({ executing: false, error: errMsg });
+                this.setState({ executing: false, error: errMsg, statusMessage: null, statusPercent: null });
                 this.props.processFinished(this.pollProcessId, false, errMsg);
             });
     };
@@ -525,6 +538,20 @@ ${responseForm}
         return null;
     };
 
+    extractProgressInfo = (parsed) => {
+        const response = parsed.ExecuteResponse;
+        if (!response || !response.Status) return { percent: null, message: null };
+        const started = response.Status.ProcessStarted;
+        const accepted = response.Status.ProcessAccepted;
+        const node = started || accepted;
+        if (!node) return { percent: null, message: null };
+        const percent = node['@_percentCompleted'] !== undefined
+            ? parseInt(node['@_percentCompleted'], 10)
+            : null;
+        const message = (typeof node === 'string' ? node : node['#text']) || null;
+        return { percent, message };
+    };
+
     extractOutputs = (parsed) => {
         const response = parsed.ExecuteResponse;
         if (!response || !response.ProcessOutputs) return null;
@@ -572,6 +599,8 @@ ${responseForm}
             formValues: {},
             validationErrors: {},
             executing: false,
+            statusMessage: null,
+            statusPercent: null,
             results: null,
             error: null
         });
@@ -643,7 +672,7 @@ ${responseForm}
     };
 
     renderForm = () => {
-        const { processDescription, loadingDescription, formValues, validationErrors, executing } = this.state;
+        const { processDescription, loadingDescription, formValues, validationErrors, executing, statusPercent, statusMessage } = this.state;
         const { currentTheme } = this.props;
 
         if (loadingDescription) {
@@ -667,7 +696,14 @@ ${responseForm}
                 {processDescription.inputs.map(input => this.renderInputField(input, formValues, validationErrors))}
                 <div className="wps-client-execute">
                     {executing ? (
-                        <div className="wps-client-loading"><Spinner /> Executing...</div>
+                        <div className="wps-client-progress">
+                            <div className="wps-client-loading">
+                                <Spinner /> Executing...{statusPercent !== null ? ' ' + statusPercent + '%' : ''}
+                            </div>
+                            {statusMessage && (
+                                <div className="wps-client-status-message">{statusMessage}</div>
+                            )}
+                        </div>
                     ) : (
                         <button className="button" onClick={this.executeProcess}>
                             Run

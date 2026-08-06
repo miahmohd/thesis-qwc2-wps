@@ -42,6 +42,7 @@ except ImportError as exc:
 
 _qgs_app = None
 if QgsApplication.instance() is None:
+    QGIS_PREFIX = os.environ.get("QGIS_PREFIX_PATH", "/usr")
     _qgs_app = QgsApplication([], False)
     QgsApplication.setPrefixPath(QGIS_PREFIX, True)
     _qgs_app.initQgis()
@@ -100,7 +101,7 @@ if OUTPUT_PROJECT.exists():
 if not INPUT_DIR.exists():
     sys.exit(f"ERROR: Input directory not found: {INPUT_DIR}")
 
-shp_files = sorted(INPUT_DIR.glob("*.shp"))
+shp_files = sorted(INPUT_DIR.glob("ccc.shp"))
 
 if not shp_files:
     sys.exit(f"ERROR: No .shp files found in {INPUT_DIR}")

@@ -28,23 +28,23 @@ from flask_cors import CORS
 import pywps
 from pywps import Service
 
-from processes.sleep import Sleep
+from qgis.core import QgsApplication
 
-# from processes.ultimate_question import UltimateQuestion
-# from processes.centroids import Centroids
+_qgs_app = None
+if QgsApplication.instance() is None:
+    QGIS_PREFIX = os.environ.get("QGIS_PREFIX_PATH", "/usr")
+    _qgs_app = QgsApplication([], False)
+    QgsApplication.setPrefixPath(QGIS_PREFIX, True)
+    _qgs_app.initQgis()
+
 from processes.sayhello import SayHello
-
-# from processes.feature_count import FeatureCount
-# from processes.buffer import Buffer
-# from processes.area import Area
-# from processes.bboxinout import Box
-from processes.jsonprocess import TestJson
+from processes.lmbstats import LMBStatistic
 
 app = flask.Flask(__name__)
 app.url_map.strict_slashes = False
 CORS(app)
 
-processes = [SayHello(), TestJson(), Sleep()]
+processes = [SayHello(), LMBStatistic()]
 
 # For the process list on the home page
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:ExecuteResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 ../wpsExecute_response.xsd" service="WPS" version="1.0.0" xml:lang="en-US" serviceInstance="http://localhost:8088/wps?request=GetCapabilities&amp;amp;service=WPS" statusLocation="http://localhost:8088/wps-outputs/8447b664-9176-11f1-a7a6-82d5edd93821.xml">
+    <wps:Process wps:processVersion="1.0">
+        <ows:Identifier>lmb_statistics</ows:Identifier>
+        <ows:Title>LMB grid statistics</ows:Title>
+        <ows:Abstract>Compute statistics over LMB grids</ows:Abstract>
+    </wps:Process>
+    <wps:Status creationTime="2026-08-06T11:30:36Z">
+        <wps:ProcessSucceeded>PyWPS Process LMB grid statistics finished</wps:ProcessSucceeded>
+    </wps:Status>
+    <wps:ProcessOutputs>
+        <wps:Output>
+            <ows:Identifier>response</ows:Identifier>
+            <ows:Title>Output response</ows:Title>
+            <ows:Abstract></ows:Abstract>
+            <wps:Data>
+                <wps:LiteralData uom="urn:ogc:def:uom:OGC:1.0:unity" dataType="string">Computed statistics for 107 polygons. Processed 1858193 events: 1857170 matched, 851 unmatched, 172 skipped.</wps:LiteralData>
+            </wps:Data>
+        </wps:Output>
+    </wps:ProcessOutputs>
+</wps:ExecuteResponse>

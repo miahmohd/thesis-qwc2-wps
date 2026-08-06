@@ -16,81 +16,8 @@
           "title": "LMB Grids",
           "layers": [
             {
-              "name": "lmb5a",
-              "title": "LMB5A",
-              "attributes": [
-                {
-                  "name": "LMB5A_IDis",
-                  "alias": "LMB5A_IDis"
-                },
-                {
-                  "name": "LMB5A_IDna",
-                  "alias": "LMB5A_IDna"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB5A_IDna"
-            },
-            {
-              "name": "lmb4b",
-              "title": "LMB4B",
-              "attributes": [
-                {
-                  "name": "LMB4B_IDna",
-                  "alias": "LMB4B_IDna"
-                },
-                {
-                  "name": "LMB4B_IDcu",
-                  "alias": "LMB4B_IDcu"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB4B_IDna"
-            },
-            {
-              "name": "lmb4a",
-              "title": "LMB4A",
-              "attributes": [
-                {
-                  "name": "LMB4A_IDis",
-                  "alias": "LMB4A_IDis"
-                },
-                {
-                  "name": "LMB4A_IDna",
-                  "alias": "LMB4A_IDna"
-                },
-                {
-                  "name": "LMB4A_IDtg",
-                  "alias": "LMB4A_IDtg"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB4A_IDna"
-            },
-            {
-              "name": "lmb3b",
-              "title": "LMB3B",
+              "name": "ccc",
+              "title": "ccc",
               "attributes": [
                 {
                   "name": "LMB3B_IDna",
@@ -99,6 +26,14 @@
                 {
                   "name": "LMB3B_IDcu",
                   "alias": "LMB3B_IDcu"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
                 },
                 {
                   "name": "geometry",
@@ -110,178 +45,6 @@
                 }
               ],
               "display_field": "LMB3B_IDna"
-            },
-            {
-              "name": "lmb3a",
-              "title": "LMB3A",
-              "attributes": [
-                {
-                  "name": "LMB3A_IDcu",
-                  "alias": "LMB3A_IDcu"
-                },
-                {
-                  "name": "LMB3A_area",
-                  "alias": "LMB3A_area"
-                },
-                {
-                  "name": "POP_2018",
-                  "alias": "POP_2018"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB3A_IDcu"
-            },
-            {
-              "name": "lmb2c",
-              "title": "LMB2C",
-              "attributes": [
-                {
-                  "name": "LMB2C_IDcu",
-                  "alias": "LMB2C_IDcu"
-                },
-                {
-                  "name": "LMB2C_IDna",
-                  "alias": "LMB2C_IDna"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB2C_IDna"
-            },
-            {
-              "name": "lmb2b",
-              "title": "LMB2B",
-              "attributes": [
-                {
-                  "name": "LMB2B_IDis",
-                  "alias": "LMB2B_IDis"
-                },
-                {
-                  "name": "LMB2B_IDna",
-                  "alias": "LMB2B_IDna"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB2B_IDis"
-            },
-            {
-              "name": "lmb2a",
-              "title": "LMB2A",
-              "attributes": [
-                {
-                  "name": "LMB2A_IDis",
-                  "alias": "LMB2A_IDis"
-                },
-                {
-                  "name": "LMB2A_IDna",
-                  "alias": "LMB2A_IDna"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB2A_IDis"
-            },
-            {
-              "name": "lmb1c",
-              "title": "LMB1C",
-              "attributes": [
-                {
-                  "name": "LMB1C_IDcu",
-                  "alias": "LMB1C_IDcu"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB1C_IDcu"
-            },
-            {
-              "name": "lmb1b",
-              "title": "LMB1B",
-              "attributes": [
-                {
-                  "name": "LMB1B_IDcu",
-                  "alias": "LMB1B_IDcu"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB1B_IDcu"
-            },
-            {
-              "name": "lmb1a",
-              "title": "LMB1A",
-              "attributes": [
-                {
-                  "name": "LMB1A_IDcu",
-                  "alias": "LMB1A_IDcu"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB1A_IDcu"
-            },
-            {
-              "name": "lmb0a",
-              "title": "LMB0A",
-              "attributes": [
-                {
-                  "name": "LMB0A_IDcu",
-                  "alias": "LMB0A_IDcu"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB0A_IDcu"
             }
           ]
         }

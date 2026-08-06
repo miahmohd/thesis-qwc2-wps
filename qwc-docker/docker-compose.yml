@@ -168,8 +168,9 @@ services:
     environment:
       <<: *qwc-service-variables
     volumes:
-      - ./volumes/wps-logs:/app/logs
       - ./volumes/wps-outputs:/app/outputs
+      - ./volumes/wps-logs:/app/logs
+      - ../data:/data
       - wps_workdir:/app/workdir
     # Use these option only for development
     command: gunicorn main:app --bind 0.0.0.0:5000 --reload

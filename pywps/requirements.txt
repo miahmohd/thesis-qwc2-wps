@@ -3,3 +3,4 @@ lxml
 pywps
 flask-cors
 gunicorn
+pandas

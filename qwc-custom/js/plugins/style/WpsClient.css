@@ -147,3 +147,16 @@
     color: red;
     font-size: 0.8em;
 }
+
+.wps-client-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+.wps-client-status-message {
+    font-size: 0.8em;
+    color: var(--text-color-secondary, #666);
+    font-style: italic;
+    padding-left: 0.25em;
+}

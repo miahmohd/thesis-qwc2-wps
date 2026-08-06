@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:ExecuteResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 ../wpsExecute_response.xsd" service="WPS" version="1.0.0" xml:lang="en-US" serviceInstance="http://localhost:8088/wps?request=GetCapabilities&amp;amp;service=WPS" statusLocation="http://localhost:8088/wps-outputs/b15e2ad0-9184-11f1-b48d-fa1b2f2c1277.xml">
+    <wps:Process wps:processVersion="1.0">
+        <ows:Identifier>lmb_statistics</ows:Identifier>
+        <ows:Title>LMB grid statistics</ows:Title>
+        <ows:Abstract>Compute statistics over LMB grids</ows:Abstract>
+    </wps:Process>
+    <wps:Status creationTime="2026-08-06T12:50:52Z">
+        <wps:ProcessAccepted percentCompleted="0">PyWPS Process lmb_statistics accepted</wps:ProcessAccepted>
+    </wps:Status>
+</wps:ExecuteResponse>

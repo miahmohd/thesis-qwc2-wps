@@ -132,15 +132,25 @@ class LMBStatistic(Process):
         resp_time_count = {fid: 0 for fid in features}
 
         # --- Step 7: Read all .tab files into a single DataFrame ---
+        response.update_status(f"Reading evt files", 3)
+        # Speed rading by parsing only the used columns
+        USECOLS = ["LONG", "LAT", "INVIO_1", "POSTO_1"]
         dfs = []
         for evt_file in evt_files:
-            df = pd.read_csv(evt_file, sep="\t", encoding="latin-1", dtype=str)
+            df = pd.read_csv(
+                evt_file,
+                sep="\t",
+                encoding="latin-1",
+                usecols=USECOLS,
+                dtype={"INVIO": str, "POSTO_1": str, "LAT": float, "LONG": float},
+            )
             dfs.append(df)
 
         events = pd.concat(dfs, ignore_index=True)
         total_raw = len(events)
 
         # --- Step 8: Filter invalid coordinates ---
+        response.update_status(f"Filtering events", 5)
         events["LONG"] = pd.to_numeric(events["LONG"], errors="coerce")
         events["LAT"] = pd.to_numeric(events["LAT"], errors="coerce")
         events = events.dropna(subset=["LONG", "LAT"])
@@ -150,6 +160,7 @@ class LMBStatistic(Process):
         # --- Step 9: Spatial matching ---
         matched_events = 0
         unmatched_events = 0
+        response.update_status(f"Spatial matching", 6)
 
         for row in events.itertuples(index=False):
             lon = row.LONG

@@ -1,3 +1,4 @@
+import logging
 import os
 import shutil
 import math
@@ -5,18 +6,27 @@ from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
+import requests
 from pywps import Process, LiteralInput, LiteralOutput, UOM
 from qgis.core import (
+    QgsClassificationJenks,
+    QgsClassificationQuantile,
     QgsCoordinateReferenceSystem,
     QgsCoordinateTransform,
     QgsField,
+    QgsFillSymbol,
     QgsGeometry,
+    QgsGraduatedSymbolRenderer,
     QgsPointXY,
     QgsProject,
+    QgsRendererRange,
     QgsSpatialIndex,
+    QgsStyle,
     QgsVectorLayer,
 )
 from PyQt5.QtCore import QVariant
+
+logger = logging.getLogger("gunicorn.error")
 
 SHAPEFILES_DIR = Path("/data/LMB_grids")
 EVT_DIR = Path("/data/EVT")
@@ -67,6 +77,20 @@ class LMBStatistic(Process):
                 ],
                 default="LMB0A",
             ),
+            LiteralInput(
+                "color_by",
+                "Color by",
+                data_type="string",
+                allowed_values=["evt_count", "avg_resp_s"],
+                default="evt_count",
+            ),
+            LiteralInput(
+                "classification_method",
+                "Classification method",
+                data_type="string",
+                allowed_values=["quantile", "jenks"],
+                default="quantile",
+            ),
         ]
         outputs = [LiteralOutput("response", "Output response", data_type="string")]
 
@@ -83,8 +107,13 @@ class LMBStatistic(Process):
         )
 
     def _handler(self, request, response):
+        logger.info("Starting lmbstat process")
         layer_name = request.inputs["layer_name"][0].data
         lmbgrid = request.inputs["lmbgrid"][0].data
+        project = request.inputs["project"][0].data
+        color_by = request.inputs["color_by"][0].data
+        classification_method = request.inputs["classification_method"][0].data
+        qgis_project_path = f"/data/scan/{project}.qgs"
 
         # --- Step 1: Copy shapefile to output directory ---
         os.makedirs(str(OUTPUT_DIR), exist_ok=True)
@@ -226,7 +255,81 @@ class LMBStatistic(Process):
         provider.changeAttributeValues(attr_map)
         layer.updateFields()
 
-        # --- Step 11: Return result ---
+        # --- Step 11: Open QGIS project and remove existing layer if present ---
+        response.update_status("Updating QGIS project", 92)
+        qgis_proj = QgsProject()
+        qgis_proj.read(qgis_project_path)
+
+        existing_layers = qgis_proj.mapLayersByName(layer_name)
+        for existing_layer in existing_layers:
+            qgis_proj.removeMapLayer(existing_layer.id())
+
+        # --- Step 12: Add the new layer with absolute path ---
+        # QGIS will store it as a relative path in the project file automatically
+        new_layer = QgsVectorLayer(shp_path, layer_name, "ogr")
+        if not new_layer.isValid():
+            response.outputs["response"].data = (
+                f"ERROR: Failed to load layer for project from {shp_path}"
+            )
+            response.outputs["response"].uom = UOM("unity")
+            return response
+
+        qgis_proj.addMapLayer(new_layer)
+
+        # --- Step 13: Apply graduated choropleth symbology ---
+        response.update_status("Applying choropleth symbology", 94)
+
+        # Get YlOrRd color ramp from built-in styles
+        style = QgsStyle.defaultStyle()
+        color_ramp = style.colorRamp("YlOrRd")
+
+        # Compute class breaks using the chosen method
+        if classification_method == "jenks":
+            classifier = QgsClassificationJenks()
+        else:
+            classifier = QgsClassificationQuantile()
+
+        n_classes = 5
+        breaks = classifier.classes(new_layer, color_by, n_classes)
+
+        # Build renderer ranges from the computed breaks
+        ranges = []
+        for i, cls in enumerate(breaks):
+            lower = cls.lowerBound()
+            upper = cls.upperBound()
+
+            # Sample color from the ramp
+            color = color_ramp.color(i / max(n_classes - 1, 1))
+            symbol = QgsFillSymbol.createSimple(
+                {
+                    "color": f"{color.red()},{color.green()},{color.blue()},192",
+                    "outline_color": f"50,50,50,255",
+                }
+            )
+            label = f"{lower:.0f} - {upper:.0f}"
+            renderer_range = QgsRendererRange(lower, upper, symbol, label)
+            ranges.append(renderer_range)
+
+        renderer = QgsGraduatedSymbolRenderer(color_by, ranges)
+        new_layer.setRenderer(renderer)
+        new_layer.triggerRepaint()
+
+        # --- Step 14: Save the project ---
+        response.update_status("Saving project", 96)
+        qgis_proj.write()
+
+        # --- Step 15: Trigger QWC2 config regeneration ---
+        response.update_status("Regenerating QWC2 config", 98)
+        try:
+            requests.get(
+                "http://qwc-config-service:9090/generate_configs",
+                params={"tenant": "default"},
+                timeout=120,
+            )
+        except Exception as e:
+            logger.warning(f"Config regeneration failed: {e}")
+
+        # --- Step 16: Return result ---
         total_events = matched_events + unmatched_events
         msg = (
             f"Computed statistics for {len(features)} polygons. "

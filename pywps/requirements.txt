@@ -4,3 +4,4 @@ pywps
 flask-cors
 gunicorn
 pandas
+requests

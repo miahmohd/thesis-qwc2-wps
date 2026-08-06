@@ -167,6 +167,7 @@ services:
     build: ../pywps
     environment:
       <<: *qwc-service-variables
+      PYTHONUNBUFFERED: "1"
     volumes:
       - ./volumes/wps-outputs:/app/outputs
       - ./volumes/wps-logs:/app/logs

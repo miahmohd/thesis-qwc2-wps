@@ -52,6 +52,8 @@ WORKDIR /app
 COPY *.py .
 
 # ── Entrypoint ────────────────────────────────────────────────────────────────
-# Override with: docker run ... python3 your_script.py
-ENTRYPOINT ["python3" ]
+# Default script is lmb_grids.py. Override the CMD to run a different script:
+#   docker run <image> shp_to_gpkg.py
+#   docker run <image> transform.py
+ENTRYPOINT ["python3"]
 CMD ["lmb_grids.py"]

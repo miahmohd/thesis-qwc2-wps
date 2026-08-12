@@ -40,10 +40,168 @@
                 ]
               },
               {
+                "name": "osm_bg"
+              },
+              {
                 "name": "esri_imagery_bg"
+              }
+            ]
+          },
+          {
+            "name": "scan/lmb_grids_gpkg",
+            "layers": [
+              {
+                "name": "LMB Grids (GPKG)",
+                "queryable": true,
+                "info_template": true
+              },
+              {
+                "name": "lmb5a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB5A_IDis",
+                  "LMB5A_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb4b",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB4B_IDna",
+                  "LMB4B_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb4a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB4A_IDis",
+                  "LMB4A_IDna",
+                  "LMB4A_IDtg",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb3b",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB3B_IDna",
+                  "LMB3B_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb3a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB3A_IDcu",
+                  "LMB3A_area",
+                  "POP_2018",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb2c",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB2C_IDcu",
+                  "LMB2C_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb2b",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB2B_IDis",
+                  "LMB2B_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb2a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB2A_IDis",
+                  "LMB2A_IDna",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb1c",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB1C_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb1b",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB1B_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb1a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB1A_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "lmb0a",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "LMB0A_IDcu",
+                  "geometry",
+                  "maptip"
+                ]
               },
               {
                 "name": "osm_bg"
+              },
+              {
+                "name": "esri_imagery_bg"
               }
             ]
           }

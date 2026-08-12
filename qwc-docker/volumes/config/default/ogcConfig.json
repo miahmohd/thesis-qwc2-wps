@@ -38,8 +38,185 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
+        ]
+      },
+      {
+        "name": "scan/lmb_grids_gpkg",
+        "title": "LMB Grids (GPKG)",
+        "hidden_in_landing_page": false,
+        "online_resources": {
+          "feature_info": "/api/v1/featureinfo/scan/lmb_grids_gpkg",
+          "legend": "/api/v1/legend/scan/lmb_grids_gpkg",
+          "service": "/ows/scan/lmb_grids_gpkg",
+          "edit_config": "/editConfig.json?map=scan/lmb_grids_gpkg"
+        },
+        "root_layer": {
+          "name": "LMB Grids (GPKG)",
+          "title": "LMB Grids (GPKG)",
+          "layers": [
+            {
+              "name": "lmb5a",
+              "title": "LMB5A",
+              "attributes": {
+                "fid": "fid",
+                "LMB5A_IDis": "LMB5A_IDis",
+                "LMB5A_IDna": "LMB5A_IDna",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb4b",
+              "title": "LMB4B",
+              "attributes": {
+                "fid": "fid",
+                "LMB4B_IDna": "LMB4B_IDna",
+                "LMB4B_IDcu": "LMB4B_IDcu",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb4a",
+              "title": "LMB4A",
+              "attributes": {
+                "fid": "fid",
+                "LMB4A_IDis": "LMB4A_IDis",
+                "LMB4A_IDna": "LMB4A_IDna",
+                "LMB4A_IDtg": "LMB4A_IDtg",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb3b",
+              "title": "LMB3B",
+              "attributes": {
+                "fid": "fid",
+                "LMB3B_IDna": "LMB3B_IDna",
+                "LMB3B_IDcu": "LMB3B_IDcu",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb3a",
+              "title": "LMB3A",
+              "attributes": {
+                "fid": "fid",
+                "LMB3A_IDcu": "LMB3A_IDcu",
+                "LMB3A_area": "LMB3A_area",
+                "POP_2018": "POP_2018",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb2c",
+              "title": "LMB2C",
+              "attributes": {
+                "fid": "fid",
+                "LMB2C_IDcu": "LMB2C_IDcu",
+                "LMB2C_IDna": "LMB2C_IDna",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb2b",
+              "title": "LMB2B",
+              "attributes": {
+                "fid": "fid",
+                "LMB2B_IDis": "LMB2B_IDis",
+                "LMB2B_IDna": "LMB2B_IDna",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb2a",
+              "title": "LMB2A",
+              "attributes": {
+                "fid": "fid",
+                "LMB2A_IDis": "LMB2A_IDis",
+                "LMB2A_IDna": "LMB2A_IDna",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb1c",
+              "title": "LMB1C",
+              "attributes": {
+                "fid": "fid",
+                "LMB1C_IDcu": "LMB1C_IDcu",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb1b",
+              "title": "LMB1B",
+              "attributes": {
+                "fid": "fid",
+                "LMB1B_IDcu": "LMB1B_IDcu",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb1a",
+              "title": "LMB1A",
+              "attributes": {
+                "fid": "fid",
+                "LMB1A_IDcu": "LMB1A_IDcu",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "lmb0a",
+              "title": "LMB0A",
+              "attributes": {
+                "fid": "fid",
+                "LMB0A_IDcu": "LMB0A_IDcu",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            }
+          ],
+          "edit_layers": []
+        },
+        "print_templates": [],
+        "internal_print_layers": [
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       }
     ],

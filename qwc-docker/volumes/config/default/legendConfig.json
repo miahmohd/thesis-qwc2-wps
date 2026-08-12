@@ -18,6 +18,50 @@
             }
           ]
         }
+      },
+      {
+        "name": "scan/lmb_grids_gpkg",
+        "root_layer": {
+          "name": "LMB Grids (GPKG)",
+          "layers": [
+            {
+              "name": "lmb5a"
+            },
+            {
+              "name": "lmb4b"
+            },
+            {
+              "name": "lmb4a"
+            },
+            {
+              "name": "lmb3b"
+            },
+            {
+              "name": "lmb3a"
+            },
+            {
+              "name": "lmb2c"
+            },
+            {
+              "name": "lmb2b"
+            },
+            {
+              "name": "lmb2a"
+            },
+            {
+              "name": "lmb1c"
+            },
+            {
+              "name": "lmb1b"
+            },
+            {
+              "name": "lmb1a"
+            },
+            {
+              "name": "lmb0a"
+            }
+          ]
+        }
       }
     ]
   }

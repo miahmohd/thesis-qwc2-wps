@@ -59,5 +59,6 @@ RUN mkdir -p ./logs ./outputs ./workdir
 # ── Expose port and run ───────────────────────────────────────────────────────
 EXPOSE 5000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "300", "main:app"]
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
 

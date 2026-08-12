@@ -28,15 +28,6 @@ from flask_cors import CORS
 import pywps
 from pywps import Service
 
-from qgis.core import QgsApplication
-
-_qgs_app = None
-if QgsApplication.instance() is None:
-    QGIS_PREFIX = os.environ.get("QGIS_PREFIX_PATH", "/usr")
-    _qgs_app = QgsApplication([], False)
-    QgsApplication.setPrefixPath(QGIS_PREFIX, True)
-    _qgs_app.initQgis()
-
 from processes.lmbstats import LMBStatistic
 
 app = flask.Flask(__name__)

@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 import requests
+from qgis_init import ensure_qgis, cleanup_qgis
 from pywps import Process, LiteralInput, LiteralOutput, UOM
 from qgis.core import (
     QgsClassificationJenks,
@@ -120,16 +121,24 @@ class LMBStatistic(Process):
         )
 
     def _handler(self, request, response):
+        # ensure_qgis()
+        log.info("Starting lmbstat process")
+        try:
+            return self._run(request, response)
+        finally:
+            cleanup_qgis()
+
+    def _run(self, request, response):
         log.info("Starting lmbstat process")
         layer_name = request.inputs["layer_name"][0].data
         lmbgrid = request.inputs["lmbgrid"][0].data
         project = request.inputs["project"][0].data
         color_by = request.inputs["color_by"][0].data
         classification_method = request.inputs["classification_method"][0].data
-        # day_filter = request.inputs["day_filter"][0].data
-        day_filter = "all"
-        # months_str = request.inputs["months"][0].data.strip()
-        months_str = "1,2,3,4,5,6,7,8,9,10,11,12"
+        day_filter = request.inputs["day_filter"][0].data
+        # day_filter = "all"
+        months_str = request.inputs["months"][0].data.strip()
+        # months_str = "1,2,3,4,5,6,7,8,9,10,11,12"
         qgis_project_path = f"/data/scan/{project}.qgs"
 
         # --- Validate months input (strict) ---

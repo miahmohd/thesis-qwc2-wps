@@ -25,6 +25,18 @@
           "name": "LMB Grids (GPKG)",
           "layers": [
             {
+              "name": "tftf"
+            },
+            {
+              "name": "final"
+            },
+            {
+              "name": "teste2"
+            },
+            {
+              "name": "test1"
+            },
+            {
               "name": "lmb5a"
             },
             {

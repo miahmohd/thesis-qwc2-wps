@@ -56,7 +56,13 @@ def parse_timestamp_safe(s):
 class LMBStatistic(Process):
     def __init__(self):
         inputs = [
-            LiteralInput("project", "Theme", data_type="string", default="lmb_grids"),
+            LiteralInput(
+                "project",
+                "Theme",
+                data_type="string",
+                default="lmb_grids",
+                allowed_values=["lmb_grids"],
+            ),
             LiteralInput("layer_name", "Layer name", data_type="string"),
             LiteralInput(
                 "lmbgrid",

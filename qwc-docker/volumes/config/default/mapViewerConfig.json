@@ -716,7 +716,11 @@
               "lmb3b",
               "lmb4a",
               "lmb4b",
-              "lmb5a"
+              "lmb5a",
+              "test1",
+              "teste2",
+              "final",
+              "tftf"
             ],
             "editConfig": {},
             "expanded": true,
@@ -745,6 +749,158 @@
               "coordinates"
             ],
             "sublayers": [
+              {
+                "name": "tftf",
+                "title": "tftf",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "window_start",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485961,
+                    44.654707,
+                    11.502601,
+                    46.642184
+                  ]
+                },
+                "dimensions": [
+                  {
+                    "units": "ISO8601",
+                    "name": "TIME",
+                    "multiple": true,
+                    "value": "2015-01-01T00:00:00, 2015-01-31T00:00:00, 2015-03-02T00:00:00, 2015-04-01T00:00:00, 2015-05-01T00:00:00, 2015-05-31T00:00:00, 2015-06-30T00:00:00, 2015-07-30T00:00:00, 2015-08-29T00:00:00, 2015-09-28T00:00:00, 2015-10-28T00:00:00, 2015-11-27T00:00:00, 2015-12-27T00:00:00, 2016-01-26T00:00:00, 2016-02-25T00:00:00, 2016-03-26T00:00:00, 2016-04-25T00:00:00, 2016-05-25T00:00:00, 2016-06-24T00:00:00, 2016-07-24T00:00:00, 2016-08-23T00:00:00, 2016-09-22T00:00:00, 2016-10-22T00:00:00, 2016-11-21T00:00:00, 2016-12-21T00:00:00, 2017-01-20T00:00:00",
+                    "fieldName": "window_start",
+                    "endFieldName": "window_end"
+                  }
+                ],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "final",
+                "title": "final",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "window_start",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485961,
+                    44.654707,
+                    11.502601,
+                    46.642184
+                  ]
+                },
+                "dimensions": [
+                  {
+                    "units": "ISO8601",
+                    "name": "TIME",
+                    "multiple": true,
+                    "value": "2015-01-01T00:00:00, 2015-01-31T00:00:00, 2015-03-02T00:00:00, 2015-04-01T00:00:00, 2015-05-01T00:00:00, 2015-05-31T00:00:00, 2015-06-30T00:00:00, 2015-07-30T00:00:00, 2015-08-29T00:00:00, 2015-09-28T00:00:00, 2015-10-28T00:00:00, 2015-11-27T00:00:00, 2015-12-27T00:00:00, 2016-01-26T00:00:00, 2016-02-25T00:00:00, 2016-03-26T00:00:00, 2016-04-25T00:00:00, 2016-05-25T00:00:00, 2016-06-24T00:00:00, 2016-07-24T00:00:00, 2016-08-23T00:00:00, 2016-09-22T00:00:00, 2016-10-22T00:00:00, 2016-11-21T00:00:00, 2016-12-21T00:00:00, 2017-01-20T00:00:00",
+                    "fieldName": "window_start",
+                    "endFieldName": "window_end"
+                  }
+                ],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "teste2",
+                "title": "teste2",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "window_start",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485961,
+                    44.654707,
+                    11.502601,
+                    46.642184
+                  ]
+                },
+                "dimensions": [
+                  {
+                    "units": "ISO8601",
+                    "name": "TIME",
+                    "multiple": true,
+                    "value": "2015-01-01T00:00:00, 2015-01-31T00:00:00, 2015-03-02T00:00:00, 2015-04-01T00:00:00, 2015-05-01T00:00:00, 2015-05-31T00:00:00, 2015-06-30T00:00:00, 2015-07-30T00:00:00, 2015-08-29T00:00:00, 2015-09-28T00:00:00, 2015-10-28T00:00:00, 2015-11-27T00:00:00, 2015-12-27T00:00:00, 2016-01-26T00:00:00, 2016-02-25T00:00:00, 2016-03-26T00:00:00, 2016-04-25T00:00:00, 2016-05-25T00:00:00, 2016-06-24T00:00:00, 2016-07-24T00:00:00, 2016-08-23T00:00:00, 2016-09-22T00:00:00, 2016-10-22T00:00:00, 2016-11-21T00:00:00, 2016-12-21T00:00:00, 2017-01-20T00:00:00",
+                    "fieldName": "window_start",
+                    "endFieldName": "window_end"
+                  }
+                ],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
+              {
+                "name": "test1",
+                "title": "test1",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "window_start",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.485961,
+                    44.654707,
+                    11.502601,
+                    46.642184
+                  ]
+                },
+                "dimensions": [
+                  {
+                    "units": "ISO8601",
+                    "name": "TIME",
+                    "multiple": true,
+                    "value": "2015-01-01T00:00:00, 2015-01-31T00:00:00, 2015-03-02T00:00:00, 2015-04-01T00:00:00, 2015-05-01T00:00:00, 2015-05-31T00:00:00, 2015-06-30T00:00:00, 2015-07-30T00:00:00, 2015-08-29T00:00:00, 2015-09-28T00:00:00, 2015-10-28T00:00:00, 2015-11-27T00:00:00, 2015-12-27T00:00:00, 2016-01-26T00:00:00, 2016-02-25T00:00:00, 2016-03-26T00:00:00, 2016-04-25T00:00:00, 2016-05-25T00:00:00, 2016-06-24T00:00:00, 2016-07-24T00:00:00, 2016-08-23T00:00:00, 2016-09-22T00:00:00, 2016-10-22T00:00:00, 2016-11-21T00:00:00, 2016-12-21T00:00:00, 2017-01-20T00:00:00",
+                    "fieldName": "window_start",
+                    "endFieldName": "window_end"
+                  }
+                ],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
               {
                 "name": "lmb5a",
                 "title": "LMB5A",

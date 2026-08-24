@@ -40,10 +40,10 @@
                 ]
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               }
             ]
           },
@@ -54,6 +54,58 @@
                 "name": "LMB Grids (GPKG)",
                 "queryable": true,
                 "info_template": true
+              },
+              {
+                "name": "tftf",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "evt_count",
+                  "window_start",
+                  "window_end",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "final",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "evt_count",
+                  "window_start",
+                  "window_end",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "teste2",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "evt_count",
+                  "window_start",
+                  "window_end",
+                  "geometry",
+                  "maptip"
+                ]
+              },
+              {
+                "name": "test1",
+                "queryable": true,
+                "info_template": true,
+                "attributes": [
+                  "fid",
+                  "evt_count",
+                  "window_start",
+                  "window_end",
+                  "geometry",
+                  "maptip"
+                ]
               },
               {
                 "name": "lmb5a",
@@ -198,10 +250,10 @@
                 ]
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               }
             ]
           }

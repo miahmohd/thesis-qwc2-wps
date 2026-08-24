@@ -48,6 +48,130 @@
           "title": "LMB Grids (GPKG)",
           "layers": [
             {
+              "name": "tftf",
+              "title": "tftf",
+              "attributes": [
+                {
+                  "name": "fid",
+                  "alias": "fid"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "window_start",
+                  "alias": "window_start"
+                },
+                {
+                  "name": "window_end",
+                  "alias": "window_end"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "window_start"
+            },
+            {
+              "name": "final",
+              "title": "final",
+              "attributes": [
+                {
+                  "name": "fid",
+                  "alias": "fid"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "window_start",
+                  "alias": "window_start"
+                },
+                {
+                  "name": "window_end",
+                  "alias": "window_end"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "window_start"
+            },
+            {
+              "name": "teste2",
+              "title": "teste2",
+              "attributes": [
+                {
+                  "name": "fid",
+                  "alias": "fid"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "window_start",
+                  "alias": "window_start"
+                },
+                {
+                  "name": "window_end",
+                  "alias": "window_end"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "window_start"
+            },
+            {
+              "name": "test1",
+              "title": "test1",
+              "attributes": [
+                {
+                  "name": "fid",
+                  "alias": "fid"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "window_start",
+                  "alias": "window_start"
+                },
+                {
+                  "name": "window_end",
+                  "alias": "window_end"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "window_start"
+            },
+            {
               "name": "lmb5a",
               "title": "LMB5A",
               "attributes": [

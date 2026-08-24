@@ -29,12 +29,13 @@ import pywps
 from pywps import Service
 
 from processes.lmbstats import LMBStatistic
+from processes.window_stat import WindowStatistic
 
 app = flask.Flask(__name__)
 app.url_map.strict_slashes = False
 CORS(app)
 
-processes = [LMBStatistic()]
+processes = [LMBStatistic(), WindowStatistic()]
 
 # For the process list on the home page
 

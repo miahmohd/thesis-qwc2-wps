@@ -38,8 +38,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "osm_bg",
-          "esri_imagery_bg"
+          "esri_imagery_bg",
+          "osm_bg"
         ]
       },
       {
@@ -56,6 +56,62 @@
           "name": "LMB Grids (GPKG)",
           "title": "LMB Grids (GPKG)",
           "layers": [
+            {
+              "name": "tftf",
+              "title": "tftf",
+              "attributes": {
+                "fid": "fid",
+                "evt_count": "evt_count",
+                "window_start": "window_start",
+                "window_end": "window_end",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "final",
+              "title": "final",
+              "attributes": {
+                "fid": "fid",
+                "evt_count": "evt_count",
+                "window_start": "window_start",
+                "window_end": "window_end",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "teste2",
+              "title": "teste2",
+              "attributes": {
+                "fid": "fid",
+                "evt_count": "evt_count",
+                "window_start": "window_start",
+                "window_end": "window_end",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
+            {
+              "name": "test1",
+              "title": "test1",
+              "attributes": {
+                "fid": "fid",
+                "evt_count": "evt_count",
+                "window_start": "window_start",
+                "window_end": "window_end",
+                "geometry": "geometry",
+                "maptip": "maptip"
+              },
+              "queryable": true,
+              "edit_layers": []
+            },
             {
               "name": "lmb5a",
               "title": "LMB5A",
@@ -215,8 +271,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "osm_bg",
-          "esri_imagery_bg"
+          "esri_imagery_bg",
+          "osm_bg"
         ]
       }
     ],

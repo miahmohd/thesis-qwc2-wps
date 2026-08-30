@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/qwc-services/qwc-legend-service/raw/master/schemas/qwc-legend-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-legend-service/raw/2026-lts/schemas/qwc-legend-service.json",
   "service": "legend",
   "config": {
     "legend_images_path": "/legends/",

@@ -33,12 +33,69 @@ log = logging.getLogger(__name__)
 EVT_DIR = Path("/data/EVT")
 GPKG_PATH = Path("/data/layer/lmb_grids.gpkg")
 
+LMB_GRIDS = [
+    "LMB0A", "LMB1A", "LMB1B", "LMB1C",
+    "LMB2A", "LMB2B", "LMB2C",
+    "LMB3A", "LMB3B",
+    "LMB4A", "LMB4B",
+    "LMB5A",
+]
+
 METADATA = {
     "version": "1.0",
     "id": "lmb-sliding-window",
     "title": "LMB sliding window statistics",
     "description": "Compute sliding window event counts over LMB grids as temporal layer",
     "jobControlOptions": ["async-execute"],
+    "inputs": {
+        "project": {
+            "title": "Theme",
+            "description": "QGIS project theme name",
+            "schema": {
+                "type": "string",
+                "default": "lmb_grids_gpkg",
+                "enum": ["lmb_grids_gpkg"],
+            },
+        },
+        "layer_name": {
+            "title": "Layer name",
+            "description": "Name for the output temporal layer in the QGIS project",
+            "schema": {"type": "string"},
+            "minOccurs": 1,
+        },
+        "lmbgrid": {
+            "title": "LMB grid",
+            "description": "LMB grid identifier to process",
+            "schema": {
+                "type": "string",
+                "default": "LMB0A",
+                "enum": LMB_GRIDS,
+            },
+        },
+        "window_size": {
+            "title": "Window size (days)",
+            "description": "Number of days in each sliding window",
+            "schema": {
+                "type": "integer",
+                "default": 30,
+            },
+        },
+        "slide_size": {
+            "title": "Slide size (days)",
+            "description": "Number of days to advance the window",
+            "schema": {
+                "type": "integer",
+                "default": 30,
+            },
+        },
+    },
+    "outputs": {
+        "response": {
+            "title": "Output response",
+            "description": "Summary message of the processing result",
+            "schema": {"type": "string"},
+        }
+    },
 }
 
 

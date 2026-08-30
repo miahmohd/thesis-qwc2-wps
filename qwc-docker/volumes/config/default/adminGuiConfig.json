@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/qwc-services/qwc-admin-gui/raw/master/schemas/qwc-admin-gui.json",
+  "$schema": "https://github.com/qwc-services/qwc-admin-gui/raw/2026-lts/schemas/qwc-admin-gui.json",
   "service": "admin-gui",
   "config": {
     "config_generator_service_url": "http://qwc-config-service:9090",

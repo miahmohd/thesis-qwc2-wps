@@ -16,6 +16,9 @@ server:
     name: TinyDB
     connection: /tmp/pygeoapi-process-manager.db
     output_dir: /tmp/pygeoapi-process-outputs
+  limits:
+    default_items: 10
+    max_items: 10
 
 logging:
   level: INFO

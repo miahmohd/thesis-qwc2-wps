@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/qwc-services/qwc-services-core/raw/master/schemas/qwc-services-permissions.json",
+  "$schema": "https://github.com/qwc-services/qwc-services-core/raw/2026-lts/schemas/qwc-services-permissions.json",
   "users": [
     {
       "name": "admin",
@@ -7,11 +7,6 @@
       "roles": [
         "admin"
       ]
-    },
-    {
-      "name": "test",
-      "groups": [],
-      "roles": []
     }
   ],
   "groups": [],
@@ -40,10 +35,10 @@
                 ]
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               }
             ]
           },
@@ -250,10 +245,10 @@
                 ]
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               }
             ]
           }

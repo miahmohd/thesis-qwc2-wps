@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/qwc-services/qwc-feature-info-service/raw/master/schemas/qwc-feature-info-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-feature-info-service/raw/2026-lts/schemas/qwc-feature-info-service.json",
   "service": "feature-info",
   "config": {
     "data_service_url": "/api/v1/data/",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/qwc-services/qwc-map-viewer/raw/master/schemas/qwc-map-viewer.json",
+  "$schema": "https://github.com/qwc-services/qwc-map-viewer/raw/2026-lts/schemas/qwc-map-viewer.json",
   "service": "map-viewer",
   "config": {
     "qwc2_path": "/qwc2/",
@@ -109,7 +109,7 @@
             {
               "name": "WpsClient",
               "cfg": {
-                "wpsUrl": "/wps/"
+                "pygeoApiUrl": "."
               }
             },
             {

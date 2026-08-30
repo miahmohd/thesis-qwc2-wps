@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_PASSWORD: 'test' # TODO: Set your postgres password here!
     volumes:
-      - ./volumes/db:/var/lib/postgresql/docker
+      - postgis:/var/lib/postgresql/docker
       # NOTE: Remove this line if you don't want/need the demo data
       # - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
     # ports:
@@ -223,6 +223,8 @@ services:
       - --upstream=http://pygeoapi-service:5000/processes
       - --upstream=http://pygeoapi-service:5000/jobs/
       - --upstream=http://pygeoapi-service:5000/jobs
+      - --upstream=http://pygeoapi-service:5000/openapi/
+      - --upstream=http://pygeoapi-service:5000/openapi
       - --upstream=http://qwc-map-viewer:9090/
       # - --pass-access-token=true
       - --cookie-refresh=0
@@ -230,3 +232,4 @@ services:
 
 volumes:
   pygeoapi_workdir:
+  postgis:

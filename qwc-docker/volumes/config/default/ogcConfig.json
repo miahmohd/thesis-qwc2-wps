@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/qwc-services/qwc-ogc-service/raw/master/schemas/qwc-ogc-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-ogc-service/raw/2026-lts/schemas/qwc-ogc-service.json",
   "service": "ogc",
   "config": {
     "default_qgis_server_url": "http://qwc-qgis-server/ows/",
@@ -38,8 +38,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       },
       {
@@ -271,8 +271,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       }
     ],

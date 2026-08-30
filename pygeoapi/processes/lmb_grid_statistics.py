@@ -34,12 +34,88 @@ SHAPEFILES_DIR = Path("/data/LMB_grids")
 EVT_DIR = Path("/data/EVT")
 OUTPUT_DIR = Path("/data/layer")
 
+LMB_GRIDS = [
+    "LMB0A", "LMB1A", "LMB1B", "LMB1C",
+    "LMB2A", "LMB2B", "LMB2C",
+    "LMB3A", "LMB3B",
+    "LMB4A", "LMB4B",
+    "LMB5A",
+]
+
 METADATA = {
     "version": "1.0",
     "id": "lmb-grid-statistics",
     "title": "LMB grid statistics",
     "description": "Compute statistics over LMB grids",
     "jobControlOptions": ["async-execute"],
+    "inputs": {
+        "project": {
+            "title": "Theme",
+            "description": "QGIS project theme name",
+            "schema": {
+                "type": "string",
+                "default": "lmb_grids",
+                "enum": ["lmb_grids"],
+            },
+        },
+        "layer_name": {
+            "title": "Layer name",
+            "description": "Name for the output layer in the QGIS project",
+            "schema": {"type": "string"},
+            "minOccurs": 1,
+        },
+        "lmbgrid": {
+            "title": "LMB grid",
+            "description": "LMB grid identifier to process",
+            "schema": {
+                "type": "string",
+                "default": "LMB0A",
+                "enum": LMB_GRIDS,
+            },
+        },
+        "color_by": {
+            "title": "Color by",
+            "description": "Attribute field used for choropleth coloring",
+            "schema": {
+                "type": "string",
+                "default": "evt_count",
+                "enum": ["evt_count", "avg_resp_s"],
+            },
+        },
+        "classification_method": {
+            "title": "Classification method",
+            "description": "Method used for class break computation",
+            "schema": {
+                "type": "string",
+                "default": "Natural Breaks (Jenks)",
+                "enum": ["Equal Count", "Natural Breaks (Jenks)"],
+            },
+        },
+        "day_filter": {
+            "title": "Day filter",
+            "description": "Filter events by day of week",
+            "schema": {
+                "type": "string",
+                "default": "all",
+                "enum": ["all", "weekday", "weekend"],
+            },
+        },
+        "months": {
+            "title": "Months",
+            "description": "Comma-separated month numbers to include (e.g. 1,3,5)",
+            "schema": {
+                "type": "string",
+                "default": "1,2,3,4,5,6,7,8,9,10,11,12",
+            },
+        },
+    },
+    "outputs": {
+        "response": {
+            "title": "Output response",
+            "description": "Summary message of the processing result",
+            "schema": {"type": "string"},
+        }
+    },
 }
 
 
@@ -232,7 +308,9 @@ class LmbGridStatisticsProcessor(BaseProcessor):
 
             if found:
                 matched_events += 1
-                if matched_events % 10000 == 0:
+                if matched_events % 1000 == 0:
+                    progress = int((i + 1) / total_raw * 100)
+                    update_progress(progress)
                     log.info(f"Processed {matched_events} events")
             else:
                 unmatched_events += 1

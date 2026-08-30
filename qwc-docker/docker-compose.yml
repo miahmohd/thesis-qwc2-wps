@@ -162,29 +162,23 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
 
-  wps-service:
-    # image: pywps
-    build: ../pywps
+  pygeoapi-service:
+    build: ../pygeoapi
     environment:
       <<: *qwc-service-variables
       PYTHONUNBUFFERED: "1"
+      PYGEOAPI_CONFIG: /app/pygeoapi-config.yml
+      PYGEOAPI_OPENAPI: /app/pygeoapi-openapi.yml
     volumes:
-      - ./volumes/wps-outputs:/app/outputs
-      - ./volumes/wps-logs:/app/logs
       - ../data:/data
-      - wps_workdir:/app/workdir
-    # # Use these option only for development
-    # command: gunicorn main:app --bind 0.0.0.0:5000 --reload
+      - pygeoapi_workdir:/tmp/pygeoapi-process-outputs
     develop:
       watch:
         - action: rebuild
-          path: ../pywps
+          path: ../pygeoapi
           ignore:
-            - node_modules/
             - venv/
-            - outputs/
-            - logs/
-            - workdir/
+            - __pycache__/
 
   # qwc-api-gateway:
   #   image: nginx:1.29
@@ -194,7 +188,7 @@ services:
   #   volumes:
   #     - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
   #   depends_on:
-  #     - wps-service
+  #     - pygeoapi-service
   #     - qwc-postgis
   #     - qwc-qgis-server
   #     - qwc-config-service
@@ -225,12 +219,14 @@ services:
       - --upstream=http://qwc-admin-gui:9090/qwc_admin/
       - --upstream=http://qwc-auth-service:9090/auth/
       - --upstream=http://qwc-ogc-service:9090/ows/
-      - --upstream=http://wps-service:5000/wps/
-      - --upstream=http://wps-service:5000/wps-outputs/
+      - --upstream=http://pygeoapi-service:5000/processes/
+      - --upstream=http://pygeoapi-service:5000/processes
+      - --upstream=http://pygeoapi-service:5000/jobs/
+      - --upstream=http://pygeoapi-service:5000/jobs
       - --upstream=http://qwc-map-viewer:9090/
       # - --pass-access-token=true
       - --cookie-refresh=0
       # - --reverse-proxy=true
 
 volumes:
-  wps_workdir:
+  pygeoapi_workdir:

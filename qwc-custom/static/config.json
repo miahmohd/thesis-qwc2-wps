@@ -384,7 +384,7 @@
       {
         "name": "WpsClient",
         "cfg": {
-          "wpsUrl": "http://localhost:5000/wps"
+          "pygeoApiUrl": "http://localhost:8088"
         }
       },
       {

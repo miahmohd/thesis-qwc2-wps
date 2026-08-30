@@ -1,17 +1,15 @@
 /**
- * WPS Client Plugin for QWC2
+ * OGC API - Processes Client Plugin for QWC2
  *
- * Allows users to browse, configure, and execute WPS 1.0.0 processes
- * served by a remote OGC WPS server (PyWPS).
+ * Allows users to browse, configure, and execute geoprocessing tasks
+ * served by a pygeoapi OGC API - Processes server.
  */
 
 import React from 'react';
 import { connect } from 'react-redux';
 
 import axios from 'axios';
-import { XMLParser } from 'fast-xml-parser';
 import PropTypes from 'prop-types';
-
 import { processFinished, processStarted } from 'qwc2/actions/processNotifications';
 import SideBar from 'qwc2/components/SideBar';
 import ComboBox from 'qwc2/components/widgets/ComboBox';
@@ -26,14 +24,14 @@ const MAX_POLL_ATTEMPTS = 1500;
 
 class WpsClient extends React.Component {
     static propTypes = {
-        /** URL of the WPS server */
-        wpsUrl: PropTypes.string.isRequired,
-        /** The side of the application on which to display the sidebar */
-        side: PropTypes.string,
         /** The currently active theme object from Redux state */
         currentTheme: PropTypes.object,
+        processFinished: PropTypes.func,
         processStarted: PropTypes.func,
-        processFinished: PropTypes.func
+        /** URL of the pygeoapi server (base URL, e.g. http://localhost:8088) */
+        pygeoApiUrl: PropTypes.string.isRequired,
+        /** The side of the application on which to display the sidebar */
+        side: PropTypes.string
     };
     static defaultProps = {
         side: 'right'
@@ -67,28 +65,18 @@ class WpsClient extends React.Component {
     }
 
     // =========================================================================
-    // WPS GetCapabilities
+    // OGC API - Processes: List processes
     // =========================================================================
 
     fetchProcesses = () => {
-        const { wpsUrl } = this.props;
+        const { pygeoApiUrl } = this.props;
         this.setState({ loadingProcesses: true, processes: [], error: null });
 
-        const params = {
-            service: 'WPS',
-            request: 'GetCapabilities',
-            version: '1.0.0'
-        };
-
-        axios.get(wpsUrl, { params })
+        axios.get(`${pygeoApiUrl}/processes`, {
+            headers: { Accept: 'application/json' }
+        })
             .then(response => {
-                const parser = new XMLParser({
-                    ignoreAttributes: false,
-                    attributeNamePrefix: '@_',
-                    removeNSPrefix: true
-                });
-                const result = parser.parse(response.data);
-                const processes = this.extractProcesses(result);
+                const processes = this.extractProcesses(response.data);
                 this.setState({ processes, loadingProcesses: false });
             })
             .catch(err => {
@@ -99,15 +87,13 @@ class WpsClient extends React.Component {
             });
     };
 
-    extractProcesses = (parsed) => {
+    extractProcesses = (data) => {
         try {
-            const offerings = parsed.Capabilities?.ProcessOfferings?.Process;
-            if (!offerings) return [];
-            const list = Array.isArray(offerings) ? offerings : [offerings];
+            const list = data.processes || [];
             return list.map(p => ({
-                identifier: p.Identifier || '',
-                title: p.Title || p.Identifier || '',
-                abstract: p.Abstract || ''
+                identifier: p.id || '',
+                title: p.title || p.id || '',
+                abstract: p.description || ''
             }));
         } catch {
             return [];
@@ -115,29 +101,18 @@ class WpsClient extends React.Component {
     };
 
     // =========================================================================
-    // WPS DescribeProcess
+    // OGC API - Processes: Describe process
     // =========================================================================
 
     fetchProcessDescription = (identifier) => {
-        const { wpsUrl } = this.props;
+        const { pygeoApiUrl } = this.props;
         this.setState({ loadingDescription: true, processDescription: null, formValues: {}, validationErrors: {}, results: null, error: null });
 
-        const params = {
-            service: 'WPS',
-            request: 'DescribeProcess',
-            version: '1.0.0',
-            identifier: identifier
-        };
-
-        axios.get(wpsUrl, { params })
+        axios.get(`${pygeoApiUrl}/processes/${identifier}`, {
+            headers: { Accept: 'application/json' }
+        })
             .then(response => {
-                const parser = new XMLParser({
-                    ignoreAttributes: false,
-                    attributeNamePrefix: '@_',
-                    removeNSPrefix: true
-                });
-                const result = parser.parse(response.data);
-                const description = this.extractDescription(result);
+                const description = this.extractDescription(response.data);
                 // Initialize form with default values
                 const formValues = {};
                 if (description && description.inputs) {
@@ -155,87 +130,69 @@ class WpsClient extends React.Component {
             });
     };
 
-    extractDescription = (parsed) => {
+    extractDescription = (data) => {
         try {
-            const descriptions = parsed.ProcessDescriptions?.ProcessDescription;
-            const desc = Array.isArray(descriptions) ? descriptions[0] : descriptions;
-            if (!desc) return null;
+            const inputs = [];
+            const inputDefs = data.inputs || {};
 
-            const storeSupported = desc['@_storeSupported'] === 'true';
-            const statusSupported = desc['@_statusSupported'] === 'true';
-
-            // Extract inputs
-            const dataInputs = desc.DataInputs?.Input;
-            const inputList = dataInputs ? (Array.isArray(dataInputs) ? dataInputs : [dataInputs]) : [];
-
-            const inputs = inputList.map(input => {
-                const literalData = input.LiteralData;
-                const minOccurs = parseInt(input['@_minOccurs'] || '1', 10);
-                const identifier = input.Identifier || '';
-                const title = input.Title || identifier;
-                const abstract = input.Abstract || '';
+            Object.keys(inputDefs).forEach(key => {
+                const inputDef = inputDefs[key];
+                const schema = inputDef.schema || {};
+                const minOccurs = inputDef.minOccurs !== undefined ? inputDef.minOccurs : 1;
 
                 let dataType = 'string';
-                let allowedValues = null;
-                let defaultValue = '';
-
-                if (literalData) {
-                    dataType = this.parseLiteralDataType(literalData.DataType);
-                    defaultValue = literalData.DefaultValue || '';
-
-                    const av = literalData.AllowedValues;
-                    if (av) {
-                        const values = av.Value;
-                        if (values) {
-                            allowedValues = Array.isArray(values) ? values : [values];
-                        }
-                    }
-                    // Check for AnyValue (no restrictions)
-                    // If AllowedValues is not defined but AnyValue is, leave allowedValues null
+                if (schema.type === 'integer') {
+                    dataType = 'integer';
+                } else if (schema.type === 'number') {
+                    dataType = 'float';
+                } else if (schema.type === 'boolean') {
+                    dataType = 'boolean';
                 }
 
-                return {
-                    identifier,
-                    title,
-                    abstract,
+                let allowedValues = null;
+                if (schema.enum) {
+                    allowedValues = schema.enum.map(v => v.toString());
+                }
+
+                const defaultValue = schema.default !== undefined ? schema.default.toString() : '';
+
+                inputs.push({
+                    identifier: key,
+                    title: inputDef.title || key,
+                    abstract: inputDef.description || '',
                     dataType,
                     minOccurs,
                     allowedValues,
-                    defaultValue: defaultValue.toString()
-                };
+                    defaultValue
+                });
             });
 
-            // Extract outputs
-            const processOutputs = desc.ProcessOutputs?.Output;
-            const outputList = processOutputs ? (Array.isArray(processOutputs) ? processOutputs : [processOutputs]) : [];
+            const outputs = [];
+            const outputDefs = data.outputs || {};
+            Object.keys(outputDefs).forEach(key => {
+                const outputDef = outputDefs[key];
+                outputs.push({
+                    identifier: key,
+                    title: outputDef.title || key,
+                    abstract: outputDef.description || ''
+                });
+            });
 
-            const outputs = outputList.map(output => ({
-                identifier: output.Identifier || '',
-                title: output.Title || output.Identifier || '',
-                abstract: output.Abstract || ''
-            }));
+            // Check if async execution is supported
+            const jobControlOptions = data.jobControlOptions || [];
+            const asyncSupported = jobControlOptions.includes('async-execute');
 
             return {
-                identifier: desc.Identifier || '',
-                title: desc.Title || '',
-                abstract: desc.Abstract || '',
-                storeSupported,
-                statusSupported,
+                identifier: data.id || '',
+                title: data.title || '',
+                abstract: data.description || '',
+                asyncSupported,
                 inputs,
                 outputs
             };
         } catch {
             return null;
         }
-    };
-
-    parseLiteralDataType = (dataType) => {
-        if (!dataType) return 'string';
-        const typeStr = (typeof dataType === 'string' ? dataType : dataType['#text'] || '').toLowerCase();
-        if (typeStr.includes('integer') || typeStr.includes('int')) return 'integer';
-        if (typeStr.includes('float') || typeStr.includes('double') || typeStr.includes('decimal')) return 'float';
-        if (typeStr.includes('boolean') || typeStr.includes('bool')) return 'boolean';
-        return 'string';
     };
 
     // =========================================================================
@@ -283,7 +240,7 @@ class WpsClient extends React.Component {
     };
 
     // =========================================================================
-    // WPS Execute
+    // OGC API - Processes: Execute
     // =========================================================================
 
     executeProcess = () => {
@@ -292,8 +249,8 @@ class WpsClient extends React.Component {
         const { processDescription, formValues } = this.state;
         if (!processDescription) return;
 
-        const useAsync = processDescription.storeSupported && processDescription.statusSupported;
-        const requestXml = this.buildExecuteRequest(processDescription, formValues, useAsync);
+        const useAsync = processDescription.asyncSupported;
+        const requestBody = this.buildExecuteRequest(processDescription, formValues);
 
         this.setState({ executing: true, results: null, error: null, statusMessage: null, statusPercent: null });
 
@@ -302,55 +259,51 @@ class WpsClient extends React.Component {
             this.props.processStarted(processId, processDescription.title);
         }
 
-        axios.post(this.props.wpsUrl, requestXml, {
-            headers: { 'Content-Type': 'application/xml' }
-        })
+        const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        };
+        if (useAsync) {
+            headers.Prefer = 'respond-async';
+        }
+
+        const { pygeoApiUrl } = this.props;
+        axios.post(
+            `${pygeoApiUrl}/processes/${processDescription.identifier}/execution`,
+            requestBody,
+            { headers }
+        )
             .then(response => {
-                const parser = new XMLParser({
-                    ignoreAttributes: false,
-                    attributeNamePrefix: '@_',
-                    removeNSPrefix: true
-                });
-                const result = parser.parse(response.data);
+                if (useAsync && (response.status === 201 || response.status === 200)) {
+                    // Async: check for Location header or jobId in response
+                    const locationHeader = response.headers.location || response.headers.Location;
+                    const jobData = response.data;
 
-                // Check for exception
-                const exception = this.extractException(result);
-                if (exception) {
-                    this.setState({ executing: false, error: exception });
-                    if (useAsync) {
-                        this.props.processFinished(processId, false, exception);
+                    if (jobData && jobData.status === 'successful') {
+                        // Process completed synchronously despite async request
+                        this.handleJobCompleted(jobData, processId);
+                        return;
                     }
-                    return;
-                }
 
-                if (useAsync) {
-                    // Check status
-                    const status = this.extractStatus(result);
-                    if (status === 'ProcessAccepted' || status === 'ProcessStarted') {
-                        const progress = this.extractProgressInfo(result);
+                    let jobUrl = locationHeader;
+                    if (!jobUrl && jobData && jobData.jobID) {
+                        jobUrl = `${pygeoApiUrl}/jobs/${jobData.jobID}`;
+                    }
+
+                    if (jobUrl) {
+                        const progress = this.extractJobProgress(jobData);
                         this.setState({
                             statusPercent: progress.percent,
                             statusMessage: progress.message
                         });
-                        const statusLocation = this.extractStatusLocation(result);
-                        if (statusLocation) {
-                            this.startPolling(statusLocation, processId);
-                        } else {
-                            this.setState({ executing: false, error: 'No status location returned', statusMessage: null, statusPercent: null });
-                            this.props.processFinished(processId, false, 'No status location');
-                        }
-                    } else if (status === 'ProcessSucceeded') {
-                        const outputs = this.extractOutputs(result);
-                        this.setState({ executing: false, results: outputs });
-                        this.props.processFinished(processId, true, 'Process completed');
-                    } else if (status === 'ProcessFailed') {
-                        const failMsg = this.extractFailureMessage(result) || 'Process failed';
-                        this.setState({ executing: false, error: failMsg });
-                        this.props.processFinished(processId, false, failMsg);
+                        this.startPolling(jobUrl, processId);
+                    } else {
+                        this.setState({ executing: false, error: 'No job location returned' });
+                        this.props.processFinished(processId, false, 'No job location');
                     }
                 } else {
-                    // Synchronous - extract results directly
-                    const outputs = this.extractOutputs(result);
+                    // Synchronous response - results directly in body
+                    const outputs = this.extractResults(response.data);
                     if (outputs) {
                         this.setState({ executing: false, results: outputs });
                     } else {
@@ -359,7 +312,10 @@ class WpsClient extends React.Component {
                 }
             })
             .catch(err => {
-                const errMsg = 'Execution failed: ' + (err.message || 'Unknown error');
+                const detail = err.response && err.response.data
+                    ? (err.response.data.detail || err.response.data.description || JSON.stringify(err.response.data))
+                    : (err.message || 'Unknown error');
+                const errMsg = 'Execution failed: ' + detail;
                 this.setState({ executing: false, error: errMsg, statusMessage: null, statusPercent: null });
                 if (useAsync) {
                     this.props.processFinished(processId, false, errMsg);
@@ -367,67 +323,35 @@ class WpsClient extends React.Component {
             });
     };
 
-    buildExecuteRequest = (description, values, useAsync) => {
-        const inputs = description.inputs
-            .filter(input => values[input.identifier] !== '' && values[input.identifier] !== undefined)
-            .map(input => {
-                return `    <wps:Input>
-      <ows:Identifier>${input.identifier}</ows:Identifier>
-      <wps:Data>
-        <wps:LiteralData>${this.escapeXml(values[input.identifier].toString())}</wps:LiteralData>
-      </wps:Data>
-    </wps:Input>`;
-            }).join('\n');
+    buildExecuteRequest = (description, values) => {
+        const inputs = {};
+        description.inputs.forEach(input => {
+            const value = values[input.identifier];
+            if (value !== '' && value !== undefined) {
+                // Convert to appropriate type
+                if (input.dataType === 'integer') {
+                    inputs[input.identifier] = parseInt(value, 10);
+                } else if (input.dataType === 'float') {
+                    inputs[input.identifier] = parseFloat(value);
+                } else if (input.dataType === 'boolean') {
+                    inputs[input.identifier] = value === 'true';
+                } else {
+                    inputs[input.identifier] = value;
+                }
+            }
+        });
 
-        const responseForm = description.outputs.map(output => {
-            return `      <wps:Output>
-        <ows:Identifier>${output.identifier}</ows:Identifier>
-      </wps:Output>`;
-        }).join('\n');
-
-        const storeAttr = useAsync ? ' storeExecuteResponse="true" status="true"' : '';
-
-        return `<?xml version="1.0" encoding="UTF-8"?>
-<wps:Execute version="1.0.0" service="WPS"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns="http://www.opengis.net/wps/1.0.0"
- xmlns:wfs="http://www.opengis.net/wfs"
- xmlns:wps="http://www.opengis.net/wps/1.0.0"
- xmlns:ows="http://www.opengis.net/ows/1.1"
- xmlns:gml="http://www.opengis.net/gml"
- xmlns:ogc="http://www.opengis.net/ogc"
- xmlns:wcs="http://www.opengis.net/wcs/1.1.1"
- xmlns:xlink="http://www.w3.org/1999/xlink"
- xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
-  <ows:Identifier>${description.identifier}</ows:Identifier>
-  <wps:DataInputs>
-${inputs}
-  </wps:DataInputs>
-  <wps:ResponseForm>
-    <wps:ResponseDocument${storeAttr}>
-${responseForm}
-    </wps:ResponseDocument>
-  </wps:ResponseForm>
-</wps:Execute>`;
-    };
-
-    escapeXml = (str) => {
-        return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&apos;');
+        return { inputs };
     };
 
     // =========================================================================
     // Async polling
     // =========================================================================
 
-    startPolling = (statusLocation, processId) => {
+    startPolling = (jobUrl, processId) => {
         this.pollCount = 0;
         this.pollProcessId = processId;
-        this.pollStatusLocation = statusLocation;
+        this.pollJobUrl = jobUrl;
         this.pollTimer = setInterval(() => this.pollStatus(), POLL_INTERVAL_MS);
     };
 
@@ -448,37 +372,28 @@ ${responseForm}
             return;
         }
 
-        axios.get(this.pollStatusLocation)
+        axios.get(this.pollJobUrl, {
+            headers: { Accept: 'application/json' }
+        })
             .then(response => {
-                const parser = new XMLParser({
-                    ignoreAttributes: false,
-                    attributeNamePrefix: '@_',
-                    removeNSPrefix: true
-                });
-                const result = parser.parse(response.data);
+                const jobData = response.data;
+                const status = jobData.status;
 
-                const exception = this.extractException(result);
-                if (exception) {
+                if (status === 'successful') {
                     this.stopPolling();
-                    this.setState({ executing: false, error: exception });
-                    this.props.processFinished(this.pollProcessId, false, exception);
-                    return;
-                }
-
-                const status = this.extractStatus(result);
-                if (status === 'ProcessSucceeded') {
+                    this.handleJobCompleted(jobData, this.pollProcessId);
+                } else if (status === 'failed') {
                     this.stopPolling();
-                    const outputs = this.extractOutputs(result);
-                    this.setState({ executing: false, results: outputs, statusMessage: null, statusPercent: null });
-                    this.props.processFinished(this.pollProcessId, true, 'Process completed');
-                } else if (status === 'ProcessFailed') {
-                    this.stopPolling();
-                    const failMsg = this.extractFailureMessage(result) || 'Process failed';
+                    const failMsg = jobData.message || 'Process failed';
                     this.setState({ executing: false, error: failMsg, statusMessage: null, statusPercent: null });
                     this.props.processFinished(this.pollProcessId, false, failMsg);
+                } else if (status === 'dismissed') {
+                    this.stopPolling();
+                    this.setState({ executing: false, error: 'Process was dismissed', statusMessage: null, statusPercent: null });
+                    this.props.processFinished(this.pollProcessId, false, 'Process dismissed');
                 } else {
-                    // ProcessAccepted / ProcessStarted => update progress and keep polling
-                    const progress = this.extractProgressInfo(result);
+                    // accepted / running - update progress and keep polling
+                    const progress = this.extractJobProgress(jobData);
                     this.setState({
                         statusPercent: progress.percent,
                         statusMessage: progress.message
@@ -497,80 +412,56 @@ ${responseForm}
     // Response parsing helpers
     // =========================================================================
 
-    extractException = (parsed) => {
-        const report = parsed.ExceptionReport || parsed.Exception;
-        if (report) {
-            const ex = report.Exception || report;
-            const exArr = Array.isArray(ex) ? ex : [ex];
-            return exArr.map(e => e.ExceptionText || e['@_exceptionCode'] || 'Unknown error').join('; ');
+    handleJobCompleted = (jobData, processId) => {
+        // Fetch results from /jobs/{jobId}/results
+        const { pygeoApiUrl } = this.props;
+        const jobId = jobData.jobID;
+
+        if (!jobId) {
+            // Results might be inline
+            const outputs = this.extractResults(jobData);
+            this.setState({ executing: false, results: outputs, statusMessage: null, statusPercent: null });
+            this.props.processFinished(processId, true, 'Process completed');
+            return;
         }
-        return null;
+
+        axios.get(`${pygeoApiUrl}/jobs/${jobId}/results`, {
+            headers: { Accept: 'application/json' }
+        })
+            .then(response => {
+                const outputs = this.extractResults(response.data);
+                this.setState({ executing: false, results: outputs, statusMessage: null, statusPercent: null });
+                this.props.processFinished(processId, true, 'Process completed');
+            })
+            .catch(err => {
+                const errMsg = 'Failed to fetch results: ' + (err.message || 'Unknown error');
+                this.setState({ executing: false, error: errMsg, statusMessage: null, statusPercent: null });
+                this.props.processFinished(processId, false, errMsg);
+            });
     };
 
-    extractStatus = (parsed) => {
-        const response = parsed.ExecuteResponse;
-        if (!response) return null;
-        const status = response.Status;
-        if (!status) return null;
-        if (status.ProcessAccepted !== undefined) return 'ProcessAccepted';
-        if (status.ProcessStarted !== undefined) return 'ProcessStarted';
-        if (status.ProcessSucceeded !== undefined) return 'ProcessSucceeded';
-        if (status.ProcessFailed !== undefined) return 'ProcessFailed';
-        return null;
-    };
-
-    extractStatusLocation = (parsed) => {
-        const response = parsed.ExecuteResponse;
-        return response ? response['@_statusLocation'] : null;
-    };
-
-    extractFailureMessage = (parsed) => {
-        const response = parsed.ExecuteResponse;
-        if (!response || !response.Status || !response.Status.ProcessFailed) return null;
-        const exReport = response.Status.ProcessFailed.ExceptionReport;
-        if (exReport) {
-            const ex = exReport.Exception;
-            if (ex) {
-                const exArr = Array.isArray(ex) ? ex : [ex];
-                return exArr.map(e => e.ExceptionText || '').join('; ');
-            }
-        }
-        return null;
-    };
-
-    extractProgressInfo = (parsed) => {
-        const response = parsed.ExecuteResponse;
-        if (!response || !response.Status) return { percent: null, message: null };
-        const started = response.Status.ProcessStarted;
-        const accepted = response.Status.ProcessAccepted;
-        const node = started || accepted;
-        if (!node) return { percent: null, message: null };
-        const percent = node['@_percentCompleted'] !== undefined
-            ? parseInt(node['@_percentCompleted'], 10)
-            : null;
-        const message = (typeof node === 'string' ? node : node['#text']) || null;
+    extractJobProgress = (jobData) => {
+        if (!jobData) return { percent: null, message: null };
+        const percent = jobData.progress !== undefined ? jobData.progress : null;
+        const message = jobData.message || null;
         return { percent, message };
     };
 
-    extractOutputs = (parsed) => {
-        const response = parsed.ExecuteResponse;
-        if (!response || !response.ProcessOutputs) return null;
-        const outputDefs = response.ProcessOutputs.Output;
-        if (!outputDefs) return null;
-        const outputs = Array.isArray(outputDefs) ? outputDefs : [outputDefs];
+    extractResults = (data) => {
+        if (!data) return null;
 
-        return outputs.map(output => {
-            const identifier = output.Identifier || '';
-            const title = output.Title || identifier;
-            let value = '';
-            if (output.Data) {
-                if (output.Data.LiteralData !== undefined) {
-                    console.log("output.Data", output.Data)
-                    value = output.Data.LiteralData["#text"] || JSON.stringify(output.Data.LiteralData);
-                }
-            }
-            return { identifier, title, value };
+        // OGC API - Processes returns results as a JSON object with output keys
+        const outputs = [];
+        Object.keys(data).forEach(key => {
+            const value = data[key];
+            outputs.push({
+                identifier: key,
+                title: key,
+                value: typeof value === 'object' ? JSON.stringify(value) : String(value)
+            });
         });
+
+        return outputs.length > 0 ? outputs : null;
     };
 
     // =========================================================================
@@ -618,7 +509,7 @@ ${responseForm}
                 onHide={this.onHide}
                 onShow={this.onShow}
                 side={this.props.side}
-                title="WPS Client"
+                title="Geoprocessing"
                 width="20em"
             >
                 {() => ({
@@ -792,21 +683,21 @@ ${responseForm}
     renderResults = () => {
         const { results } = this.state;
         if (!results) return null;
-        console.log(results)
+
         return (
             <div className="wps-client-section wps-client-results">
                 <label className="wps-client-label">Results:</label>
                 <table className="wps-client-results-table">
                     <tbody>
                         {results.map(output => (
-                            < tr key={output.identifier} >
+                            <tr key={output.identifier}>
                                 <td className="wps-client-result-label">{output.title}</td>
                                 <td className="wps-client-result-value">{output.value}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </div >
+            </div>
         );
     };
 }
@@ -816,7 +707,7 @@ export default connect(
         currentTheme: state.theme.current
     }),
     {
-        processStarted: processStarted,
-        processFinished: processFinished
+        processFinished: processFinished,
+        processStarted: processStarted
     }
 )(WpsClient);

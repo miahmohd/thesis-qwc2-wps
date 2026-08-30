@@ -1,0 +1,7 @@
+pygeoapi
+Flask
+flask-cors
+gunicorn
+pandas
+requests
+lxml

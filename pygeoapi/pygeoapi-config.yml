@@ -1,0 +1,211 @@
+server:
+  bind:
+    host: 0.0.0.0
+    port: 5000
+  url: http://localhost:8088
+  mimetype: application/json; charset=UTF-8
+  encoding: utf-8
+  gzip: false
+  languages:
+    - en-US
+  cors: true
+  map:
+    url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+  manager:
+    name: TinyDB
+    connection: /tmp/pygeoapi-process-manager.db
+    output_dir: /tmp/pygeoapi-process-outputs
+
+logging:
+  level: INFO
+
+metadata:
+  identification:
+    title: LMB Geoprocessing API
+    description: OGC API - Processes server for LMB grid geoprocessing
+    keywords:
+      - geospatial
+      - geoprocessing
+      - LMB
+      - OGC API
+    keywords_type: theme
+    terms_of_service: null
+    url: http://localhost:8088
+  license:
+    name: CC-BY 4.0 license
+    url: https://creativecommons.org/licenses/by/4.0/
+  provider:
+    name: Polimi
+    url: https://www.polimi.it
+  contact:
+    name: Miah Mohd
+    position: Developer
+    address: Address
+    city: Milano
+    stateorprovince: null
+    postalcode: '000 00'
+    country: Italy
+    phone: '+00 00 11 22 33'
+    fax: '+00 99 88 77 66'
+    email: info@yourdomain.org
+    url: https://www.polimi.it
+    hours: 8:00-20:00UTC
+    instructions: Knock on the door
+    role: pointOfContact
+
+resources:
+  lmb-grid-statistics:
+    type: process
+    processor:
+      name: processes.lmb_grid_statistics.LmbGridStatisticsProcessor
+    title: LMB grid statistics
+    description: Compute statistics over LMB grids
+    keywords:
+      - LMB
+      - statistics
+      - geoprocessing
+    version: '1.0'
+    jobControlOptions:
+      - async-execute
+    inputs:
+      project:
+        title: Theme
+        description: QGIS project theme name
+        schema:
+          type: string
+          default: lmb_grids
+          enum:
+            - lmb_grids
+      layer_name:
+        title: Layer name
+        description: Name for the output layer in the QGIS project
+        schema:
+          type: string
+        minOccurs: 1
+      lmbgrid:
+        title: LMB grid
+        description: LMB grid identifier to process
+        schema:
+          type: string
+          default: LMB0A
+          enum:
+            - LMB0A
+            - LMB1A
+            - LMB1B
+            - LMB1C
+            - LMB2A
+            - LMB2B
+            - LMB2C
+            - LMB3A
+            - LMB3B
+            - LMB4A
+            - LMB4B
+            - LMB5A
+      color_by:
+        title: Color by
+        description: Attribute field used for choropleth coloring
+        schema:
+          type: string
+          default: evt_count
+          enum:
+            - evt_count
+            - avg_resp_s
+      classification_method:
+        title: Classification method
+        description: Method used for class break computation
+        schema:
+          type: string
+          default: Natural Breaks (Jenks)
+          enum:
+            - Equal Count
+            - Natural Breaks (Jenks)
+      day_filter:
+        title: Day filter
+        description: Filter events by day of week
+        schema:
+          type: string
+          default: all
+          enum:
+            - all
+            - weekday
+            - weekend
+      months:
+        title: Months
+        description: Comma-separated month numbers to include (e.g. 1,3,5)
+        schema:
+          type: string
+          default: '1,2,3,4,5,6,7,8,9,10,11,12'
+    outputs:
+      response:
+        title: Output response
+        description: Summary message of the processing result
+        schema:
+          type: string
+
+  lmb-sliding-window:
+    type: process
+    processor:
+      name: processes.lmb_sliding_window.LmbSlidingWindowProcessor
+    title: LMB sliding window statistics
+    description: Compute sliding window event counts over LMB grids as temporal layer
+    keywords:
+      - LMB
+      - sliding window
+      - temporal
+      - geoprocessing
+    version: '1.0'
+    jobControlOptions:
+      - async-execute
+    inputs:
+      project:
+        title: Theme
+        description: QGIS project theme name
+        schema:
+          type: string
+          default: lmb_grids_gpkg
+          enum:
+            - lmb_grids_gpkg
+      layer_name:
+        title: Layer name
+        description: Name for the output temporal layer in the QGIS project
+        schema:
+          type: string
+        minOccurs: 1
+      lmbgrid:
+        title: LMB grid
+        description: LMB grid identifier to process
+        schema:
+          type: string
+          default: LMB0A
+          enum:
+            - LMB0A
+            - LMB1A
+            - LMB1B
+            - LMB1C
+            - LMB2A
+            - LMB2B
+            - LMB2C
+            - LMB3A
+            - LMB3B
+            - LMB4A
+            - LMB4B
+            - LMB5A
+      window_size:
+        title: Window size (days)
+        description: Number of days in each sliding window
+        schema:
+          type: integer
+          default: 30
+      slide_size:
+        title: Slide size (days)
+        description: Number of days to advance the window
+        schema:
+          type: integer
+          default: 30
+    outputs:
+      response:
+        title: Output response
+        description: Summary message of the processing result
+        schema:
+          type: string

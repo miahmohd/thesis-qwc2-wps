@@ -1,5 +1,4 @@
 import logging
-import math
 import os
 import shutil
 from datetime import datetime
@@ -8,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 from pygeoapi.process.base import BaseProcessor, ProcessorExecuteError
+from pygeoapi.util import get_current_datetime
 
 from qgis_init import ensure_qgis, cleanup_qgis
 from qgis.core import (
@@ -140,6 +140,24 @@ class LmbGridStatisticsProcessor(BaseProcessor):
 
     def __init__(self, processor_def):
         super().__init__(processor_def, METADATA)
+        self.job_id = None
+
+    def set_job_id(self, job_id):
+        self.job_id = job_id
+
+    def _update_progress(self, progress, message):
+        log.info(f"[{progress}%] {message}")
+        if self.job_id is None:
+            return
+        try:
+            from pygeoapi.flask_app import api_
+            api_.manager.update_job(self.job_id, {
+                "progress": progress,
+                "message": message,
+                "updated": get_current_datetime(),
+            })
+        except Exception as e:
+            log.warning(f"Could not update job progress: {e}")
 
     def execute(self, data, outputs=None):
         ensure_qgis()
@@ -180,6 +198,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         temporal_filter_active = day_filter != "all" or months_filter is not None
 
         # --- Step 1: Copy shapefile to output directory ---
+        self._update_progress(8, "Copying shapefile to output directory")
         os.makedirs(str(OUTPUT_DIR), exist_ok=True)
 
         for src_file in SHAPEFILES_DIR.glob(f"{lmbgrid}.*"):
@@ -194,6 +213,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
             raise ProcessorExecuteError(f"Failed to load shapefile {shp_path}")
 
         # --- Step 3: Add attribute fields ---
+        self._update_progress(12, "Adding attribute fields")
         provider = layer.dataProvider()
         provider.addAttributes(
             [
@@ -204,6 +224,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         layer.updateFields()
 
         # --- Step 4: Build spatial index ---
+        self._update_progress(15, "Building spatial index")
         spatial_index = QgsSpatialIndex()
         features = {}
         for feat in layer.getFeatures():
@@ -221,7 +242,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         resp_time_count = {fid: 0 for fid in features}
 
         # --- Step 7: Read all .tab files into a single DataFrame ---
-        log.info("Reading evt files")
+        self._update_progress(18, "Reading event files")
         evt_files = sorted(EVT_DIR.glob("*.tab"))
         USECOLS = ["LONG", "LAT", "INVIO", "POSTO_1"]
         dfs = []
@@ -239,7 +260,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         total_raw = len(events)
 
         # --- Step 8: Filter invalid coordinates ---
-        log.info("Filtering events")
+        self._update_progress(22, "Filtering invalid coordinates")
         events["LONG"] = pd.to_numeric(events["LONG"], errors="coerce")
         events["LAT"] = pd.to_numeric(events["LAT"], errors="coerce")
         events = events.dropna(subset=["LONG", "LAT"])
@@ -249,7 +270,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         # --- Step 8b: Apply temporal filter (day of week / months) ---
         filtered_events = 0
         if temporal_filter_active:
-            log.info("Applying temporal filter")
+            self._update_progress(25, "Applying temporal filter")
             events["_invio_dt"] = events["INVIO"].apply(parse_timestamp_safe)
             unparseable_mask = events["_invio_dt"].isna()
             filtered_events += unparseable_mask.sum()
@@ -274,9 +295,15 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         # --- Step 9: Spatial matching ---
         matched_events = 0
         unmatched_events = 0
-        log.info("Spatial matching")
+        total_to_match = len(events)
+        self._update_progress(28, f"Spatial matching {total_to_match} events")
 
-        for row in events.itertuples(index=False):
+        # Progress spans 28% -> 85% during spatial matching
+        MATCH_PROGRESS_START = 28
+        MATCH_PROGRESS_END = 85
+        last_reported_pct = MATCH_PROGRESS_START
+
+        for i, row in enumerate(events.itertuples(index=False)):
             lon = row.LONG
             lat = row.LAT
 
@@ -308,16 +335,25 @@ class LmbGridStatisticsProcessor(BaseProcessor):
 
             if found:
                 matched_events += 1
-                if matched_events % 1000 == 0:
-                    progress = int((i + 1) / total_raw * 100)
-                    update_progress(progress)
-                    log.info(f"Processed {matched_events} events")
             else:
                 unmatched_events += 1
+
+            if total_to_match > 0 and (i + 1) % 10000 == 0:
+                pct = int(
+                    MATCH_PROGRESS_START
+                    + (i + 1) / total_to_match * (MATCH_PROGRESS_END - MATCH_PROGRESS_START)
+                )
+                if pct > last_reported_pct:
+                    self._update_progress(
+                        pct,
+                        f"Spatial matching: {i + 1}/{total_to_match} events processed",
+                    )
+                    last_reported_pct = pct
 
         log.info("Spatial matching complete")
 
         # --- Step 10: Write statistics to shapefile attributes ---
+        self._update_progress(87, "Writing statistics to shapefile")
         field_names = [field.name() for field in provider.fields()]
         evt_count_field_idx = field_names.index("evt_count")
         avg_resp_field_idx = field_names.index("avg_resp_s")
@@ -336,7 +372,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         layer.updateFields()
 
         # --- Step 11: Open QGIS project and remove existing layer if present ---
-        log.info("Updating QGIS project")
+        self._update_progress(90, "Updating QGIS project")
         qgis_proj = QgsProject()
         qgis_proj.read(qgis_project_path)
 
@@ -354,7 +390,7 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         qgis_proj.addMapLayer(new_layer)
 
         # --- Step 13: Apply graduated choropleth symbology ---
-        log.info("Applying choropleth symbology")
+        self._update_progress(92, "Applying choropleth symbology")
         style = QgsStyle.defaultStyle()
         color_ramp = style.colorRamp("YlOrRd")
 
@@ -387,11 +423,11 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         new_layer.triggerRepaint()
 
         # --- Step 14: Save the project ---
-        log.info("Saving project")
+        self._update_progress(94, "Saving QGIS project")
         qgis_proj.write()
 
         # --- Step 15: Trigger QWC2 config regeneration ---
-        log.info("Regenerating QWC2 config")
+        self._update_progress(96, "Regenerating QWC2 config")
         try:
             requests.get(
                 "http://qwc-config-service:9090/generate_configs",

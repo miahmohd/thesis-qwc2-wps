@@ -1,5 +1,4 @@
 import logging
-import math
 import os
 import sqlite3
 from datetime import datetime, timedelta
@@ -8,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 from pygeoapi.process.base import BaseProcessor, ProcessorExecuteError
+from pygeoapi.util import get_current_datetime
 
 from qgis_init import ensure_qgis, cleanup_qgis
 from qgis.core import (
@@ -120,6 +120,24 @@ class LmbSlidingWindowProcessor(BaseProcessor):
 
     def __init__(self, processor_def):
         super().__init__(processor_def, METADATA)
+        self.job_id = None
+
+    def set_job_id(self, job_id):
+        self.job_id = job_id
+
+    def _update_progress(self, progress, message):
+        log.info(f"[{progress}%] {message}")
+        if self.job_id is None:
+            return
+        try:
+            from pygeoapi.flask_app import api_
+            api_.manager.update_job(self.job_id, {
+                "progress": progress,
+                "message": message,
+                "updated": get_current_datetime(),
+            })
+        except Exception as e:
+            log.warning(f"Could not update job progress: {e}")
 
     def execute(self, data, outputs=None):
         ensure_qgis()
@@ -144,7 +162,7 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         gpkg_path = str(GPKG_PATH)
 
         # --- Load polygons from GeoPackage ---
-        log.info("Loading grid polygons from GeoPackage")
+        self._update_progress(8, f"Loading grid polygons for {lmbgrid}")
         uri = f"{gpkg_path}|layername={lmbgrid}"
         grid_layer = QgsVectorLayer(uri, lmbgrid, "ogr")
         if not grid_layer.isValid():
@@ -153,6 +171,7 @@ class LmbSlidingWindowProcessor(BaseProcessor):
             )
 
         # Build spatial index and store features keyed by fid
+        self._update_progress(12, "Building spatial index")
         spatial_index = QgsSpatialIndex()
         features = {}
         for feat in grid_layer.getFeatures():
@@ -167,7 +186,7 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         transform = QgsCoordinateTransform(crs_src, crs_dst, QgsProject.instance())
 
         # --- Read all EVT files ---
-        log.info("Reading event files")
+        self._update_progress(15, "Reading event files")
         evt_files = sorted(EVT_DIR.glob("*.tab"))
         USECOLS = ["LONG", "LAT", "INVIO"]
         dfs = []
@@ -186,24 +205,29 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         log.info(f"Read {total_raw} raw events")
 
         # --- Filter invalid coordinates ---
-        log.info("Filtering invalid coordinates")
+        self._update_progress(20, "Filtering invalid coordinates")
         events["LONG"] = pd.to_numeric(events["LONG"], errors="coerce")
         events["LAT"] = pd.to_numeric(events["LAT"], errors="coerce")
         events = events.dropna(subset=["LONG", "LAT"])
         events = events[~((events["LONG"] == 0.0) & (events["LAT"] == 0.0))]
 
         # Parse INVIO timestamps
-        log.info("Parsing timestamps")
+        self._update_progress(23, "Parsing timestamps")
         events["invio_dt"] = events["INVIO"].apply(parse_timestamp_safe)
         events = events.dropna(subset=["invio_dt"])
         log.info(f"Events with valid coords and timestamps: {len(events)}")
 
         # --- Spatial matching (once for all events) ---
-        log.info("Spatial matching events to polygons")
         matched_fids = []
         matched_times = []
         unmatched = 0
         total_to_match = len(events)
+        self._update_progress(26, f"Spatial matching {total_to_match} events")
+
+        # Progress spans 26% -> 75% during spatial matching
+        MATCH_PROGRESS_START = 26
+        MATCH_PROGRESS_END = 75
+        last_reported_pct = MATCH_PROGRESS_START
 
         for i, row in enumerate(events.itertuples(index=False)):
             lon = row.LONG
@@ -227,13 +251,22 @@ class LmbSlidingWindowProcessor(BaseProcessor):
             if not found:
                 unmatched += 1
 
-            if (i + 1) % 10000 == 0:
-                log.info(f"Spatial matching: {i + 1}/{total_to_match}")
+            if total_to_match > 0 and (i + 1) % 10000 == 0:
+                pct = int(
+                    MATCH_PROGRESS_START
+                    + (i + 1) / total_to_match * (MATCH_PROGRESS_END - MATCH_PROGRESS_START)
+                )
+                if pct > last_reported_pct:
+                    self._update_progress(
+                        pct,
+                        f"Spatial matching: {i + 1}/{total_to_match} events processed",
+                    )
+                    last_reported_pct = pct
 
         log.info(f"Matched: {len(matched_fids)}, Unmatched: {unmatched}")
 
         # --- Build matched DataFrame and bin by time window ---
-        log.info("Computing sliding window counts")
+        self._update_progress(77, "Computing sliding window counts")
         matched_df = pd.DataFrame(
             {
                 "fid": matched_fids,
@@ -263,6 +296,7 @@ class LmbSlidingWindowProcessor(BaseProcessor):
 
         # For each window, count events per fid
         historical_rows = []
+        n_windows = len(windows)
         for w_idx, (w_start, w_end) in enumerate(windows):
             mask = (matched_df["timestamp"] >= w_start) & (
                 matched_df["timestamp"] < w_end
@@ -277,13 +311,17 @@ class LmbSlidingWindowProcessor(BaseProcessor):
                 evt_count_val = int(counts.get(fid, 0))
                 historical_rows.append((fid, evt_count_val, w_start_iso, w_end_iso))
 
-            if (w_idx + 1) % 5 == 0:
-                log.info(f"Window {w_idx + 1}/{len(windows)}")
+            if n_windows > 0 and (w_idx + 1) % max(1, n_windows // 5) == 0:
+                pct = int(77 + (w_idx + 1) / n_windows * 5)
+                self._update_progress(
+                    pct,
+                    f"Window aggregation: {w_idx + 1}/{n_windows}",
+                )
 
         log.info(f"Generated {len(historical_rows)} historical_data rows")
 
         # --- Write to GeoPackage using sqlite3 ---
-        log.info("Writing historical data to GeoPackage")
+        self._update_progress(83, "Writing historical data to GeoPackage")
         conn = sqlite3.connect(gpkg_path)
         cursor = conn.cursor()
 
@@ -390,7 +428,7 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         conn.close()
 
         # --- Add temporal layer to QGIS project ---
-        log.info("Updating QGIS project")
+        self._update_progress(88, "Updating QGIS project")
         qgis_proj = QgsProject()
         qgis_proj.read(qgis_project_path)
 
@@ -422,7 +460,7 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         server_props.addWmsDimension(dim_info)
 
         # --- Apply graduated symbology ---
-        log.info("Applying symbology")
+        self._update_progress(91, "Applying symbology")
         style = QgsStyle.defaultStyle()
         color_ramp = style.colorRamp("YlOrRd")
 
@@ -450,11 +488,11 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         new_layer.triggerRepaint()
 
         # --- Save the project ---
-        log.info("Saving project")
+        self._update_progress(94, "Saving QGIS project")
         qgis_proj.write()
 
         # --- Trigger QWC2 config regeneration ---
-        log.info("Regenerating QWC2 config")
+        self._update_progress(96, "Regenerating QWC2 config")
         try:
             requests.get(
                 "http://qwc-config-service:9090/generate_configs",

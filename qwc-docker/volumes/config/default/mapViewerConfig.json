@@ -588,7 +588,8 @@
             },
             "description": "",
             "drawingOrder": [
-              "lmb5a"
+              "lmb5a",
+              "test"
             ],
             "editConfig": {},
             "expanded": true,
@@ -617,6 +618,35 @@
               "coordinates"
             ],
             "sublayers": [
+              {
+                "name": "test",
+                "title": "test",
+                "visibility": true,
+                "geometryType": "MultiPolygon",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "default": "default"
+                },
+                "style": "default",
+                "displayField": "LMB0A_IDcu",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    8.487098,
+                    44.654473,
+                    11.50087,
+                    46.641894
+                  ]
+                },
+                "dimensions": [],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                },
+                "refreshInterval": 0
+              },
               {
                 "name": "lmb5a",
                 "title": "LMB5A",

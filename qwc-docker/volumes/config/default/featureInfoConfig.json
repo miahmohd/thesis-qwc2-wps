@@ -16,6 +16,33 @@
           "title": "LMB Grids",
           "layers": [
             {
+              "name": "test",
+              "title": "test",
+              "attributes": [
+                {
+                  "name": "LMB0A_IDcu",
+                  "alias": "LMB0A_IDcu"
+                },
+                {
+                  "name": "evt_count",
+                  "alias": "evt_count"
+                },
+                {
+                  "name": "avg_resp_s",
+                  "alias": "avg_resp_s"
+                },
+                {
+                  "name": "geometry",
+                  "alias": "geometry"
+                },
+                {
+                  "name": "maptip",
+                  "alias": "maptip"
+                }
+              ],
+              "display_field": "LMB0A_IDcu"
+            },
+            {
               "name": "lmb5a",
               "title": "LMB5A",
               "attributes": [

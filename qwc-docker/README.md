@@ -1,24 +1,41 @@
-# QWC2 + PyWPS Docker Deployment
+# QWC2 + pygeoapi Docker Deployment
 
-Docker Compose setup for deploying a custom [QWC2](https://github.com/qgis/qwc2) map viewer with a [PyWPS](https://pywps.org/) geoprocessing server, backed by QGIS Server and the QWC Services ecosystem.
+Docker Compose setup for deploying a custom [QWC2](https://github.com/qgis/qwc2) map viewer with a [pygeoapi](https://pygeoapi.io/) OGC API - Processes server, backed by QGIS Server and the QWC Services ecosystem.
 
 ## Architecture
 
-All services are orchestrated via Docker Compose behind an **OAuth2 Proxy** (acting as both reverse proxy and authentication gateway) exposed on port **8088**. The OAuth2 Proxy authenticates users via an OIDC provider (AWS Cognito) before forwarding requests to the backend services.
+All services are orchestrated via Docker Compose behind a reverse proxy exposed on port **8088**. Two proxy options are available:
+
+- **Production / authenticated**: `auth-proxy` (OAuth2 Proxy with OIDC). Users authenticate via an OIDC provider before reaching backend services.
+- **Development / unauthenticated**: `qwc-api-gateway` (NGINX). Enabled by swapping the commented blocks in `docker-compose.yml` (see [Development without authentication](#development-without-authentication)).
+
+### Services
 
 | Service | Description |
 |---------|-------------|
 | `auth-proxy` | OAuth2 Proxy — reverse proxy + OIDC authentication (entry point, port 8088) |
-| `qwc-map-viewer` | Custom QWC2 web map viewer |
-| `qwc-qgis-server` | QGIS Server (WMS/WFS) |
+| `qwc-map-viewer` | Custom QWC2 web map viewer (built from `../qwc-custom`) |
+| `qwc-qgis-server` | QGIS Server 3.40 (WMS/WFS), mounts `../data:/data` |
 | `qwc-ogc-service` | OGC proxy service |
-| `wps-service` | PyWPS geoprocessing server (Flask + Gunicorn) |
+| `pygeoapi-service` | pygeoapi OGC API - Processes server (built from `../pygeoapi`) |
 | `qwc-postgis` | PostgreSQL/PostGIS database |
-| `qwc-config-service` | Configuration generator |
+| `qwc-config-service` | Configuration generator (produces runtime configs for QWC services) |
 | `qwc-admin-gui` | Administration interface |
 | `qwc-auth-service` | Authentication service (JWT, used internally by QWC services) |
 | `qwc-feature-info-service` | Feature info service |
 | `qwc-legend-service` | Legend service |
+
+### URL Routing
+
+| Path prefix | Upstream service |
+|-------------|-----------------|
+| `/processes/`, `/jobs/`, `/openapi/` | `pygeoapi-service:5000` |
+| `/ows/` | `qwc-ogc-service:9090` |
+| `/auth/` | `qwc-auth-service:9090` |
+| `/qwc_admin/` | `qwc-admin-gui:9090` |
+| `/api/v1/featureinfo/` | `qwc-feature-info-service:9090` |
+| `/api/v1/legend/` | `qwc-legend-service:9090` |
+| `/` (catch-all) | `qwc-map-viewer:9090` |
 
 ## Prerequisites
 
@@ -28,20 +45,17 @@ All services are orchestrated via Docker Compose behind an **OAuth2 Proxy** (act
 ## Project Structure
 
 ```
-qwc-docker/             # This directory - Docker orchestration
+qwc-docker/
 ├── docker-compose.yml
-├── .env                # Secrets (JWT, OAuth2 Proxy)
+├── .env                    # Secrets (JWT key, OAuth2 Proxy credentials)
 ├── api-gateway/
-│   └── nginx.conf      # NGINX routing configuration
-├── pg_service.conf     # PostgreSQL connection config
+│   └── nginx.conf          # NGINX routing config (used when auth-proxy is disabled)
+├── pg_service.conf         # PostgreSQL connection config
 └── volumes/
-    ├── config-in/      # Input configuration for config generator
-    ├── config/         # Generated service configurations
-    ├── qgs-resources/  # QGIS project files (.qgs)
-    ├── qwc2/           # Custom QWC2 viewer build (assets + dist)
-    ├── wps-logs/       # PyWPS log files
-    ├── wps-outputs/    # PyWPS process outputs
-    └── wps-workdir/    # PyWPS temporary working directory
+    ├── config-in/          # Input configuration for the config generator
+    ├── config/             # Generated service configurations (output)
+    ├── qgs-resources/      # QGIS project files (.qgs)
+    └── qgis-server-plugins/ # Custom QGIS Server plugins
 ```
 
 ## Getting Started
@@ -49,64 +63,67 @@ qwc-docker/             # This directory - Docker orchestration
 ### 1. Clone the repository
 
 ```bash
-git clone --recurse-submodules <repository-url>
-cd thesis/qwc-docker
+git clone <repository-url>
+cd thesis-qwc2-wps/qwc-docker
 ```
 
 ### 2. Configure environment
 
-The `.env` file contains secrets used by the services:
-
-- `JWT_SECRET_KEY` — used for authentication across QWC services. Generate a new one for production:
-- `OAUTH_COOKIE_SECRET` — cookie encryption secret for the OAuth2 Proxy.
-- `OAUTH_CLIENT_SECRET` — OIDC client secret for the OAuth2 Proxy (from your identity provider).
+Copy and edit the `.env` file:
 
 ```bash
-# Generate a new JWT secret
-python3 -c "import secrets; print(secrets.token_hex(48))"
+cp .env.example .env
 ```
 
-Update the values in `.env` accordingly.
+The `.env` file holds secrets used across services:
 
-### 3. Start the services
+| Variable | Description |
+|----------|-------------|
+| `JWT_SECRET_KEY` | Shared JWT secret for QWC services. Generate with: `python3 -c "import secrets; print(secrets.token_hex(48))"` |
+| `OAUTH_COOKIE_SECRET` | Cookie encryption secret for OAuth2 Proxy |
+| `OAUTH_CLIENT_SECRET` | OIDC client secret from your identity provider |
+
+### 3. Build and start all services
 
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
 
-This will:
-1. Start the PostgreSQL database
-2. Run database migrations
-3. Start QGIS Server
-4. Build and start the PyWPS service from `../pywps`
-5. Start all QWC2 microservices
-6. Start the OAuth2 Proxy gateway on port 8088
+This builds the two custom images (`qwc-map-viewer` from `../qwc-custom` and `pygeoapi-service` from `../pygeoapi`) and starts all services. Subsequent starts without code changes can omit `--build`.
 
-### 4. Generate configuration
+### 4. Generate QWC2 service configuration
 
-<!-- TODO rewrite doc -->
-- go to the admin panel /qwc_admin,(default admin credentials: username admin, password admin, requires password change on first login).
-- run auto "Generate service configuration"
+- Open `http://localhost:8088/qwc_admin` (default credentials: `admin` / `admin`, you will be prompted to change the password on first login)
+- Click **Generate service configuration**
 
 ### 5. Access the application
 
 | URL | Description |
 |-----|-------------|
 | http://localhost:8088/ | Map viewer |
-| http://localhost:8088/wps | WPS service endpoint |
+| http://localhost:8088/processes | OGC API - Processes endpoint |
 | http://localhost:8088/qwc_admin | Admin GUI |
+
+---
 
 ## Development
 
-### Hot-reload for PyWPS
+### Development without authentication
 
-The `wps-service` is configured with Docker Compose Watch for live-reloading during development. Changes to files in `../pywps` are automatically synced into the container:
+For local development, replace the `auth-proxy` service with the plain NGINX reverse proxy to skip OIDC. In `docker-compose.yml`:
+
+1. **Comment out** the `auth-proxy` service block.
+2. **Uncomment** the `qwc-api-gateway` service block.
+
+The NGINX gateway uses `api-gateway/nginx.conf` and exposes the application on port **8088**.
+
+### Hot-reload for pygeoapi
+
+The `pygeoapi-service` is configured with Docker Compose Watch. Changes to files in `../pygeoapi/` (excluding `venv/` and `__pycache__/`) trigger an automatic rebuild:
 
 ```bash
 docker compose watch
 ```
-
-Alternatively, the service runs with `gunicorn --reload` so changes to Python files will restart the worker automatically.
 
 ### View logs
 
@@ -115,39 +132,43 @@ Alternatively, the service runs with `gunicorn --reload` so changes to Python fi
 docker compose logs -f
 
 # Specific service
-docker compose logs -f wps-service
+docker compose logs -f pygeoapi-service
+docker compose logs -f qwc-map-viewer
 ```
 
-### Rebuild the PyWPS service
+### Rebuild a single service
 
-After changing dependencies in `../pywps/requirements.txt`:
+After changing Python dependencies in `../pygeoapi/requirements.txt` or the frontend in `../qwc-custom/`:
 
 ```bash
-docker compose up --build
+docker compose up -d --build pygeoapi-service
+docker compose up -d --build qwc-map-viewer
 ```
 
-## Disabling Authentication (Using NGINX API Gateway)
+---
 
-If you do not need OIDC authentication, you can replace the `auth-proxy` with the simpler NGINX reverse proxy. In `docker-compose.yml`:
-
-1. **Comment out** the `auth-proxy` service block.
-2. **Uncomment** the `qwc-api-gateway` service block.
-
-The NGINX gateway uses the configuration in `api-gateway/nginx.conf` and exposes the application on port **8088** by default (adjust the port mapping as needed).
-
-This is useful for local development or deployments where authentication is handled externally or not required.
-
-## Stopping the services
+## Stopping the Services
 
 ```bash
-# Stop all services
+# Stop all services (preserves volumes)
 docker compose down
 
-# Stop and remove volumes (WARNING: deletes database data)
+# Stop and remove all volumes (WARNING: deletes database data)
 docker compose down -v
 ```
 
+---
+
 ## Adding QGIS Projects
 
-Place `.qgs` project files in `volumes/qgs-resources/scan` and then regenerate the configuration.
+Place `.qgs` project files in `volumes/qgs-resources/scan/`, then regenerate the configuration from the admin panel.
 
+## Adding a New Geoprocess
+
+1. Create a Python class in `../pygeoapi/processes/` inheriting from `pygeoapi.process.base.BaseProcessor`
+2. Register it under `resources:` in `../pygeoapi/pygeoapi-config.yml`
+3. Rebuild the pygeoapi service:
+
+   ```bash
+   docker compose up -d --build pygeoapi-service
+   ```

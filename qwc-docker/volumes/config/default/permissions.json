@@ -24,18 +24,6 @@
                 "info_template": true
               },
               {
-                "name": "test",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "LMB0A_IDcu",
-                  "evt_count",
-                  "avg_resp_s",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
                 "name": "lmb5a",
                 "queryable": true,
                 "info_template": true,
@@ -47,10 +35,10 @@
                 ]
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               }
             ]
           },
@@ -63,46 +51,7 @@
                 "info_template": true
               },
               {
-                "name": "tftf",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "fid",
-                  "evt_count",
-                  "window_start",
-                  "window_end",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "final",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "fid",
-                  "evt_count",
-                  "window_start",
-                  "window_end",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "teste2",
-                "queryable": true,
-                "info_template": true,
-                "attributes": [
-                  "fid",
-                  "evt_count",
-                  "window_start",
-                  "window_end",
-                  "geometry",
-                  "maptip"
-                ]
-              },
-              {
-                "name": "test1",
+                "name": "test",
                 "queryable": true,
                 "info_template": true,
                 "attributes": [
@@ -257,10 +206,10 @@
                 ]
               },
               {
-                "name": "esri_imagery_bg"
+                "name": "osm_bg"
               },
               {
-                "name": "osm_bg"
+                "name": "esri_imagery_bg"
               }
             ]
           }

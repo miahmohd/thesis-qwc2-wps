@@ -163,9 +163,9 @@ class LmbGridStatisticsProcessor(BaseProcessor):
         ensure_qgis()
         log.info("Starting lmb-grid-statistics process")
         try:
-            return self._run(data)
-        finally:
+            res =  self._run(data)
             cleanup_qgis()
+            return res
 
     def _run(self, data):
         # Extract inputs with defaults

@@ -16,33 +16,6 @@
           "title": "LMB Grids",
           "layers": [
             {
-              "name": "test",
-              "title": "test",
-              "attributes": [
-                {
-                  "name": "LMB0A_IDcu",
-                  "alias": "LMB0A_IDcu"
-                },
-                {
-                  "name": "evt_count",
-                  "alias": "evt_count"
-                },
-                {
-                  "name": "avg_resp_s",
-                  "alias": "avg_resp_s"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "LMB0A_IDcu"
-            },
-            {
               "name": "lmb5a",
               "title": "LMB5A",
               "attributes": [
@@ -75,101 +48,8 @@
           "title": "LMB Grids (GPKG)",
           "layers": [
             {
-              "name": "tftf",
-              "title": "tftf",
-              "attributes": [
-                {
-                  "name": "fid",
-                  "alias": "fid"
-                },
-                {
-                  "name": "evt_count",
-                  "alias": "evt_count"
-                },
-                {
-                  "name": "window_start",
-                  "alias": "window_start"
-                },
-                {
-                  "name": "window_end",
-                  "alias": "window_end"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "window_start"
-            },
-            {
-              "name": "final",
-              "title": "final",
-              "attributes": [
-                {
-                  "name": "fid",
-                  "alias": "fid"
-                },
-                {
-                  "name": "evt_count",
-                  "alias": "evt_count"
-                },
-                {
-                  "name": "window_start",
-                  "alias": "window_start"
-                },
-                {
-                  "name": "window_end",
-                  "alias": "window_end"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "window_start"
-            },
-            {
-              "name": "teste2",
-              "title": "teste2",
-              "attributes": [
-                {
-                  "name": "fid",
-                  "alias": "fid"
-                },
-                {
-                  "name": "evt_count",
-                  "alias": "evt_count"
-                },
-                {
-                  "name": "window_start",
-                  "alias": "window_start"
-                },
-                {
-                  "name": "window_end",
-                  "alias": "window_end"
-                },
-                {
-                  "name": "geometry",
-                  "alias": "geometry"
-                },
-                {
-                  "name": "maptip",
-                  "alias": "maptip"
-                }
-              ],
-              "display_field": "window_start"
-            },
-            {
-              "name": "test1",
-              "title": "test1",
+              "name": "test",
+              "title": "test",
               "attributes": [
                 {
                   "name": "fid",

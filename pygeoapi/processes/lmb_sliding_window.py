@@ -143,9 +143,9 @@ class LmbSlidingWindowProcessor(BaseProcessor):
         ensure_qgis()
         log.info("Starting lmb-sliding-window process")
         try:
-            return self._run(data)
-        finally:
+            res =  self._run(data)
             cleanup_qgis()
+            return res
 
     def _run(self, data):
         # Extract inputs with defaults

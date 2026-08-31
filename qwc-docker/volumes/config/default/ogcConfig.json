@@ -22,19 +22,6 @@
           "title": "LMB Grids",
           "layers": [
             {
-              "name": "test",
-              "title": "test",
-              "attributes": {
-                "LMB0A_IDcu": "LMB0A_IDcu",
-                "evt_count": "evt_count",
-                "avg_resp_s": "avg_resp_s",
-                "geometry": "geometry",
-                "maptip": "maptip"
-              },
-              "queryable": true,
-              "edit_layers": []
-            },
-            {
               "name": "lmb5a",
               "title": "LMB5A",
               "attributes": {
@@ -51,8 +38,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       },
       {
@@ -70,50 +57,8 @@
           "title": "LMB Grids (GPKG)",
           "layers": [
             {
-              "name": "tftf",
-              "title": "tftf",
-              "attributes": {
-                "fid": "fid",
-                "evt_count": "evt_count",
-                "window_start": "window_start",
-                "window_end": "window_end",
-                "geometry": "geometry",
-                "maptip": "maptip"
-              },
-              "queryable": true,
-              "edit_layers": []
-            },
-            {
-              "name": "final",
-              "title": "final",
-              "attributes": {
-                "fid": "fid",
-                "evt_count": "evt_count",
-                "window_start": "window_start",
-                "window_end": "window_end",
-                "geometry": "geometry",
-                "maptip": "maptip"
-              },
-              "queryable": true,
-              "edit_layers": []
-            },
-            {
-              "name": "teste2",
-              "title": "teste2",
-              "attributes": {
-                "fid": "fid",
-                "evt_count": "evt_count",
-                "window_start": "window_start",
-                "window_end": "window_end",
-                "geometry": "geometry",
-                "maptip": "maptip"
-              },
-              "queryable": true,
-              "edit_layers": []
-            },
-            {
-              "name": "test1",
-              "title": "test1",
+              "name": "test",
+              "title": "test",
               "attributes": {
                 "fid": "fid",
                 "evt_count": "evt_count",
@@ -284,8 +229,8 @@
         },
         "print_templates": [],
         "internal_print_layers": [
-          "esri_imagery_bg",
-          "osm_bg"
+          "osm_bg",
+          "esri_imagery_bg"
         ]
       }
     ],

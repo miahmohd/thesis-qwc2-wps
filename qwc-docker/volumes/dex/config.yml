@@ -1,0 +1,29 @@
+# Dex OIDC identity provider configuration.
+# Secrets are injected at runtime via environment variables (Dex built-in $VAR expansion).
+
+issuer: http://localhost:5556
+
+storage:
+  type: memory
+
+web:
+  http: 0.0.0.0:5556
+
+oauth2:
+  skipApprovalScreen: true
+
+staticClients:
+  - id: oauth2-proxy
+    secretEnv: DEX_CLIENT_SECRET
+    redirectURIs:
+      - http://localhost:8088/oauth2/callback
+    name: QWC2 OAuth2 Proxy
+
+# Built-in local password database.
+enablePasswordDB: true
+staticPasswords:
+  - email: admin@example.com
+    # bcrypt hash — generate with: python3 -c "import bcrypt; print(bcrypt.hashpw(b'<password>', bcrypt.gensalt()).decode())"
+    hashFromEnv: DEX_ADMIN_PASSWORD_HASH
+    username: admin
+    userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
